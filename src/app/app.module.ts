@@ -13,6 +13,9 @@ import {AppRoutingModule} from './routing.module';
 import {FeaturedComponent} from './components/ads/featured/featured.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './core/interceptors/token.interceptor';
+import {AddComponent} from './components/ads/add/add.component';
+import {AuthService} from './core/services/auth.service';
+import {AdsService} from './core/services/ads.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import {TokenInterceptor} from './core/interceptors/token.interceptor';
     SidebarComponent,
     LoginComponent,
     RegisterComponent,
-    FeaturedComponent
+    FeaturedComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
@@ -31,11 +35,13 @@ import {TokenInterceptor} from './core/interceptors/token.interceptor';
     HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 2000,
-      positionClass: 'toastr-top-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true
     })
   ],
   providers: [
+    AuthService,
+    AdsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

@@ -15,12 +15,23 @@ export class AuthService {
               private router: Router) {}
 
 
-  register(email: string, password: string) {
+  register(email: string, password: string, displayName: string) {
     firebase.auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.router.navigate(['/login'])
-        this.toastr.success('You are now registered. Please login to continue.')
+        let user = firebase.auth().currentUser
+
+        user.updateProfile({
+          displayName,
+          photoURL: ''
+        })
+          .then(() => {
+            this.router.navigate(['/login'])
+            this.toastr.success('You are now registered. Please login to continue.')
+          })
+          .catch((err) => {
+            this.toastr.error(err.message)
+          })
       })
       .catch((err) => {
         this.toastr.error(err.message)
@@ -30,7 +41,8 @@ export class AuthService {
   login(email: string, password: string) {
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((user) => {
+        localStorage.setItem('displayName', user.user.displayName)
         this.getToken()
         this.router.navigate(['/'])
         this.toastr.success('You are now logged in.')

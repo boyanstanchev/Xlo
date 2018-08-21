@@ -13,7 +13,8 @@ export class RegisterComponent implements OnInit {
   register(form: NgForm) {
     const email = form.value.email
     const password = form.value.password
-    this.authService.register(email, password)
+    const displayName = form.value.firstName + ' ' + form.value.lastName
+    this.authService.register(email, password, displayName)
   }
 
   ngOnInit() {
