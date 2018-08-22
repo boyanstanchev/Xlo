@@ -2,11 +2,9 @@ import {Injectable} from "@angular/core"
 import {ToastrService} from "ngx-toastr"
 import {Router} from "@angular/router"
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {CategoriesModel} from '../models/categories.model';
 import {AdsModel} from '../models/ads.model';
-
-const BASE_URL: string = 'https://xlo-exam.firebaseio.com/obiavi'
+import * as firebase from 'firebase';
+import {AdCreateInterface} from '../models/ad.create.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +12,40 @@ const BASE_URL: string = 'https://xlo-exam.firebaseio.com/obiavi'
 
 export class AdsService {
   constructor(private toastr: ToastrService,
-              private router: Router,
-              private http: HttpClient) {}
+              private router: Router) {}
 
   getFeaturedAds() {
-    return this.http.get(`${BASE_URL}.json`)
-      .pipe(map((res: Response) => {
-        const ids = Object.keys(res)
-        const featuredAds: AdsModel[] = []
-        for (const i of ids) {
-          featuredAds.push(new AdsModel(i, res[i].category, res[i].description, res[i].featured, res[i].imageUrl, res[i].model, res[i].price, res[i].subCategory, res[i].title))
-        }
-
-        return featuredAds.filter((ad) => {
-          return ad.featured == 'true'
+    let adsRef = firebase.database().ref('obiavi')
+    let featuredAds= []
+    adsRef.once("value")
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          featuredAds.push({
+            "id": child.key,
+            "category": child.val().category,
+            "description": child.val().description,
+            "featured": child.val().featured,
+            "imageUrl": child.val().imageUrl,
+            "model": child.val().model,
+            "price": child.val().price,
+            "subCategory": child.val().subCategory,
+            "title": child.val().title
+          })
         })
-      }))
+      })
+    return featuredAds
+  }
+
+  createAd(object: AdCreateInterface) {
+    let adsRef = firebase.database().ref('obiavi')
+    let newStoreRef = adsRef.push()
+    newStoreRef.set(object)
+      .then(() => {
+        this.toastr.success('Your ad is successfully added.')
+        this.router.navigate(['/'])
+      })
+      .catch((err) => {
+        this.toastr.error(err.message)
+      })
   }
 }

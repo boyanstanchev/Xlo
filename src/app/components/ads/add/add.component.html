@@ -1,3 +1,81 @@
-<p>
-  add works!
-</p>
+<div class="col ml-5">
+  <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+    <form #f="ngForm" (ngSubmit)="add(f)">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          required
+          type="text"
+          id="title"
+          name="title"
+          ngModel
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select
+          required
+          id="category"
+          name="category"
+          ngModel
+          class="form-control">
+          <option *ngFor="let cat of categories | async" value={{cat.id}} id={{cat.id}}>
+            {{cat.name}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="subCategory">Sub-Category</label>
+        <select
+          required
+          id="subCategory"
+          name="subCategory"
+          ngModel
+          class="form-control">
+          <option *ngFor="let cat of subCategories | async" value={{cat.id}}>
+            {{cat.name}}
+          </option>
+        </select>
+      </div>
+      <div class="custom-control custom-checkbox">
+        <label class="custom-control-label" for="featured">Featured</label>
+        <input
+          id="featured"
+          name="featured"
+          ngModel
+          type="checkbox"
+          class="custom-control-input"
+          checked>
+      </div>
+      <div class="form-group">
+        <label for="model">Model</label>
+        <input
+          required
+          id="model"
+          name="model"
+          ngModel
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input
+          type="number"
+          required
+          id="price"
+          name="price"
+          ngModel
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image</label>
+        <input
+          required
+          id="imageUrl"
+          name="imageUrl"
+          ngModel
+          class="form-control">
+      </div>
+      <button [disabled]="f.invalid" class="btn btn-primary" type="submit">Add</button>
+    </form>
+  </div>
+</div>

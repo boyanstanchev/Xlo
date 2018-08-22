@@ -43,6 +43,7 @@ export class AuthService {
       .then((user) => {
         sessionStorage.setItem('displayName', user.user.displayName)
         sessionStorage.setItem('authtoken', user.user['qa'])
+        sessionStorage.setItem('userId', user.user['uid'])
         this.router.navigate(['/'])
         this.toastr.success('You are now logged in.')
       })

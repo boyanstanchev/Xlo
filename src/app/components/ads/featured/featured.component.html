@@ -1,13 +1,13 @@
 <h1 class="text-center mb-5">Featured Ads</h1>
 <div class="row">
-  <div *ngFor="let ad of featuredAds | async" class="col-sm-4">
+  <div *ngFor="let ad of featuredAds" class="col-sm-4">
     <div class="card mb-3">
       <h3 class="card-header">{{ad.title}}</h3>
       <img style="height: 200px; width: 100%; display: block;"
            src={{ad.imageUrl}}
            alt="Card image">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{ad.price}}$</li>
+        <li class="list-group-item blockquote">{{ad.price}}$</li>
       </ul>
       <div class="card-body">
         <button *ngIf="authService.isAuthenticated()" class="card-link btn btn-success">Add To Cart</button>

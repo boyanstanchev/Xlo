@@ -17,6 +17,7 @@ import {AddComponent} from './components/ads/add/add.component';
 import {AuthService} from './core/services/auth.service';
 import {AdsService} from './core/services/ads.service';
 import {CategoriesService} from './core/services/categories.service';
+import {CategoryComponent} from './components/categories/category/category.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {CategoriesService} from './core/services/categories.service';
     LoginComponent,
     RegisterComponent,
     FeaturedComponent,
-    AddComponent
+    AddComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
