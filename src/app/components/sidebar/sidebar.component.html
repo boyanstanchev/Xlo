@@ -8,26 +8,9 @@
           Categories
         </p>
       </li>
-      <li>
-        <a href="#">Dashboard</a>
-      </li>
-      <li>
-        <a href="#">Shortcuts</a>
-      </li>
-      <li>
-        <a href="#">Overview</a>
-      </li>
-      <li>
-        <a href="#">Events</a>
-      </li>
-      <li>
-        <a href="#">About</a>
-      </li>
-      <li>
-        <a href="#">Services</a>
-      </li>
-      <li>
-        <a href="#">Contact</a>
+      <li *ngFor="let cat of categories | async">
+        <a routerLink="/category/{{cat.id}}">{{cat.name}}</a>
       </li>
     </ul>
   </div>
+</div>

@@ -58,7 +58,6 @@ export class AuthService {
         this.router.navigate(['/login'])
         this.toastr.success('You are now singed out.')
       })
-
   }
 
   isAuthenticated(): boolean {

@@ -16,6 +16,7 @@ import {TokenInterceptor} from './core/interceptors/token.interceptor';
 import {AddComponent} from './components/ads/add/add.component';
 import {AuthService} from './core/services/auth.service';
 import {AdsService} from './core/services/ads.service';
+import {CategoriesService} from './core/services/categories.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {AdsService} from './core/services/ads.service';
   providers: [
     AuthService,
     AdsService,
+    CategoriesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
