@@ -7,7 +7,7 @@ import {AuthService} from '../../core/services/auth.service';
   styleUrls: [] //'./navigation.component.css'
 })
 export class NavigationComponent implements OnInit {
-  displayName: string = localStorage.getItem('displayName')
+  displayName: string = sessionStorage.getItem('displayName')
 
   constructor(public authService: AuthService) {
   }

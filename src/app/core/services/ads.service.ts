@@ -4,7 +4,7 @@ import {ToastrService} from "ngx-toastr"
 import {Router} from "@angular/router"
 import {HttpClient} from '@angular/common/http';
 
-const BASE_URL: string = 'https://xlo-exam.firebaseio.com/ads'
+const BASE_URL: string = 'https://xlo-exam.firebaseio.com/obiavi'
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +15,7 @@ export class AdsService {
               private router: Router,
               private http: HttpClient) {}
 
-
+  getFeaturedAds() {
+    return this.http.get(`${BASE_URL}.json`)
+  }
 }

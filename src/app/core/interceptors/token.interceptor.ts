@@ -1,17 +1,15 @@
 import {Injectable} from "@angular/core"
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http"
 import {Observable} from "rxjs"
-import {AuthService} from "../services/auth.service"
-
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor{
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler)
   : Observable<HttpEvent<any>> {
-    const token = this.authService.getToken()
-    if (token) {
+    const token = sessionStorage.getItem('authtoken')
+    if (token && !req.url.endsWith('obiavi.json')) {
       req = req.clone({
         url: `${req.url}?auth=${token}`
       })

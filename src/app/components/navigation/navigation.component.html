@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a routerLink="/"><img style="width: 25%" src="http://bellacom.hu/sites/default/files/styles/photo_300_300/public/xlo_logo_1.png?itok=zM4brhf_" alt="Logo"></a>
+  <a routerLink="/"><img style="width: 20%" src="http://bellacom.hu/sites/default/files/styles/photo_300_300/public/xlo_logo_1.png?itok=zM4brhf_" alt="Logo"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,10 +7,10 @@
   <div class="collapse navbar-collapse" id="navbarColor03">
     <ul class="navbar-nav mr-auto">
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
-        <a class="nav-link ml-5" routerLink="/ads/add">New Ad</a>
+        <a class="nav-link" routerLink="/ads/add">New Ad</a>
       </li>
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
-        <a class="nav-link ml-5 btn btn-secondary" href="#">🛒 Cart[1]</a>
+        <a class="nav-link ml-2 btn btn-secondary" href="#">🛒 Cart[1]</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

@@ -9,7 +9,6 @@ import {Router} from "@angular/router"
 })
 
 export class AuthService {
-  token: string = null
 
   constructor(private toastr: ToastrService,
               private router: Router) {}
@@ -42,8 +41,8 @@ export class AuthService {
     firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
-        localStorage.setItem('displayName', user.user.displayName)
-        this.getToken()
+        sessionStorage.setItem('displayName', user.user.displayName)
+        sessionStorage.setItem('authtoken', user.user['qa'])
         this.router.navigate(['/'])
         this.toastr.success('You are now logged in.')
       })
@@ -52,28 +51,17 @@ export class AuthService {
       })
   }
 
-  getToken() {
-    firebase.auth()
-      .currentUser
-      .getIdToken()
-      .then((token : string) => {
-        this.token = token;
-      })
-
-    return this.token;
-  }
-
   logout() {
     firebase.auth().signOut()
       .then(() => {
-        this.token = null
+        sessionStorage.clear()
         this.router.navigate(['/login'])
         this.toastr.success('You are now singed out.')
       })
 
   }
 
-  isAuthenticated() {
-    return !!this.token
+  isAuthenticated(): boolean {
+    return !!sessionStorage.getItem('authtoken')
   }
 }
