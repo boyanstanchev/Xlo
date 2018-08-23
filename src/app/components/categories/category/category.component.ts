@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from '../../../core/services/categories.service';
-import {Observable} from 'rxjs';
-import {SubCategoriesModel} from '../../../core/models/subCategories.model';
 import {AdsService} from '../../../core/services/ads.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
@@ -15,6 +13,7 @@ export class CategoryComponent implements OnInit {
   subCategories = []
   ads = []
   navigationSubscription
+  categoryName
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService,
@@ -34,6 +33,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit() {
     this.subCategories = this.categoriesService.getSubCategories(this.route.snapshot.params['id'])
     this.ads = this.adsService.getAdsByCategoryId(this.route.snapshot.params['id'])
+    this.categoryName = this.categoriesService.getCategoryNameById(this.route.snapshot.params['id'], false)
   }
 
 }

@@ -1,18 +1,29 @@
-<h1 class="text-center mb-5">Featured Ads</h1>
+<h3 class="text-center">Featured Ads</h3>
 <div class="row">
-  <div *ngFor="let ad of featuredAds" class="col-sm-4">
-    <div class="card mb-3">
-      <h3 class="card-header">{{ad.title}}</h3>
+  <div *ngFor="let ad of featuredAds | paginate: { itemsPerPage: 6, currentPage: p }" class="col-sm-4">
+    <div class="card mb-4">
+      <h5 class="card-header">{{ad.title}}</h5>
       <img style="height: 200px; width: 100%; display: block;"
            src={{ad.imageUrl}}
            alt="Card image">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item blockquote">{{ad.price}}$</li>
+        <li class="list-group-item blockquote">
+          <span class="mr-5"><del>{{ad.price | currency:"USD"}}  </del></span>
+          <span class="font-weight-bold"><i>{{ad.price - (ad.price * 0.30) | currency:"USD"}}</i></span>
+        </li>
       </ul>
-      <div class="card-body">
+      <div class="card-body" style="padding: 0px">
         <button *ngIf="authService.isAuthenticated()" class="card-link btn btn-success">Add To Cart</button>
-        <a routerLink="/ads/details/{{ad.id}}" class="card-link btn btn-info">Details</a>
+        <a routerLink="/ads/{{ad.id}}" class="card-link btn btn-info">Details</a>
       </div>
     </div>
   </div>
 </div>
+<pagination-controls
+  (pageChange)="p = $event">
+  directionLinks="true"
+  autoHide="true"
+  responsive="true"
+  previousLabel="Previous"
+  nextLabel="Next"
+</pagination-controls>

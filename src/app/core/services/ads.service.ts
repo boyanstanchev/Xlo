@@ -19,18 +19,15 @@ export class AdsService {
     adsRef.once("value")
       .then((snapshot) => {
         snapshot.forEach((child) => {
-          featuredAds.push({
-            "id": child.key,
-            "category": child.val().category,
-            "condition": child.val().condition,
-            "description": child.val().description,
-            "featured": child.val().featured,
-            "imageUrl": child.val().imageUrl,
-            "model": child.val().model,
-            "price": child.val().price,
-            "subCategory": child.val().subCategory,
-            "title": child.val().title
-          })
+          child.val().featured
+          if (child.val().featured == true) {
+            featuredAds.push({
+              "id": child.key,
+              "imageUrl": child.val().imageUrl,
+              "price": child.val().price,
+              "title": child.val().title
+            })
+          }
         })
       })
     return featuredAds
@@ -56,6 +53,25 @@ export class AdsService {
       .then((snapshot) => {
         snapshot.forEach((child) => {
           if (child.val().category === categoryId) {
+            ads.push({
+              "id": child.key,
+              "imageUrl": child.val().imageUrl,
+              "price": child.val().price,
+              "title": child.val().title
+            })
+          }
+        })
+      })
+    return ads
+  }
+
+  getAdsBySubCategoryId(subCategoryId: string) {
+    const adsRef = firebase.database().ref('obiavi')
+    let ads = []
+    adsRef.once("value")
+      .then((snapshot) => {
+        snapshot.forEach((child) => {
+          if (child.val().subCategory === subCategoryId) {
             ads.push({
               "id": child.key,
               "imageUrl": child.val().imageUrl,

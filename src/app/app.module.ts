@@ -18,6 +18,9 @@ import {AuthService} from './core/services/auth.service';
 import {AdsService} from './core/services/ads.service';
 import {CategoriesService} from './core/services/categories.service';
 import {CategoryComponent} from './components/categories/category/category.component';
+import {SubCategoryComponent} from './components/categories/sub-category/sub-category.component';
+import {DetailsComponent} from './components/ads/details/details.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import {CategoryComponent} from './components/categories/category/category.compo
     RegisterComponent,
     FeaturedComponent,
     AddComponent,
-    CategoryComponent
+    CategoryComponent,
+    SubCategoryComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import {CategoryComponent} from './components/categories/category/category.compo
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxPaginationModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-right',
