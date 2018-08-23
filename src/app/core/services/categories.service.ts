@@ -7,9 +7,6 @@ import {CategoriesModel} from '../models/categories.model';
 import {map} from 'rxjs/operators';
 
 const BASE_URL = 'https://xlo-exam.firebaseio.com/categories'
-const SUB_URL = 'https://xlo-exam.firebaseio.com/subCategories'
-const categoriesRef = firebase.database().ref('categories')
-const subCatsRef = firebase.database().ref('subCategories')
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +32,7 @@ export class CategoriesService {
   }
 
   getSubCategories(categoryId) {
+    const subCatsRef = firebase.database().ref('subCategories')
     let subCategories = []
     subCatsRef.once("value")
       .then((snapshot) => {
@@ -51,21 +49,28 @@ export class CategoriesService {
   }
 
   getCategoryNameById(categoryId: string, subCategory: boolean) {
-      if (subCategory) {
+      if (subCategory === true) {
+        const subCatsRef = firebase.database().ref('subCategories')
         subCatsRef.once("value")
           .then((snapshot) => {
             snapshot.forEach((child) => {
               if (child.key === categoryId) {
                 return child.val().name
+              } else {
+                return
               }
             })
           })
       } else {
+        const categoriesRef = firebase.database().ref('categories')
         categoriesRef.once("value")
           .then((snapshot) => {
             snapshot.forEach((child) => {
               if (child.key === categoryId) {
+                console.log(child.val().name);
                 return child.val().name
+              } else {
+                return
               }
             })
           })
