@@ -4,6 +4,7 @@ import {RegisterComponent} from './components/authentication/register/register.c
 import {NgModule} from '@angular/core';
 import {FeaturedComponent} from './components/ads/featured/featured.component';
 import {AddComponent} from './components/ads/add/add.component';
+import {CategoryComponent} from './components/categories/category/category.component';
 
 const routes: Route[] = [
   {path: '', component: FeaturedComponent},
@@ -13,12 +14,17 @@ const routes: Route[] = [
     path: 'ads', children: [
       {path: 'add', component: AddComponent}
     ]
+  },
+  {
+    path: 'category', children: [
+      {path: ':id', component: CategoryComponent}
+    ], runGuardsAndResolvers: 'always'
   }
 ]
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})
   ],
   exports: [
     RouterModule

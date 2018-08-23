@@ -9,7 +9,7 @@
         </p>
       </li>
       <li *ngFor="let cat of categories | async">
-        <a routerLink="/category/{{cat.id}}">{{cat.name}}</a>
+        <a routerLink="category/{{cat.id}}">{{cat.name}}</a>
       </li>
     </ul>
   </div>

@@ -12,14 +12,27 @@
           class="form-control">
       </div>
       <div class="form-group">
+        <label for="condition">Condition</label>
+        <select
+          required
+          id="condition"
+          name="condition"
+          ngModel
+          class="form-control">
+          <option value="New">New</option>
+          <option value="New">Used</option>
+        </select>
+      </div>
+      <div class="form-group">
         <label for="category">Category</label>
         <select
           required
           id="category"
           name="category"
           ngModel
+          (change)="loadSubCategories($event)"
           class="form-control">
-          <option *ngFor="let cat of categories | async" value={{cat.id}} id={{cat.id}}>
+          <option *ngFor="let cat of categories | async" value={{cat.id}}>
             {{cat.name}}
           </option>
         </select>
@@ -32,7 +45,7 @@
           name="subCategory"
           ngModel
           class="form-control">
-          <option *ngFor="let cat of subCategories | async" value={{cat.id}}>
+          <option *ngFor="let cat of subCategories" value={{cat.id}}>
             {{cat.name}}
           </option>
         </select>
@@ -44,7 +57,6 @@
           name="featured"
           ngModel
           type="checkbox"
-          class="custom-control-input"
           checked>
       </div>
       <div class="form-group">

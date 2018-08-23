@@ -11,8 +11,9 @@ import {Observable} from 'rxjs';
 export class SidebarComponent implements OnInit {
   categories: Observable<CategoriesModel[]>
 
-  constructor(private categoriesService: CategoriesService) {
-  }
+  constructor(private categoriesService: CategoriesService) {}
+
+
 
   ngOnInit() {
     this.categories = this.categoriesService.getAllCategories()

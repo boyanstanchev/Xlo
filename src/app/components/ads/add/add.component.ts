@@ -12,7 +12,7 @@ import {AdsService} from '../../../core/services/ads.service';
 })
 export class AddComponent implements OnInit {
   categories: Observable<CategoriesModel[]>
-  subCategories: Observable<CategoriesModel[]>
+  subCategories = []
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService) {}
@@ -20,6 +20,7 @@ export class AddComponent implements OnInit {
   add(form: NgForm) {
     this.adsService.createAd({
       title: form.value.title,
+      condition: form.value.condition,
       category: form.value.category,
       subCategory: form.value.subCategory,
       featured: form.value.featured || false,
@@ -30,9 +31,13 @@ export class AddComponent implements OnInit {
     })
   }
 
+  loadSubCategories(event) {
+    this.subCategories = this.categoriesService.getSubCategories(event.target.value)
+  }
+
   ngOnInit() {
     this.categories = this.categoriesService.getAllCategories()
-    this.subCategories = this.categoriesService.getSubCategories()
+
   }
 
 }
