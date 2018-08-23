@@ -21,6 +21,8 @@ import {CategoryComponent} from './components/categories/category/category.compo
 import {SubCategoryComponent} from './components/categories/sub-category/sub-category.component';
 import {DetailsComponent} from './components/ads/details/details.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {ProfileComponent} from './components/authentication/profile/profile.component';
+import {MyProfileComponent} from './components/authentication/my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     AddComponent,
     CategoryComponent,
     SubCategoryComponent,
-    DetailsComponent
+    DetailsComponent,
+    ProfileComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

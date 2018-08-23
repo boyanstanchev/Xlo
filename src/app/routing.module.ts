@@ -7,22 +7,25 @@ import {AddComponent} from './components/ads/add/add.component';
 import {CategoryComponent} from './components/categories/category/category.component';
 import {SubCategoryComponent} from './components/categories/sub-category/sub-category.component';
 import {DetailsComponent} from './components/ads/details/details.component';
+import {ProfileComponent} from './components/authentication/profile/profile.component';
+import {MyProfileComponent} from './components/authentication/my-profile/my-profile.component';
 
 const routes: Route[] = [
   {path: '', component: FeaturedComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'category/:id', component: CategoryComponent, runGuardsAndResolvers: 'always'},
   {path: 'sub-category/:id', component: SubCategoryComponent},
-  {
-    path: 'ads', children: [
-      {path: 'add', component: AddComponent},
-      {path: ':id', component: DetailsComponent}
+  {path: 'profile', children: [
+      {path: ':id', component: ProfileComponent},
+      {path: 'me', component: MyProfileComponent}
     ]
   },
   {
-    path: 'category', children: [
-      {path: ':id', component: CategoryComponent}
-    ], runGuardsAndResolvers: 'always'
+    path: 'ads', children: [
+      {path: ':id', component: DetailsComponent},
+      {path: 'add', component: AddComponent}
+    ]
   }
 ]
 

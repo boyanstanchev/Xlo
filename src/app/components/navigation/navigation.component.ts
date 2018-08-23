@@ -8,6 +8,7 @@ import {AuthService} from '../../core/services/auth.service';
 })
 export class NavigationComponent implements OnInit {
   displayName: string = sessionStorage.getItem('displayName')
+  userId: string = sessionStorage.getItem('userId')
 
   constructor(public authService: AuthService) {
   }

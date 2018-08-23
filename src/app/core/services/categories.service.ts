@@ -31,7 +31,7 @@ export class CategoriesService {
       }))
   }
 
-  getSubCategories(categoryId) {
+  getSubCategories(categoryId): Array<any> {
     const subCatsRef = firebase.database().ref('subCategories')
     let subCategories = []
     subCatsRef.once("value")
@@ -45,35 +45,38 @@ export class CategoriesService {
           }
         })
       })
+      .catch(err => this.toastr.error(err.message))
+
     return subCategories
   }
 
-  getCategoryNameById(categoryId: string, subCategory: boolean) {
-      if (subCategory === true) {
+  getCategoryNameById(categoryId: string, subCategory: boolean): string {
+      if (subCategory) {
         const subCatsRef = firebase.database().ref('subCategories')
+        let catName = ''
         subCatsRef.once("value")
           .then((snapshot) => {
             snapshot.forEach((child) => {
-              if (child.key === categoryId) {
-                return child.val().name
-              } else {
-                return
+              if (categoryId === child.key) {
+                catName = child.val().name
               }
             })
           })
+          .catch(err => this.toastr.error(err.message))
+        return catName
       } else {
         const categoriesRef = firebase.database().ref('categories')
+        let catName = ''
         categoriesRef.once("value")
           .then((snapshot) => {
             snapshot.forEach((child) => {
-              if (child.key === categoryId) {
-                console.log(child.val().name);
-                return child.val().name
-              } else {
-                return
+              if (categoryId === child.key ) {
+                catName = child.val().name
               }
             })
           })
+          .catch(err => this.toastr.error(err.message))
+          return catName
       }
   }
 
