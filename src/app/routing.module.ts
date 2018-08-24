@@ -10,6 +10,7 @@ import {DetailsComponent} from './components/ads/details/details.component';
 import {ProfileComponent} from './components/authentication/profile/profile.component';
 import {MyProfileComponent} from './components/authentication/my-profile/my-profile.component';
 import {EditComponent} from './components/ads/edit/edit.component';
+import {AuthGuard} from './core/guards/auth.guard';
 
 const routes: Route[] = [
   {path: '', component: FeaturedComponent},
@@ -19,14 +20,14 @@ const routes: Route[] = [
   {path: 'sub-category/:id', component: SubCategoryComponent},
   {
     path: 'profile', children: [
-      {path: 'me', component: MyProfileComponent},
+      {path: 'me', component: MyProfileComponent, canActivate: [AuthGuard]},
       {path: ':id', component: ProfileComponent},
     ]
   },
   {
     path: 'ads', children: [
-      {path: 'add', component: AddComponent},
-      {path: 'edit/:id', component: EditComponent},
+      {path: 'add', component: AddComponent, canActivate: [AuthGuard]},
+      {path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]},
       {path: ':id', component: DetailsComponent}
     ]
   }

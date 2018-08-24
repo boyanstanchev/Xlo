@@ -24,7 +24,10 @@
           <li class="list-group-item blockquote">{{ad.price}}$</li>
         </ul>
         <div class="card-body">
-          <button *ngIf="authService.isAuthenticated()" class="card-link btn btn-success">Add To Cart</button>
+          <button
+            *ngIf="authService.isAuthenticated()"
+            class="card-link btn btn-success"
+            (click)="addToCart(ad.title, ad.id)">Add To Cart</button>
           <a routerLink="/ads/{{ad.id}}" class="card-link btn btn-info">Details</a>
         </div>
       </div>
