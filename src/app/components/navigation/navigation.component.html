@@ -16,7 +16,7 @@
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="/profile/me">{{displayName}}[1]</a>
+      <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="/profile/me">{{displayName}}	💬</a>
       <a *ngIf="!authService.isAuthenticated()" class="nav-link" routerLink="/login">Login</a>
       <a *ngIf="!authService.isAuthenticated()" class="nav-link mr-5" routerLink="/register">Register</a>
       <a *ngIf="authService.isAuthenticated()" class="nav-link mr-5" (click)="logout()" style="cursor: pointer">Logout</a>

@@ -1,18 +1,70 @@
-<div class="jumbotron">
-  <img alt="Card image" style="width: 100%" src="https://dizzyriders.bg/uploads/thumbs/gallery/2017-07/a0de3cbe3f4452dcf557753944255ff9-620x427.jpg">
+<div *ngIf="ad" class="jumbotron">
+  <h3 class="text-center mb-4">{{ad.title}}</h3>
+  <div class="row">
+    <div class="col-8">
+      <img alt="Card image" style="width: 100%" src={{ad.imageUrl}}>
+    </div>
+    <div class="col-4">
+      <div class="btn-group-vertical" data-toggle="buttons">
+        <button type="button" class="btn btn-secondary mb-5">🛒 Add To Cart</button>
+        <button (click)="openModal('custom-modal-1')" type="button" class="btn btn-secondary mb-5">💬 Message Seller</button>
+        <a *ngIf="isCreator" class="btn btn-secondary mb-5" routerLink="/ads/edit/{{ad.id}}">✎ Edit</a>
+      </div>
+    </div>
+
+    <modal id="custom-modal-1">
+      <div class="my-modal">
+        <div class="my-modal-body">
+          <h1>Message Seller</h1>
+          <form #f="ngForm" (ngSubmit)="message(f, ad.creator)">
+            <div class="form-group">
+              <label for="formGroupExampleInput">Message</label>
+              <textarea
+                required
+                style="height: 100px"
+                name="message"
+                type="text"
+                ngModel
+                class="form-control"
+                id="formGroupExampleInput"
+                placeholder="Message..">
+              </textarea>
+              <input [disabled]="f.invalid"  class="btn btn-success mt-5" type="submit" value="Send">
+            </div>
+          </form>
+          <button class="btn btn-danger" (click)="closeModal('custom-modal-1');">Close</button>
+        </div>
+      </div>
+      <div class="my-modal-background"></div>
+    </modal>
+
+  </div>
   <table class="table table-hover">
     <tbody>
     <tr>
       <th scope="row">Price</th>
-      <td>$14.000</td>
+      <td *ngIf="!ad.featured">{{ad.price | currency:'USD'}}</td>
+      <td *ngIf="ad.featured" class="font-weight-bold"><i>{{ad.price - (ad.price * 0.30) | currency:"USD"}}</i></td>
     </tr>
     <tr>
-      <th scope="row">Price</th>
-      <td>$14.000</td>
+      <th scope="row">Category</th>
+      <td><a routerLink="/category/{{ad.category}}">{{ad.categoryName}}</a></td>
     </tr>
     <tr>
-      <th scope="row">Price</th>
-      <td>$14.000</td>
+      <th scope="row">Sub-Category</th>
+      <td><a routerLink="/sub-category/{{ad.subCategory}}">{{ad.subCategoryName}}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Added By</th>
+      <td><a routerLink="/profile/{{ad.creator}}">{{ad.creatorUserName}}</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Condition</th>
+      <td>{{ad.condition}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Description</th>
+      <td>{{ad.model}}</td>
     </tr>
     </tbody>
   </table>

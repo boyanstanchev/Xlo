@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import * as firebase from 'firebase';
+import './components/modal/modal.less'
 
 @Component({
   selector: 'app-root',

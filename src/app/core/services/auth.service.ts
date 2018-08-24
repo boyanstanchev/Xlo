@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core"
 import * as firebase from "firebase"
 import {ToastrService} from "ngx-toastr"
 import {Router} from "@angular/router"
+import {MessagesService} from './messages.service';
 
 
 @Injectable({
@@ -11,7 +12,8 @@ import {Router} from "@angular/router"
 export class AuthService {
 
   constructor(private toastr: ToastrService,
-              private router: Router) {}
+              private router: Router,
+              private messagesService: MessagesService) {}
 
 
   register(email: string, password: string, displayName: string) {
@@ -31,10 +33,20 @@ export class AuthService {
           .catch((err) => {
             this.toastr.error(err.message)
           })
+        this.saveUserDisplayName(displayName, firebase.auth().currentUser.uid)
+
       })
       .catch((err) => {
         this.toastr.error(err.message)
       })
+  }
+
+  saveUserDisplayName(displayName: string, userId: string) {
+    const userDataRef = firebase.database().ref(`userData/${userId}`)
+    let newStoreRef = userDataRef.push()
+    newStoreRef.set({
+      displayName: displayName
+    })
   }
 
   login(email: string, password: string) {
@@ -63,5 +75,14 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!sessionStorage.getItem('authtoken')
+  }
+
+  getUserNameById(userId: string) {
+    let usersRef = firebase.database().ref(`userData/${userId}`), name
+    return usersRef.once("value")
+      .then((snapshot) => {
+        name = snapshot
+        return name
+      })
   }
 }

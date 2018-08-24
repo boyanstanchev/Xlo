@@ -9,25 +9,28 @@ import {SubCategoryComponent} from './components/categories/sub-category/sub-cat
 import {DetailsComponent} from './components/ads/details/details.component';
 import {ProfileComponent} from './components/authentication/profile/profile.component';
 import {MyProfileComponent} from './components/authentication/my-profile/my-profile.component';
+import {EditComponent} from './components/ads/edit/edit.component';
 
 const routes: Route[] = [
   {path: '', component: FeaturedComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always'},
   {path: 'register', component: RegisterComponent},
-  {path: 'category/:id', component: CategoryComponent, runGuardsAndResolvers: 'always'},
+  {path: 'category/:id', component: CategoryComponent},
   {path: 'sub-category/:id', component: SubCategoryComponent},
-  {path: 'profile', children: [
+  {
+    path: 'profile', children: [
+      {path: 'me', component: MyProfileComponent},
       {path: ':id', component: ProfileComponent},
-      {path: 'me', component: MyProfileComponent}
     ]
   },
   {
     path: 'ads', children: [
-      {path: ':id', component: DetailsComponent},
-      {path: 'add', component: AddComponent}
+      {path: 'add', component: AddComponent},
+      {path: 'edit/:id', component: EditComponent},
+      {path: ':id', component: DetailsComponent}
     ]
   }
-]
+];
 
 @NgModule({
   imports: [
@@ -38,4 +41,5 @@ const routes: Route[] = [
   ]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

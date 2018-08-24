@@ -3,7 +3,6 @@ import {ToastrService} from "ngx-toastr"
 import {Router} from "@angular/router"
 import * as firebase from 'firebase';
 import {AdCreateInterface} from '../models/ad.create.interface';
-import DataSnapshot = firebase.database.DataSnapshot;
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,6 @@ export class AdsService {
     adsRef.once("value")
       .then((snapshot) => {
         snapshot.forEach((child) => {
-          child.val().featured
           if (child.val().featured == true) {
             featuredAds.push({
               "id": child.key,
@@ -83,4 +81,26 @@ export class AdsService {
       })
     return ads
   }
+
+  getAdById(adId: string) {
+    let adsRef = firebase.database().ref(`obiavi/${adId}`), ad
+    return adsRef.once("value")
+      .then((snapshot) => {
+        ad = snapshot
+        return ad
+      })
+  }
+
+  editAdById(adId: string, body) {
+    firebase.database().ref(`obiavi/${adId}`).set(body, (err) => {
+      if (err) {
+        this.toastr.error(err.message)
+      }
+    })
+      .then(() => {
+        this.toastr.success('Ad edited.')
+        this.router.navigate([`/ads/${adId}`])
+      })
+  }
+
 }

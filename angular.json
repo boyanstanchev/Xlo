@@ -24,6 +24,7 @@
             ],
             "styles": [
               "src/styles.css",
+              "src/app/components/modal/modal.less",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []

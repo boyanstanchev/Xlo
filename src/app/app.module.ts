@@ -23,6 +23,9 @@ import {DetailsComponent} from './components/ads/details/details.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ProfileComponent} from './components/authentication/profile/profile.component';
 import {MyProfileComponent} from './components/authentication/my-profile/my-profile.component';
+import {ModalComponent} from './components/modal/modal.component';
+import {ModalService} from './components/modal/modal.service';
+import {EditComponent} from './components/ads/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import {MyProfileComponent} from './components/authentication/my-profile/my-prof
     SubCategoryComponent,
     DetailsComponent,
     ProfileComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ModalComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import {MyProfileComponent} from './components/authentication/my-profile/my-prof
     AuthService,
     AdsService,
     CategoriesService,
+    ModalService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

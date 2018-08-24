@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -8,7 +9,6 @@ import {AuthService} from '../../core/services/auth.service';
 })
 export class NavigationComponent implements OnInit {
   displayName: string = sessionStorage.getItem('displayName')
-  userId: string = sessionStorage.getItem('userId')
 
   constructor(public authService: AuthService) {
   }

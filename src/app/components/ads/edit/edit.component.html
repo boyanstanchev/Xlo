@@ -1,0 +1,76 @@
+<div *ngIf="adModel" class="container">
+  <h3 class="text-center">Edit Ad</h3>
+  <div class="col ml-5">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form #f="ngForm" (ngSubmit)="edit(f)">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            required
+            type="text"
+            id="title"
+            name="title"
+            [(ngModel)]="adModel.title"
+            #title="ngModel"
+            class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="condition">Condition</label>
+          <select
+            required
+            id="condition"
+            name="condition"
+            [(ngModel)]="adModel.condition"
+            #condition="ngModel"
+            class="form-control">
+            <option value="New">New</option>
+            <option value="New">Used</option>
+          </select>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <label class="custom-control-label" for="featured">Featured</label>
+          <input
+            id="featured"
+            name="featured"
+            [(ngModel)]="adModel.featured"
+            #featured="ngModel"
+            type="checkbox"
+            checked>
+        </div>
+        <div class="form-group">
+          <label for="model">Description</label>
+          <textarea
+            required
+            id="model"
+            name="model"
+            [(ngModel)]="adModel.model"
+            #model="ngModel"
+            class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input
+            type="number"
+            required
+            id="price"
+            name="price"
+            [(ngModel)]="adModel.price"
+            #price="ngModel"
+            class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">Image</label>
+          <input
+            required
+            id="imageUrl"
+            name="imageUrl"
+            [(ngModel)]="adModel.imageUrl"
+            #imageUrl="ngModel"
+            class="form-control">
+        </div>
+        <button [disabled]="f.invalid" class="btn btn-primary" type="submit">Edit</button>
+      </form>
+    </div>
+  </div>
+
+</div>
