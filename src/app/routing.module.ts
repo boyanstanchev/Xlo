@@ -11,6 +11,7 @@ import {ProfileComponent} from './components/authentication/profile/profile.comp
 import {MyProfileComponent} from './components/authentication/my-profile/my-profile.component';
 import {EditComponent} from './components/ads/edit/edit.component';
 import {AuthGuard} from './core/guards/auth.guard';
+import {AdminPanelComponent} from './components/authentication/admin-panel/admin-panel.component';
 
 const routes: Route[] = [
   {path: '', component: FeaturedComponent},
@@ -18,6 +19,7 @@ const routes: Route[] = [
   {path: 'register', component: RegisterComponent},
   {path: 'category/:id', component: CategoryComponent},
   {path: 'sub-category/:id', component: SubCategoryComponent},
+  {path: 'admin', component: AdminPanelComponent},
   {
     path: 'profile', children: [
       {path: 'me', component: MyProfileComponent, canActivate: [AuthGuard]},

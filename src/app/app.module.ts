@@ -26,6 +26,7 @@ import {MyProfileComponent} from './components/authentication/my-profile/my-prof
 import {ModalComponent} from './components/modal/modal.component';
 import {ModalService} from './components/modal/modal.service';
 import {EditComponent} from './components/ads/edit/edit.component';
+import {AdminPanelComponent} from './components/authentication/admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {EditComponent} from './components/ads/edit/edit.component';
     ProfileComponent,
     MyProfileComponent,
     ModalComponent,
-    EditComponent
+    EditComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

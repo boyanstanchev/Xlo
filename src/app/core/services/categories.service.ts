@@ -68,4 +68,33 @@ export class CategoriesService {
       }
   }
 
+  addCategory(categoryName: string) {
+    let catsRef = firebase.database().ref('categories')
+    let newCatRef = catsRef.push()
+    newCatRef.set({
+      name: categoryName
+    })
+      .then(() => {
+        this.toastr.success('Category added successfully.')
+      })
+      .catch((err) => {
+        this.toastr.error(err.message)
+      })
+  }
+
+  addSubCategory(subCategoryName: string, categoryId: string) {
+    let catsRef = firebase.database().ref('subCategories')
+    let newCatRef = catsRef.push()
+    newCatRef.set({
+      name: subCategoryName,
+      category: categoryId
+    })
+      .then(() => {
+        this.toastr.success('Sub-Category added successfully.')
+      })
+      .catch((err) => {
+        this.toastr.error(err.message)
+      })
+  }
+
 }

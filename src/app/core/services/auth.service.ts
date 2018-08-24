@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core"
 import * as firebase from "firebase"
 import {ToastrService} from "ngx-toastr"
 import {Router} from "@angular/router"
-import {MessagesService} from './messages.service';
 
 
 @Injectable({
@@ -12,8 +11,7 @@ import {MessagesService} from './messages.service';
 export class AuthService {
 
   constructor(private toastr: ToastrService,
-              private router: Router,
-              private messagesService: MessagesService) {}
+              private router: Router) {}
 
 
   register(email: string, password: string, displayName: string) {
@@ -45,7 +43,8 @@ export class AuthService {
     const userDataRef = firebase.database().ref(`userData/${userId}`)
     let newStoreRef = userDataRef.push()
     newStoreRef.set({
-      displayName: displayName
+      displayName: displayName,
+      isAdmin: true
     })
   }
 

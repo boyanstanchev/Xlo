@@ -38,7 +38,8 @@
       <a *ngIf="authService.isAuthenticated()" class="nav-link" routerLink="/profile/me">{{displayName}}	💬</a>
       <a *ngIf="!authService.isAuthenticated()" class="nav-link" routerLink="/login">Login</a>
       <a *ngIf="!authService.isAuthenticated()" class="nav-link mr-5" routerLink="/register">Register</a>
-      <a *ngIf="authService.isAuthenticated()" class="nav-link mr-5" (click)="logout()" style="cursor: pointer">Logout</a>
+      <a *ngIf="authService.isAuthenticated()" routerLink="/admin" class="nav-link mr-5" style="cursor: pointer">Admin Panel 🔑</a>
+      <a *ngIf="authService.isAuthenticated()" class="nav-link mr-5" (click)="logout()" style="cursor: pointer">Logout ❌</a>
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>

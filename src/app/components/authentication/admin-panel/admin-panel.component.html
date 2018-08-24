@@ -1,0 +1,71 @@
+<div class="container">
+  <h3 class="text-center">Admin Panel</h3>
+
+  <form #f="ngForm" (ngSubmit)="addCategory(f)">
+    <div class="form-group">
+      <label class="col-form-label" for="inputDefault"><h5>Add an category</h5></label>
+      <input
+        type="text"
+        class="form-control"
+        name="category"
+        ngModel
+        placeholder="Category name.."
+        id="inputDefault">
+      <input class="btn btn-success mt-3" type="submit" value="Add">
+    </div>
+  </form>
+
+  <form #f4="ngForm" (ngSubmit)="deleteCategory(f4)">
+    <div class="form-group">
+      <label class="col-form-label" for="inputDefault4"><h5>Delete an category</h5></label>
+      <input
+        type="text"
+        class="form-control"
+        name="categoryName"
+        ngModel
+        placeholder="Category name.."
+        id="inputDefault4">
+      <input class="btn btn-success mt-3" type="submit" value="Add">
+    </div>
+  </form>
+
+  <form class="mt-5" #f2="ngForm" (ngSubmit)="addSubCategory(f2)">
+    <div class="form-group">
+      <label class="col-form-label" for="inputDefault-2"><h5>Add an sub-category</h5></label>
+      <input
+        type="text"
+        class="form-control"
+        name="subCategory"
+        ngModel
+        placeholder="Sub-Category name.."
+        id="inputDefault-2">
+
+      <label class="col-form-label" for="sub-category">Select category</label>
+      <select
+        class="form-control"
+        name="category"
+        id="sub-category"
+        ngModel>
+        <option *ngFor="let cat of categories | async" value={{cat.id}}>
+          {{cat.name}}
+        </option>
+      </select>
+      <input class="btn btn-success mt-3" type="submit" value="Add">
+    </div>
+  </form>
+
+  <form class="mt-5" #f3="ngForm" (ngSubmit)="deleteAd(f3)">
+    <div class="form-group">
+      <label class="col-form-label" for="inputDefault-3"><h5>Delete an ad by ID</h5></label>
+      <input
+        type="text"
+        class="form-control"
+        name="adId"
+        ngModel
+        placeholder="Ad ID.."
+        id="inputDefault-3">
+      <input class="btn btn-danger mt-3" type="submit" value="Remove">
+    </div>
+  </form>
+
+</div>
