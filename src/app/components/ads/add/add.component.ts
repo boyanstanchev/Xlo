@@ -4,6 +4,7 @@ import {CategoriesModel} from '../../../core/models/categories.model';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {NgForm} from '@angular/forms';
 import {AdsService} from '../../../core/services/ads.service';
+import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-add',
@@ -15,7 +16,8 @@ export class AddComponent implements OnInit {
   subCategories = []
 
   constructor(private categoriesService: CategoriesService,
-              private adsService: AdsService) {}
+              private adsService: AdsService,
+              private authService: AuthService) {}
 
   add(form: NgForm) {
     this.adsService.createAd({
@@ -27,7 +29,7 @@ export class AddComponent implements OnInit {
       model: form.value.model,
       price: form.value.price,
       imageUrl: form.value.imageUrl,
-      creator: sessionStorage.getItem('userId')
+      creator: this.authService.userId
     })
   }
 

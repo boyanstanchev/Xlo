@@ -19,7 +19,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.adsService.getAdById(this.route.snapshot.params['id']) // ADD ALL THE FIELDS!
+    this.adsService.getAdById(this.route.snapshot.params['id'])
       .then((snapshot) => {
         this.adModel = {
           title: snapshot.val().title,

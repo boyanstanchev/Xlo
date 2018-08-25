@@ -27,6 +27,7 @@ import {ModalComponent} from './components/modal/modal.component';
 import {ModalService} from './components/modal/modal.service';
 import {EditComponent} from './components/ads/edit/edit.component';
 import {AdminPanelComponent} from './components/authentication/admin-panel/admin-panel.component';
+import {ShoppingCartService} from './core/services/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {AdminPanelComponent} from './components/authentication/admin-panel/admin
     AdsService,
     CategoriesService,
     ModalService,
+    ShoppingCartService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

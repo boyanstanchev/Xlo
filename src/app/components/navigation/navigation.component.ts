@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
-import {NavigationEnd, Router} from '@angular/router';
 import {ModalService} from '../modal/modal.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: [] //'./navigation.component.css'
+  styleUrls: []
 })
 export class NavigationComponent implements OnInit {
-  displayName: string = sessionStorage.getItem('displayName')
   cartItems
 
   constructor(public authService: AuthService,

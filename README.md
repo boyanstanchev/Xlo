@@ -1,27 +1,38 @@
-# TechStore
+# Xlo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+An Olx-like project with authentication, admin functionality.
+You can add ads and edit ads send message and buy now if the price is right for you.
 
-## Development server
+The main page consists of featured ads wich you have to pay to have.
+There is also a nav-bar with menus for adding an ad and your shopping cart.
+On the side you can find the sidebar with all the categories listed.
+On the category page you can view all the ads from the current category and also all the sub-categories.
+Every ad has Buy Now and Details buttons - pretty self explainatory.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Project components: 
 
-## Code scaffolding
+	AppComponent,
+    NavigationComponent,
+    SidebarComponent,
+    LoginComponent,
+    RegisterComponent,
+    FeaturedComponent,
+    AddComponent,
+    CategoryComponent,
+    SubCategoryComponent,
+    DetailsComponent,
+    ProfileComponent,
+    MyProfileComponent,
+    ModalComponent,
+    EditComponent,
+    AdminPanelComponent
+	
+The main project category consists of two main folders - Components and Core.
+In the core folder you can find 4 folders:
+		
+		Guard,
+		Interceptors,
+		Models,
+		Services.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

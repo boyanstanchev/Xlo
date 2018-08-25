@@ -1,0 +1,52 @@
+import {Injectable} from '@angular/core';
+import * as firebase from 'firebase';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {AdCreateInterface} from '../models/ad.create.interface';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class ShoppingCartService {
+
+  constructor(private toastr: ToastrService,
+              private router: Router) {
+  }
+
+  add(adTitle: string, adId: string, adPrice: string) {
+    const cartRef = firebase.database().ref('shopping-cart');
+    let newStoreRef = cartRef.push();
+    newStoreRef.set({
+      adId,
+      adTitle,
+      adPrice
+    })
+      .then(() => {
+        this.toastr.success('Product added to shopping cart.');
+      })
+      .catch((err) => {
+        this.toastr.error(err.message);
+      });
+  }
+
+  remove(cartItemId: string) {
+    const cartRef = firebase.database().ref(`shopping-cart/${cartItemId}`);
+    cartRef.remove()
+      .then(() => {
+        this.toastr.success('Product removed successfully.')
+      })
+      .catch((err) => {
+        this.toastr.error(err.message)
+      })
+  }
+
+  getAll() {
+    const cartRef = firebase.database().ref('shopping-cart');
+    cartRef.once('value')
+      .then((snapshot) => {
+        return snapshot
+      })
+  }
+}

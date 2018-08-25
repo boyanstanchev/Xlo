@@ -62,7 +62,7 @@ export class DetailsComponent implements OnInit {
             });
           })
 
-        this.isCreator = sessionStorage.getItem('userId') === snapshot.val().creator;
+        this.isCreator = this.authService.userId === snapshot.val().creator;
 
         this.ad = {
           id: snapshot.key,

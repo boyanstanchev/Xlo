@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdsService} from '../../../core/services/ads.service';
 import {AuthService} from '../../../core/services/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-featured',
@@ -13,20 +14,11 @@ export class FeaturedComponent implements OnInit {
 
   constructor(private adsService: AdsService,
               public authService: AuthService,
-              private toastr: ToastrService) {
+              private cartService: ShoppingCartService) {
   }
 
   addToCart(adTitle: string, adId: string, adPrice: string) {
-    let cartItems = JSON.parse(sessionStorage.getItem('cartItems'))
-    if (cartItems) {
-      cartItems[adId] = adTitle
-      sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
-    } else {
-      let data = {}
-      data[adId] = adTitle
-      sessionStorage.setItem('cartItems', JSON.stringify(data))
-    }
-    this.toastr.success('Item had been added to your cart.')
+    this.cartService.add(adTitle, adId, adPrice)
   }
 
   ngOnInit() {
