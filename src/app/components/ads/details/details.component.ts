@@ -33,9 +33,9 @@ export class DetailsComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  message(form, profileId) {
+  message(form, profileId, adTitle) {
     let message = form.value.message
-    this.messagesService.sendMessage(message, profileId, this.route.snapshot.params['id'])
+    this.messagesService.sendMessage(message, profileId, this.route.snapshot.params['id'], adTitle)
       .then(() => {
         this.toastr.success('Message send.')
         this.closeModal('custom-modal-1')

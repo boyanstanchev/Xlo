@@ -13,6 +13,7 @@
 
 <div class="container">
   <h3 class="text-center mb-5">{{categoryName}}</h3>
+  <h4 class="text-danger" *ngIf="ads.length == 0">There are no ads in this category.</h4>
   <div class="row">
     <div *ngFor="let ad of ads" class="col-sm-4">
       <div class="card mb-3">
@@ -39,7 +40,7 @@
         <div class="my-modal">
           <div class="my-modal-body">
             <h1>Message Seller</h1>
-            <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.id)">
+            <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.id, ad.title)">
               <div class="form-group">
                 <label for="formGroupExampleInput">Message</label>
                 <textarea

@@ -28,6 +28,7 @@ import {ModalService} from './components/modal/modal.service';
 import {EditComponent} from './components/ads/edit/edit.component';
 import {AdminPanelComponent} from './components/authentication/admin-panel/admin-panel.component';
 import {ShoppingCartService} from './core/services/shopping-cart.service';
+import {CheckoutComponent} from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {ShoppingCartService} from './core/services/shopping-cart.service';
     MyProfileComponent,
     ModalComponent,
     EditComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

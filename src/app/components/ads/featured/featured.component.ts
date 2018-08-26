@@ -36,9 +36,9 @@ export class FeaturedComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  message(form, profileId, adId) {
+  message(form, profileId, adId, adTitle) {
     let message = form.value.message
-    this.messagesService.sendMessage(message, profileId, adId)
+    this.messagesService.sendMessage(message, profileId, adId, adTitle)
       .then(() => {
         this.toastr.success('Message send.')
         this.closeModal('custom-modal-4')

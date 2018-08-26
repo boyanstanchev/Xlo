@@ -12,6 +12,8 @@ import {MyProfileComponent} from './components/authentication/my-profile/my-prof
 import {EditComponent} from './components/ads/edit/edit.component';
 import {AuthGuard} from './core/guards/auth.guard';
 import {AdminPanelComponent} from './components/authentication/admin-panel/admin-panel.component';
+import {CheckoutComponent} from './components/checkout/checkout.component';
+import {AdminGuard} from './core/guards/admin.guard';
 
 const routes: Route[] = [
   {path: '', component: FeaturedComponent},
@@ -19,7 +21,8 @@ const routes: Route[] = [
   {path: 'register', component: RegisterComponent},
   {path: 'category/:id', component: CategoryComponent},
   {path: 'sub-category/:id', component: SubCategoryComponent},
-  {path: 'admin', component: AdminPanelComponent},
+  {path: 'admin', component: AdminPanelComponent}, //, canActivate: [AdminGuard]
+  {path: 'checkout', component: CheckoutComponent},
   {
     path: 'profile', children: [
       {path: 'me', component: MyProfileComponent, canActivate: [AuthGuard]},

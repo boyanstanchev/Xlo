@@ -8,6 +8,7 @@ import {
 import {Observable} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from '../services/auth.service';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     if (this.authService.isAuthenticated()) {
-      return true;
+      return true
     }
 
     this.router.navigate(['/login']);

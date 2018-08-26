@@ -100,7 +100,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!firebase.auth().currentUser;
+    return !!firebase.auth().currentUser
   }
 
   getUserNameById(userId: string) {

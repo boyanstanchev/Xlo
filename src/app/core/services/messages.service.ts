@@ -15,26 +15,43 @@ export class MessagesService {
   }
 
 
-  sendMessage(message: string, receiverId: string, adId: string) {
+  sendMessage(message: string, receiverId: string, adId: string, adTitle: string) {
     const messagesRef = firebase.database().ref('messages')
     let newStoreRef = messagesRef.push()
     let messageObj = {
       receiverId,
       message,
       adId,
+      adTitle,
       senderId: firebase.auth().currentUser.uid
     }
     return newStoreRef.set(messageObj)
   }
 
-  getMessagesByProfileId(profileId: string) {
-    const messagesRef = firebase.database().ref('messages')
-    let peep
-    return messagesRef.once('value')
+  getSentMessagesByProfileId(profileId: string) {
+    let dbRef = firebase.database().ref();
+    let peep;
+    return dbRef.child('messages')
+      .orderByChild('senderId')
+      .equalTo(profileId)
+      .once('value')
       .then((snapshot) => {
-        peep = snapshot
-        return peep
-      })
+        peep = snapshot;
+        return peep;
+      });
+  }
+
+  getRecievedMessagesByProfileId(profileId: string) {
+    let dbRef = firebase.database().ref();
+    let peep;
+    return dbRef.child('messages')
+      .orderByChild('receiverId')
+      .equalTo(profileId)
+      .once('value')
+      .then((snapshot) => {
+        peep = snapshot;
+        return peep;
+      });
   }
 
 }

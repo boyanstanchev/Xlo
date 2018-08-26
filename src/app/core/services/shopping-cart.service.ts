@@ -35,6 +35,7 @@ export class ShoppingCartService {
     const cartRef = firebase.database().ref(`shopping-cart/${cartItemId}`);
     cartRef.remove()
       .then(() => {
+        document.getElementById(cartItemId).outerHTML = "";
         this.toastr.success('Product removed successfully.')
       })
       .catch((err) => {
@@ -44,10 +45,12 @@ export class ShoppingCartService {
 
   getAllByUserId(userId: string) {
     const cartRef = firebase.database().ref('shopping-cart');
-    cartRef.orderByChild('userId').equalTo(userId)
+    let peep
+    return cartRef.orderByChild('userId').equalTo(userId)
       .once('value')
       .then((snapshot) => {
-
+        peep = snapshot
+        return peep
       })
   }
 }
