@@ -1,0 +1,40 @@
+<table id="cart" class="table table-hover table-condensed">
+  <thead>
+  <tr>
+    <th style="width:50%">Product</th>
+    <th></th>
+    <th></th>
+    <th style="width:10%">Price</th>
+    <th style="width:10%"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngIf="cartItems.length == 0">
+    <td>Shopping cart is empty</td>
+  </tr>
+  <tr *ngFor="let item of cartItems" id={{item.cartItemId}}>
+    <td  data-th="Product">
+      <div class="row">
+        <div class="col-sm-10">
+          <h4 class="nomargin"><a routerLink="/ads/{{item.adId}}">{{item.adTitle}}</a></h4>
+        </div>
+      </div>
+    </td>
+    <td></td>
+    <td></td>
+    <td data-th="Price">{{item.adPrice | currency:'USD'}}</td>
+    <td class="actions" data-th="">
+      <button (click)="remove(item.cartItemId)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+    </td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td><a routerLink="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+    <td colspan="2" class="hidden-xs"></td>
+    <td class="hidden-xs text-center"><strong>Total {{total | currency:'USD'}}</strong></td>
+    <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+  </tr>
+  </tfoot>
+</table>
