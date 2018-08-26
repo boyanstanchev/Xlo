@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 })
 export class NavigationComponent implements OnInit {
   cartItems
+  isAdmin: boolean
 
   constructor(public authService: AuthService,
               private modalService: ModalService) {
@@ -35,6 +36,18 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        let userDataRef = firebase.database().ref()
+        userDataRef.child('userData').child(firebase.auth().currentUser.uid)
+          .once('value')
+          .then((snapshot) => {
+            snapshot.forEach((child) => {
+              this.isAdmin = child.val().isAdmin
+            })
+          })
+      }
+    });
   }
 
 }

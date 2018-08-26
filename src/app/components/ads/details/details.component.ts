@@ -6,6 +6,7 @@ import {AuthService} from '../../../core/services/auth.service';
 import {ModalService} from '../../modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ToastrService} from 'ngx-toastr';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-details',
@@ -18,7 +19,7 @@ export class DetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private adsService: AdsService,
-              private authService: AuthService,
+              public authService: AuthService,
               public categoriesService: CategoriesService,
               private modalService: ModalService,
               private messagesService: MessagesService,
@@ -62,7 +63,10 @@ export class DetailsComponent implements OnInit {
             });
           })
 
-        this.isCreator = this.authService.userId === snapshot.val().creator;
+        if (firebase.auth().currentUser) {
+          this.isCreator = this.authService.userId === snapshot.val().creator;
+        }
+
 
         this.ad = {
           id: snapshot.key,

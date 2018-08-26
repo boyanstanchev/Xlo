@@ -24,13 +24,43 @@
           <li class="list-group-item blockquote">{{ad.price}}$</li>
         </ul>
         <div class="card-body">
-          <button
-            *ngIf="authService.isAuthenticated()"
-            class="card-link btn btn-success"
-            (click)="addToCart(ad.title, ad.id)">Add To Cart</button>
+          <button *ngIf="authService.isAuthenticated() && ad.condition == 'New' && !ad.isCreator"
+                  (click)="addToCart(ad.title, ad.id, ad.price)"
+                  class="card-link btn btn-success">Add To Cart</button>
+          <button *ngIf="authService.isAuthenticated() && ad.condition == 'Used'  && !ad.isCreator"
+                  (click)="openModal('custom-modal-5')"
+                  class="card-link btn btn-success">Message</button>
+          <a *ngIf="ad.isCreator" routerLink="/ads/edit/{{ad.id}}" class="card-link btn btn-success">Edit</a>
           <a routerLink="/ads/{{ad.id}}" class="card-link btn btn-info">Details</a>
         </div>
       </div>
+
+      <modal id="custom-modal-5">
+        <div class="my-modal">
+          <div class="my-modal-body">
+            <h1>Message Seller</h1>
+            <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.id)">
+              <div class="form-group">
+                <label for="formGroupExampleInput">Message</label>
+                <textarea
+                  required
+                  style="height: 100px"
+                  name="message"
+                  type="text"
+                  ngModel
+                  class="form-control"
+                  id="formGroupExampleInput"
+                  placeholder="Message..">
+              </textarea>
+                <input [disabled]="f.invalid"  class="btn btn-success mt-5" type="submit" value="Send">
+              </div>
+            </form>
+            <button class="btn btn-danger" (click)="closeModal('custom-modal-5');">Close</button>
+          </div>
+        </div>
+        <div class="my-modal-background"></div>
+      </modal>
+
     </div>
   </div>
 

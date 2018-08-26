@@ -20,11 +20,19 @@ export class AdsService {
       .then((snapshot) => {
         snapshot.forEach((child) => {
           if (child.val().featured == true) {
+            let isCreator = false
+            if (firebase.auth().currentUser && firebase.auth().currentUser.uid == child.val().creator) {
+              isCreator = true
+            }
+
             featuredAds.push({
               'id': child.key,
               'imageUrl': child.val().imageUrl,
               'price': child.val().price,
-              'title': child.val().title
+              'title': child.val().title,
+              'condition': child.val().condition,
+              'creator': child.val().creator,
+              isCreator
             });
           }
         });
@@ -52,11 +60,19 @@ export class AdsService {
       .then((snapshot) => {
         snapshot.forEach((child) => {
           if (child.val().category === categoryId) {
+            let isCreator = false
+            if (firebase.auth().currentUser && firebase.auth().currentUser.uid == child.val().creator) {
+              isCreator = true
+            }
+
             ads.push({
               'id': child.key,
               'imageUrl': child.val().imageUrl,
               'price': child.val().price,
-              'title': child.val().title
+              'title': child.val().title,
+              'condition': child.val().condition,
+              'creator': child.val().creator,
+              isCreator
             });
           }
         });
@@ -71,11 +87,19 @@ export class AdsService {
       .then((snapshot) => {
         snapshot.forEach((child) => {
           if (child.val().subCategory === subCategoryId) {
+            let isCreator = false
+            if (firebase.auth().currentUser && firebase.auth().currentUser.uid == child.val().creator) {
+              isCreator = true
+            }
+
             ads.push({
               'id': child.key,
               'imageUrl': child.val().imageUrl,
               'price': child.val().price,
-              'title': child.val().title
+              'title': child.val().title,
+              'condition': child.val().condition,
+              'creator': child.val().creator,
+              isCreator
             });
           }
         });

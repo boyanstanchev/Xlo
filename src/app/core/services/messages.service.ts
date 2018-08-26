@@ -19,9 +19,10 @@ export class MessagesService {
     const messagesRef = firebase.database().ref('messages')
     let newStoreRef = messagesRef.push()
     let messageObj = {
-      profileId: receiverId,
-      message: message,
-      adId: adId
+      receiverId,
+      message,
+      adId,
+      senderId: firebase.auth().currentUser.uid
     }
     return newStoreRef.set(messageObj)
   }

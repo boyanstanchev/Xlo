@@ -4,6 +4,9 @@ import {AdsService} from '../../../core/services/ads.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {ModalService} from '../../modal/modal.service';
+import {MessagesService} from '../../../core/services/messages.service';
+import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-category',
@@ -21,7 +24,10 @@ export class CategoryComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               public authService: AuthService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private modalService: ModalService,
+              private messagesService: MessagesService,
+              private cartService: ShoppingCartService) {
 
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
 
@@ -31,17 +37,26 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  addToCart(adTitle: string, adId: string) {
-    let cartItems = JSON.parse(sessionStorage.getItem('cartItems'))
-    if (cartItems) {
-      cartItems[adId] = adTitle
-      sessionStorage.setItem('cartItems', JSON.stringify(cartItems))
-    } else {
-      let data = {}
-      data[adId] = adTitle
-      sessionStorage.setItem('cartItems', JSON.stringify(data))
-    }
-    this.toastr.success('Item had been added to your cart.')
+  addToCart(adTitle: string, adId: string, adPrice: string) {
+    this.cartService.add(adTitle, adId, adPrice)
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+  }
+
+  message(form, profileId, adId) {
+    let message = form.value.message
+    this.messagesService.sendMessage(message, profileId, adId)
+      .then(() => {
+        this.toastr.success('Message send.')
+        this.closeModal('custom-modal-5')
+      })
+      .catch(err => this.toastr.error(err.message))
   }
 
 

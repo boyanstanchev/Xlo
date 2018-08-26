@@ -26,6 +26,10 @@ export class AdminPanelComponent implements OnInit {
     this.adsService.deleteAd(form.value.adId)
   }
 
+  deleteCategory(form) {
+    //TODO
+  }
+
   ngOnInit() {
     this.categories = this.categoriesService.getAllCategories()
   }

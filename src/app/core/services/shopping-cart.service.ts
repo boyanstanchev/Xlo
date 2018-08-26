@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import * as firebase from 'firebase';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {AdCreateInterface} from '../models/ad.create.interface';
 
 
 @Injectable({
@@ -21,7 +20,8 @@ export class ShoppingCartService {
     newStoreRef.set({
       adId,
       adTitle,
-      adPrice
+      adPrice,
+      userId: firebase.auth().currentUser.uid
     })
       .then(() => {
         this.toastr.success('Product added to shopping cart.');
@@ -42,11 +42,12 @@ export class ShoppingCartService {
       })
   }
 
-  getAll() {
+  getAllByUserId(userId: string) {
     const cartRef = firebase.database().ref('shopping-cart');
-    cartRef.once('value')
+    cartRef.orderByChild('userId').equalTo(userId)
+      .once('value')
       .then((snapshot) => {
-        return snapshot
+
       })
   }
 }

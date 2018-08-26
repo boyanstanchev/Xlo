@@ -18,7 +18,7 @@ export class AuthService {
   /*
    The callback hell is real. Let me explain what's happening:
 
-   The method 'createUserWithEmailAndPassword' logs in the user and I don't want that so right after that I log him out. Then I update his profile with the display name from registration form. Then I call the function 'saveUserDisplayName' which creates new collection in database with userId + user display name. This is necessary because firebase does not allow access to other user's data like displayName. But in every ad I want to display the creator so I just use the created collection to retrieve it.
+   The method 'createUserWithEmailAndPassword' logs in the user and I don't want that so right after that I log him out. Then I update his profile with the display name and isAdmin property from registration form. Then I call the function 'saveUserDisplayName' which creates new collection in database with userId + user display name. This is necessary because firebase does not allow access to other user's data like displayName. But in every ad I want to display the creator so I just use the created collection to retrieve it.
 
  'I am a genius!!'
         - Boyan Stanchev 2018
@@ -54,7 +54,7 @@ export class AuthService {
     let newStoreRef = userDataRef.push();
     newStoreRef.set({
       displayName: displayName,
-      isAdmin: true
+      isAdmin: false
     });
   }
 
