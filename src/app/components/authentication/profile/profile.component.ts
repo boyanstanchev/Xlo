@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {AdsService} from '../../../core/services/ads.service';
-import {ModalService} from '../../modal/modal.service';
+import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ToastrService} from 'ngx-toastr';
 

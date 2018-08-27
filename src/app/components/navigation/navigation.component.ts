@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
-import {ModalService} from '../modal/modal.service';
+import {ModalService} from '../shared/modal/modal.service';
 import * as firebase from 'firebase';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
 import {Router} from '@angular/router';

@@ -7,8 +7,6 @@ import {FormsModule} from '@angular/forms';
 import {ToastrModule} from 'ngx-toastr';
 import {NavigationComponent} from './components/navigation/navigation.component';
 import {SidebarComponent} from './components/sidebar/sidebar.component';
-import {LoginComponent} from './components/authentication/login/login.component';
-import {RegisterComponent} from './components/authentication/register/register.component';
 import {AppRoutingModule} from './routing.module';
 import {FeaturedComponent} from './components/ads/featured/featured.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -17,36 +15,23 @@ import {AddComponent} from './components/ads/add/add.component';
 import {AuthService} from './core/services/auth.service';
 import {AdsService} from './core/services/ads.service';
 import {CategoriesService} from './core/services/categories.service';
-import {CategoryComponent} from './components/categories/category/category.component';
-import {SubCategoryComponent} from './components/categories/sub-category/sub-category.component';
 import {DetailsComponent} from './components/ads/details/details.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {ProfileComponent} from './components/authentication/profile/profile.component';
-import {MyProfileComponent} from './components/authentication/my-profile/my-profile.component';
-import {ModalComponent} from './components/modal/modal.component';
-import {ModalService} from './components/modal/modal.service';
+import {ModalService} from './components/shared/modal/modal.service';
 import {EditComponent} from './components/ads/edit/edit.component';
-import {AdminPanelComponent} from './components/authentication/admin-panel/admin-panel.component';
 import {ShoppingCartService} from './core/services/shopping-cart.service';
 import {CheckoutComponent} from './components/checkout/checkout.component';
+import {AuthenticationModule} from './components/authentication/authentication.module';
+import {MessagesService} from './core/services/messages.service';
+import {CategoriesModule} from './components/categories/categories.module';
+import {SharedModule} from './components/shared/shared.module';
+import {AdsModule} from './components/ads/ads.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     SidebarComponent,
-    LoginComponent,
-    RegisterComponent,
-    FeaturedComponent,
-    AddComponent,
-    CategoryComponent,
-    SubCategoryComponent,
-    DetailsComponent,
-    ProfileComponent,
-    MyProfileComponent,
-    ModalComponent,
-    EditComponent,
-    AdminPanelComponent,
     CheckoutComponent
   ],
   imports: [
@@ -55,7 +40,10 @@ import {CheckoutComponent} from './components/checkout/checkout.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule,
+    AuthenticationModule,
+    CategoriesModule,
+    SharedModule,
+    AdsModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-right',
@@ -68,6 +56,7 @@ import {CheckoutComponent} from './components/checkout/checkout.component';
     CategoriesService,
     ModalService,
     ShoppingCartService,
+    MessagesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

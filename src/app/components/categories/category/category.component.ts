@@ -4,7 +4,7 @@ import {AdsService} from '../../../core/services/ads.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {ToastrService} from 'ngx-toastr';
-import {ModalService} from '../../modal/modal.service';
+import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 

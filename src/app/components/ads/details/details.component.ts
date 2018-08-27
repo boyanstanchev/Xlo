@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AdsService} from '../../../core/services/ads.service';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {AuthService} from '../../../core/services/auth.service';
-import {ModalService} from '../../modal/modal.service';
+import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ToastrService} from 'ngx-toastr';
 import * as firebase from 'firebase';

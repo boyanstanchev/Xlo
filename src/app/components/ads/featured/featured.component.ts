@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdsService} from '../../../core/services/ads.service';
 import {AuthService} from '../../../core/services/auth.service';
 import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
-import {ModalService} from '../../modal/modal.service';
+import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute} from '@angular/router';
@@ -20,8 +20,7 @@ export class FeaturedComponent implements OnInit {
               private cartService: ShoppingCartService,
               private modalService: ModalService,
               private messagesService: MessagesService,
-              private toastr: ToastrService,
-              private route: ActivatedRoute) {
+              private toastr: ToastrService) {
   }
 
   addToCart(adTitle: string, adId: string, adPrice: string) {
