@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a routerLink="/">
+  <a routerLink="/ads/featured">
     <img style="width: 50px" src="http://bellacom.hu/sites/default/files/styles/photo_300_300/public/xlo_logo_1.png?itok=zM4brhf_" alt="Logo">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,9 +36,9 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <a *ngIf="authService.loggedInUser !== null" class="nav-link" routerLink="/profile/me">{{authService.loggedInUser}}	💬</a>
-      <a *ngIf="!authService.isAuthenticated()" class="nav-link" routerLink="/login">Login</a>
-      <a *ngIf="!authService.isAuthenticated()" class="nav-link mr-5" routerLink="/register">Register</a>
-      <a *ngIf="isAdmin && authService.isAuthenticated()" routerLink="/admin" class="nav-link mr-5" style="cursor: pointer">Admin Panel 🔑</a>
+      <a *ngIf="!authService.isAuthenticated()" class="nav-link" routerLink="/profile/login">Login</a>
+      <a *ngIf="!authService.isAuthenticated()" class="nav-link mr-5" routerLink="/profile/register">Register</a>
+      <a *ngIf="isAdmin && authService.isAuthenticated()" routerLink="/profile/admin" class="nav-link mr-5" style="cursor: pointer">Admin Panel 🔑</a>
       <a *ngIf="authService.isAuthenticated()" class="nav-link mr-5" (click)="logout()" style="cursor: pointer">Logout ❌</a>
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>

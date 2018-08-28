@@ -40,7 +40,7 @@ export class AdminGuard implements CanActivate {
     if (isAdmin) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/profile/login']);
       this.toastr.error('You must be admin to enter this page.');
       return false;
     }

@@ -46,7 +46,7 @@ export class AdsService {
     newStoreRef.set(object)
       .then(() => {
         this.toastr.success('Your Ad is successfully added.');
-        this.router.navigate(['/']);
+        this.router.navigate(['/ads/featured']);
       })
       .catch((err) => {
         this.toastr.error(err.message);

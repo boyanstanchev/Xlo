@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
       return true
     }
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/profile/login']);
     this.toastr.error('You must be logged in to see this page');
     return false;
   }

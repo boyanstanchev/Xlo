@@ -36,7 +36,7 @@ export class AuthService {
             })
               .then(() => {
                 this.saveUserDisplayName(displayName, user.user.uid);
-                this.router.navigate(['/login']);
+                this.router.navigate(['/profile/login']);
                 this.toastr.success('You are now registered. Please login to continue.');
               })
               .catch((err) => {
@@ -63,7 +63,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.authtoken = user.user['qa']
-        this.router.navigate(['/']);
+        this.router.navigate(['/ads/featured']);
         this.toastr.success('You are now logged in.');
       })
       .catch((err) => {
@@ -94,7 +94,7 @@ export class AuthService {
   logout() {
     firebase.auth().signOut()
       .then(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/profile/login']);
         this.toastr.success('You are now singed out.');
       });
   }

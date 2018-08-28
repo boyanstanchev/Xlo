@@ -9,8 +9,8 @@ import {AdsService} from '../../core/services/ads.service';
 import {ModalService} from '../shared/modal/modal.service';
 import {MessagesService} from '../../core/services/messages.service';
 import {CategoriesService} from '../../core/services/categories.service';
-import {AppRoutingModule} from '../../routing.module';
 import {SharedModule} from '../shared/shared.module';
+import {AuthenticationRoutingModule} from './authentication-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,8 @@ import {SharedModule} from '../shared/shared.module';
   imports: [
     FormsModule,
     CommonModule,
-    AppRoutingModule,
-    SharedModule
+    SharedModule,
+    AuthenticationRoutingModule
   ],
   providers: [
     AuthService,

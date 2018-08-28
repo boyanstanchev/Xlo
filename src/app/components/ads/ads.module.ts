@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {adsComponents} from './index';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {AppRoutingModule} from '../../routing.module';
 import {SharedModule} from '../shared/shared.module';
 import {AdsService} from '../../core/services/ads.service';
 import {AuthService} from '../../core/services/auth.service';
@@ -10,6 +9,7 @@ import {ShoppingCartService} from '../../core/services/shopping-cart.service';
 import {ModalService} from '../shared/modal/modal.service';
 import {MessagesService} from '../../core/services/messages.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {AdsRoutingModule} from './ads-routing.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
   imports: [
     FormsModule,
     CommonModule,
-    AppRoutingModule,
+    AdsRoutingModule,
     SharedModule,
     NgxPaginationModule
   ],
@@ -28,6 +28,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ShoppingCartService,
     ModalService,
     MessagesService
+  ],
+  exports: [
+    CommonModule
   ]
 })
 
