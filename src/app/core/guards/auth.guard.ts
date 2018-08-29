@@ -8,7 +8,6 @@ import {
 import {Observable} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from '../services/auth.service';
-import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
