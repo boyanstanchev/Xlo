@@ -45,42 +45,43 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
     this.adsService.getAdById(this.route.snapshot.params['id'])
-      .then((snapshot) => {
-        this.categoriesService.getCategoryNameById(snapshot.val().category, false)
-          .then((snapshot) => {
-            this.ad['categoryName'] = snapshot.val().name
-          })
+      .subscribe((ads) => {
+        ads.forEach((ad) => {
+          this.categoriesService.getCategoryNameById(ad.payload.val()['category'], false)
+            .then((snapshot) => {
+              this.ad['categoryName'] = snapshot.val().name
+            })
 
-        this.categoriesService.getCategoryNameById(snapshot.val().subCategory, true)
-          .then((snapshot) => {
-            this.ad['subCategoryName'] = snapshot.val().name
-          })
+          this.categoriesService.getCategoryNameById(ad.payload.val()['subCategory'], true)
+            .then((snapshot) => {
+              this.ad['subCategoryName'] = snapshot.val().name
+            })
 
-        this.authService.getUserNameById(snapshot.val().creator)
-          .then((snapshot) => {
-            snapshot.forEach((child) => {
-              this.ad['creatorUserName'] = child.val().displayName
-            });
-          })
+          this.authService.getUserNameById(ad.payload.val()['creator'])
+            .then((snapshot) => {
+              snapshot.forEach((child) => {
+                this.ad['creatorUserName'] = child.val().displayName
+              });
+            })
 
-        if (firebase.auth().currentUser) {
-          this.isCreator = this.authService.userId === snapshot.val().creator;
-        }
+          if (firebase.auth().currentUser) {
+            this.isCreator = this.authService.userId === ad.payload.val()['creator'];
+          }
 
 
-        this.ad = {
-          id: snapshot.key,
-          title: snapshot.val().title,
-          condition: snapshot.val().condition,
-          category: snapshot.val().category,
-          subCategory: snapshot.val().subCategory,
-          featured: snapshot.val().featured,
-          model: snapshot.val().model,
-          price: snapshot.val().price,
-          imageUrl: snapshot.val().imageUrl,
-          creator: snapshot.val().creator
-        }
+          this.ad = {
+            id: ad.key,
+            title: ad.payload.val()['title'],
+            condition: ad.payload.val()['condition'],
+            category: ad.payload.val()['category'],
+            subCategory: ad.payload.val()['subCategory'],
+            featured: ad.payload.val()['featured'],
+            model: ad.payload.val()['model'],
+            price: ad.payload.val()['price'],
+            imageUrl: ad.payload.val()['imageUrl'],
+            creator: ad.payload.val()['creator']
+          }
+        })
       })
   }
-
 }

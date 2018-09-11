@@ -20,18 +20,20 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.adsService.getAdById(this.route.snapshot.params['id'])
-      .then((snapshot) => {
-        this.adModel = {
-          title: snapshot.val().title,
-          category: snapshot.val().category,
-          subCategory: snapshot.val().subCategory,
-          condition: snapshot.val().condition,
-          featured: snapshot.val().featured,
-          model: snapshot.val().model,
-          price: snapshot.val().price,
-          imageUrl: snapshot.val().imageUrl,
-          creator: snapshot.val().creator
-        }
+      .subscribe((ads) => {
+        ads.forEach((ad) => {
+          this.adModel = {
+            title: ad.payload.val()['title'],
+            category: ad.payload.val()['category'],
+            subCategory: ad.payload.val()['subCategory'],
+            condition: ad.payload.val()['condition'],
+            featured: ad.payload.val()['featured'],
+            model: ad.payload.val()['model'],
+            price: ad.payload.val()['price'],
+            imageUrl: ad.payload.val()['imageUrl'],
+            creator: ad.payload.val()['creator']
+          }
+        })
       });
   }
 

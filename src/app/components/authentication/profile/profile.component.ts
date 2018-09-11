@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  message(form, profileId, adTitle) {
+  message(form, profileId, adId, adTitle) {
     let message = form.value.message
     this.messagesService.sendMessage(message, profileId, this.route.snapshot.params['id'], adTitle)
       .then(() => {
@@ -50,13 +50,13 @@ export class ProfileComponent implements OnInit {
       })
 
     this.adsService.getAdsByUserId(this.route.snapshot.params['id'])
-      .then((snapshot) => {
-        snapshot.forEach((child) => {
+      .subscribe((ads) => {
+        ads.forEach((ad) => {
           this.userAds.push({
-            id: child.key,
-            title: child.val().title,
-            price: child.val().price,
-            creator: child.val().creator
+            id: ad.key,
+            title: ad.payload.val()['title'],
+            price: ad.payload.val()['price'],
+            creator: ad.payload.val()['creator']
           })
         })
       })

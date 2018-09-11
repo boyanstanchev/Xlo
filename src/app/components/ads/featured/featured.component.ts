@@ -5,7 +5,6 @@ import {ShoppingCartService} from '../../../core/services/shopping-cart.service'
 import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ToastrService} from 'ngx-toastr';
-import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-featured',
@@ -13,15 +12,14 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: []
 })
 export class FeaturedComponent implements OnInit {
-  featuredAds = [];
+  featuredAds: Array<any>
 
   constructor(private adsService: AdsService,
               public authService: AuthService,
               private cartService: ShoppingCartService,
               private modalService: ModalService,
               private messagesService: MessagesService,
-              private toastr: ToastrService) {
-  }
+              private toastr: ToastrService) {}
 
   addToCart(adTitle: string, adId: string, adPrice: string) {
     this.cartService.add(adTitle, adId, adPrice)

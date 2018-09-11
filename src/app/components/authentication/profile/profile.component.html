@@ -6,33 +6,33 @@
       <span class="badge">{{ad.price | currency:'USD'}}</span>
       <button (click)="openModal('custom-modal-3')" type="button" class="btn btn-secondary">💬 Message Seller</button>
 
+      <modal id="custom-modal-3">
+        <div class="my-modal">
+          <div class="my-modal-body">
+            <h1>Message Seller</h1>
+            <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.id, ad.title)">
+              <div class="form-group">
+                <label for="formGroupExampleInput">Message</label>
+                <textarea
+                  required
+                  style="height: 100px"
+                  name="message"
+                  type="text"
+                  ngModel
+                  class="form-control"
+                  id="formGroupExampleInput"
+                  placeholder="Message..">
+              </textarea>
+                <input [disabled]="f.invalid"  class="btn btn-success mt-5" type="submit" value="Send">
+              </div>
+            </form>
+            <button class="btn btn-danger" (click)="closeModal('custom-modal-3');">Close</button>
+          </div>
+        </div>
+        <div class="my-modal-background"></div>
+      </modal>
 
     </li>
   </ul>
 </div>
 
-<modal id="custom-modal-3">
-  <div class="my-modal">
-    <div class="my-modal-body">
-      <h1>Message Seller</h1>
-      <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.title)">
-        <div class="form-group">
-          <label for="formGroupExampleInput">Message</label>
-          <textarea
-            required
-            style="height: 100px"
-            name="message"
-            type="text"
-            ngModel
-            class="form-control"
-            id="formGroupExampleInput"
-            placeholder="Message..">
-              </textarea>
-          <input [disabled]="f.invalid"  class="btn btn-success mt-5" type="submit" value="Send">
-        </div>
-      </form>
-      <button class="btn btn-danger" (click)="closeModal('custom-modal-3');">Close</button>
-    </div>
-  </div>
-  <div class="my-modal-background"></div>
-</modal>

@@ -6,6 +6,9 @@ import {ShoppingCartService} from './services/shopping-cart.service';
 import {ModalService} from '../components/shared/modal/modal.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from './interceptors/token.interceptor';
+import {CheckoutComponent} from '../components/checkout/checkout.component';
+import {NavigationComponent} from '../components/navigation/navigation.component';
+import {SidebarComponent} from '../components/sidebar/sidebar.component';
 
 export const coreServices = [
   AdsService,
@@ -19,4 +22,10 @@ export const coreServices = [
     useClass: TokenInterceptor,
     multi: true
   }
+]
+
+export const coreComponents = [
+  CheckoutComponent,
+  NavigationComponent,
+  SidebarComponent
 ]

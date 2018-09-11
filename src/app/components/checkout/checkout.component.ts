@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
-import {AuthService} from '../../core/services/auth.service';
 import * as firebase from 'firebase';
 
 @Component({
