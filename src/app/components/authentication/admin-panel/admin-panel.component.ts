@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {AdsService} from '../../../core/services/ads.service';
+import {CategoriesModel} from '../../../core/models/categories.model';
 
 @Component({
   selector: 'app-admin-panel',
@@ -8,7 +9,7 @@ import {AdsService} from '../../../core/services/ads.service';
   styleUrls: []
 })
 export class AdminPanelComponent implements OnInit {
-  categories
+  categories: Array<CategoriesModel> = []
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService) {
@@ -31,7 +32,12 @@ export class AdminPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categories = this.categoriesService.getAllCategories()
+    this.categoriesService.getAllCategories()
+      .subscribe((cats) => {
+        cats.forEach((cat) => {
+          this.categories.push(new CategoriesModel(cat.key, cat.payload.val()['name']))
+        })
+      })
   }
 
 }

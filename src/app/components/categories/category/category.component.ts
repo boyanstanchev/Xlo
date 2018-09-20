@@ -62,12 +62,15 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit() {
     this.subCategories = this.categoriesService.getSubCategories(this.route.snapshot.params['id'])
-    this.ads = this.adsService.getAdsByCategoryId(this.route.snapshot.params['id'])
-    this.categoriesService.getCategoryNameById(this.route.snapshot.params['id'], false)
-      .then((snapshot) => {
-        this.categoryName = snapshot.val().name
-      })
 
+    this.ads = this.adsService.getAdsByCategoryId(this.route.snapshot.params['id'])
+
+    this.categoriesService.getCategoryNameById(this.route.snapshot.params['id'], false)
+      .subscribe((cats) => {
+        cats.forEach((cat) => {
+          this.categoryName= cat.payload.val()['name']
+        })
+      })
   }
 
 }

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from '../../core/services/categories.service';
 import {CategoriesModel} from '../../core/models/categories.model';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,14 +8,19 @@ import {Observable} from 'rxjs';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  categories: Observable<CategoriesModel[]>
+  categories: Array<CategoriesModel> = [];
 
-  constructor(private categoriesService: CategoriesService) {}
-
-
+  constructor(private categoriesService: CategoriesService) {
+  }
 
   ngOnInit() {
-    this.categories = this.categoriesService.getAllCategories()
+    this.categoriesService.getAllCategories()
+      .subscribe((cats) => {
+        this.categories = [];
+        cats.forEach((cat) => {
+          this.categories.push(new CategoriesModel(cat.key, cat.payload.val()['name']));
+        });
+      });
   }
 
 }

@@ -12,12 +12,13 @@ import {AuthService} from '../../../core/services/auth.service';
   styleUrls: []
 })
 export class AddComponent implements OnInit {
-  categories: Observable<CategoriesModel[]>
-  subCategories = []
+  categories: CategoriesModel[] = [];
+  subCategories = [];
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService,
-              private authService: AuthService) {}
+              private authService: AuthService) {
+  }
 
   add(form: NgForm) {
     this.adsService.createAd({
@@ -30,16 +31,19 @@ export class AddComponent implements OnInit {
       price: form.value.price,
       imageUrl: form.value.imageUrl,
       creator: this.authService.userId
-    })
+    });
   }
 
   loadSubCategories(event) {
-    this.subCategories = this.categoriesService.getSubCategories(event.target.value)
+    this.subCategories = this.categoriesService.getSubCategories(event.target.value);
   }
 
   ngOnInit() {
-    this.categories = this.categoriesService.getAllCategories()
-
+    this.categoriesService.getAllCategories().subscribe((cats) => {
+      cats.forEach((cat) => {
+        this.categories.push(new CategoriesModel(cat.key, cat.payload.val()['name']))
+      });
+    });
   }
 
 }

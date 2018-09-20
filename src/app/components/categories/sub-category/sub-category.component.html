@@ -1,6 +1,6 @@
 <div *ngIf="catName" class="container">
-  <h3 class="text-center mb-5">{{catName}}</h3>
-  <div class="row">
+  <h3 class="text-center mt-3">{{catName}}</h3>
+  <div class="row mt-3">
     <h4 class="text-danger" *ngIf="ads.length == 0">Sorry, there are no ads in this category.</h4>
     <div *ngFor="let ad of ads" class="col-sm-4">
       <div class="card mb-3">

@@ -46,7 +46,7 @@
         name="category"
         id="sub-category"
         ngModel>
-        <option *ngFor="let cat of categories | async" value={{cat.id}}>
+        <option *ngFor="let cat of categories" value={{cat.id}}>
           {{cat.name}}
         </option>
       </select>

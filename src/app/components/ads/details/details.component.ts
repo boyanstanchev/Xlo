@@ -14,8 +14,8 @@ import * as firebase from 'firebase';
   styleUrls: []
 })
 export class DetailsComponent implements OnInit {
-  ad
-  isCreator: boolean = false
+  ad;
+  isCreator: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private adsService: AdsService,
@@ -23,7 +23,8 @@ export class DetailsComponent implements OnInit {
               public categoriesService: CategoriesService,
               private modalService: ModalService,
               private messagesService: MessagesService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService) {
+  }
 
   openModal(id: string) {
     this.modalService.open(id);
@@ -34,13 +35,13 @@ export class DetailsComponent implements OnInit {
   }
 
   message(form, profileId, adTitle) {
-    let message = form.value.message
+    let message = form.value.message;
     this.messagesService.sendMessage(message, profileId, this.route.snapshot.params['id'], adTitle)
       .then(() => {
-        this.toastr.success('Message send.')
-        this.closeModal('custom-modal-1')
+        this.toastr.success('Message send.');
+        this.closeModal('custom-modal-1');
       })
-      .catch(err => this.toastr.error(err.message))
+      .catch(err => this.toastr.error(err.message));
   }
 
   ngOnInit() {
@@ -48,21 +49,25 @@ export class DetailsComponent implements OnInit {
       .subscribe((ads) => {
         ads.forEach((ad) => {
           this.categoriesService.getCategoryNameById(ad.payload.val()['category'], false)
-            .then((snapshot) => {
-              this.ad['categoryName'] = snapshot.val().name
-            })
+            .subscribe((cats) => {
+              cats.forEach((cat) => {
+                this.ad['categoryName'] = cat.payload.val()['name'];
+              });
+            });
 
           this.categoriesService.getCategoryNameById(ad.payload.val()['subCategory'], true)
-            .then((snapshot) => {
-              this.ad['subCategoryName'] = snapshot.val().name
-            })
+            .subscribe((cats) => {
+              cats.forEach((cat) => {
+                this.ad['subCategoryName'] = cat.payload.val()['name'];
+              });
+            });
 
           this.authService.getUserNameById(ad.payload.val()['creator'])
             .then((snapshot) => {
               snapshot.forEach((child) => {
-                this.ad['creatorUserName'] = child.val().displayName
+                this.ad['creatorUserName'] = child.val().displayName;
               });
-            })
+            });
 
           if (firebase.auth().currentUser) {
             this.isCreator = this.authService.userId === ad.payload.val()['creator'];
@@ -80,8 +85,8 @@ export class DetailsComponent implements OnInit {
             price: ad.payload.val()['price'],
             imageUrl: ad.payload.val()['imageUrl'],
             creator: ad.payload.val()['creator']
-          }
-        })
-      })
+          };
+        });
+      });
   }
 }

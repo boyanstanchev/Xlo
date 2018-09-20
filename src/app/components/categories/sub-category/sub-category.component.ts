@@ -12,7 +12,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class SubCategoryComponent implements OnInit {
   ads = [];
-  catName
+  catName: string
 
   constructor(private adsService: AdsService,
               private route: ActivatedRoute,
@@ -37,9 +37,11 @@ export class SubCategoryComponent implements OnInit {
   ngOnInit() {
     this.ads = this.adsService.getAdsBySubCategoryId(this.route.snapshot.params['id'])
     this.categoriesService.getCategoryNameById(this.route.snapshot.params['id'], true)
-      .then((snapshot) => {
-        this.catName = snapshot.val().name
-      })
+      .subscribe((cats) => {
+        cats.forEach((cat) => {
+          this.catName = cat.payload.val()['name'];
+        });
+      });
   }
 
 }

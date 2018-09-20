@@ -16,28 +16,29 @@ export class AdsService {
   }
 
   getFeaturedAds() {
-    let featuredAds: Array<any> = [];
-    this.db.list('obiavi').snapshotChanges()
-      .subscribe((ads) => {
-        ads.forEach((ad) => {
-          if (ad.payload.val()['featured']) {
-            let isCreator = false;
-            if (firebase.auth().currentUser && firebase.auth().currentUser.uid == ad.payload.val()['creator']) {
-              isCreator = true;
-            }
-            featuredAds.push({
-              'id': ad.key,
-              'imageUrl': ad.payload.val()['imageUrl'],
-              'price': ad.payload.val()['price'],
-              'title': ad.payload.val()['title'],
-              'condition': ad.payload.val()['condition'],
-              'creator': ad.payload.val()['creator'],
-              isCreator
-            });
-          }
-        });
-      });
-    return featuredAds;
+    return this.db.list('obiavi').snapshotChanges()
+    // let featuredAds: Array<any> = [];
+    // this.db.list('obiavi').snapshotChanges()
+    //   .subscribe((ads) => {
+    //     ads.forEach((ad) => {
+    //       if (ad.payload.val()['featured']) {
+    //         let isCreator = false;
+    //         if (firebase.auth().currentUser && firebase.auth().currentUser.uid == ad.payload.val()['creator']) {
+    //           isCreator = true;
+    //         }
+    //         featuredAds.push({
+    //           'id': ad.key,
+    //           'imageUrl': ad.payload.val()['imageUrl'],
+    //           'price': ad.payload.val()['price'],
+    //           'title': ad.payload.val()['title'],
+    //           'condition': ad.payload.val()['condition'],
+    //           'creator': ad.payload.val()['creator'],
+    //           isCreator
+    //         });
+    //       }
+    //     });
+    //   });
+    // return featuredAds;
   }
 
   createAd(ad: AdCreateInterface) {

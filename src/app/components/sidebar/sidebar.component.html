@@ -8,7 +8,7 @@
           Categories
         </p>
       </li>
-      <li *ngFor="let cat of categories | async">
+      <li *ngFor="let cat of categories">
         <a routerLink="category/{{cat.id}}">{{cat.name}}</a>
       </li>
     </ul>

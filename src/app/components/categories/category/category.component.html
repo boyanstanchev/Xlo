@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="text-center">Sub-Categories</h3>
+  <h3 class="text-center mt-3">{{categoryName}}</h3>
   <ul class="nav navbar-nav d-inline-flex">
     <li class="nav-item mb-5">
       <ul class="list-inline-mb-0">
@@ -12,7 +12,6 @@
 </div>
 
 <div class="container">
-  <h3 class="text-center mb-5">{{categoryName}}</h3>
   <h4 class="text-danger" *ngIf="ads.length == 0">There are no ads in this category.</h4>
   <div class="row">
     <div *ngFor="let ad of ads" class="col-sm-4">

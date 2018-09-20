@@ -5,6 +5,7 @@ import {ShoppingCartService} from '../../../core/services/shopping-cart.service'
 import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ToastrService} from 'ngx-toastr';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-featured',
@@ -12,7 +13,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: []
 })
 export class FeaturedComponent implements OnInit {
-  featuredAds: Array<any>
+  featuredAds: Array<any> = []
 
   constructor(private adsService: AdsService,
               public authService: AuthService,
@@ -44,7 +45,27 @@ export class FeaturedComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.featuredAds = this.adsService.getFeaturedAds();
+    this.adsService.getFeaturedAds()
+      .subscribe((ads) => {
+        this.featuredAds = []
+        ads.forEach((ad) => {
+          if (ad.payload.val()['featured']) {
+            let isCreator = false;
+            if (firebase.auth().currentUser && firebase.auth().currentUser.uid == ad.payload.val()['creator']) {
+              isCreator = true;
+            }
+            this.featuredAds.push({
+              'id': ad.key,
+              'imageUrl': ad.payload.val()['imageUrl'],
+              'price': ad.payload.val()['price'],
+              'title': ad.payload.val()['title'],
+              'condition': ad.payload.val()['condition'],
+              'creator': ad.payload.val()['creator'],
+              isCreator
+            });
+          }
+        });
+      });
   }
 
 }
