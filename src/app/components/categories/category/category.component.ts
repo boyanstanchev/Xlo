@@ -3,9 +3,7 @@ import {CategoriesService} from '../../../core/services/categories.service';
 import {AdsService} from '../../../core/services/ads.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
-import {ToastrService} from 'ngx-toastr';
 import {ModalService} from '../../shared/modal/modal.service';
-import {MessagesService} from '../../../core/services/messages.service';
 
 @Component({
   selector: 'app-category',
@@ -22,10 +20,7 @@ export class CategoryComponent implements OnInit {
               private adsService: AdsService,
               private route: ActivatedRoute,
               private router: Router,
-              public authService: AuthService,
-              private toastr: ToastrService,
-              public modalService: ModalService,
-              private messagesService: MessagesService) {
+              public authService: AuthService) {
 
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
 
@@ -34,16 +29,6 @@ export class CategoryComponent implements OnInit {
       }
     });
   }
-
-  message(form, profileId, adId, adTitle) {
-    let message = form.value.message
-    this.messagesService.sendMessage(message, profileId, adId, adTitle)
-      .then(() => {
-        this.toastr.success('Message send.')
-        this.modalService.close('custom-modal-5')
-      })
-  }
-
 
   ngOnInit() {
     this.subCategories = this.categoriesService.getSubCategories(this.route.snapshot.params['id'])

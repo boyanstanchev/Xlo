@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
   styleUrls: []
 })
 export class FeaturedComponent implements OnInit {
-  featuredAds: Array<any> = []
+  ads: Array<any> = []
 
   constructor(private adsService: AdsService,
               public authService: AuthService,
@@ -22,14 +22,14 @@ export class FeaturedComponent implements OnInit {
   ngOnInit() {
     this.adsService.getFeaturedAds()
       .subscribe((ads) => {
-        this.featuredAds = []
+        this.ads = []
         ads.forEach((ad) => {
           if (ad.payload.val()['featured']) {
             let isCreator = false;
             if (firebase.auth().currentUser && firebase.auth().currentUser.uid == ad.payload.val()['creator']) {
               isCreator = true;
             }
-            this.featuredAds.push({
+            this.ads.push({
               'id': ad.key,
               'imageUrl': ad.payload.val()['imageUrl'],
               'price': ad.payload.val()['price'],

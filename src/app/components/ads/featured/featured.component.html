@@ -1,18 +1,3 @@
 <h3 class="text-center">Featured Ads</h3>
 
-<div class="row">
-  <div *ngFor="let ad of featuredAds | paginate: { itemsPerPage: 6, currentPage: p }" class="col-sm-4">
-
-    <app-ad-card [ad]="ad"></app-ad-card>
-
-  </div>
-</div>
-
-<pagination-controls
-  (pageChange)="p = $event">
-  directionLinks="true"
-  autoHide="true"
-  responsive="true"
-  previousLabel="Previous"
-  nextLabel="Next"
-</pagination-controls>
+<app-ad-card [ads]="ads"></app-ad-card>

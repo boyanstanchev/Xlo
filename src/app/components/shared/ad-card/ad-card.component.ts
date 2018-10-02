@@ -12,7 +12,7 @@ export class AdCardComponent implements OnInit {
   constructor(public authService: AuthService,
               public cartService: ShoppingCartService) { }
 
-  @Input() ad
+  @Input() ads
 
   ngOnInit() {
   }

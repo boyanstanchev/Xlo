@@ -14,37 +14,6 @@
 <div class="container">
   <h4 class="text-danger" *ngIf="ads.length == 0">There are no ads in this category.</h4>
 
-  <div class="row">
-    <div *ngFor="let ad of ads" class="col-sm-4">
-
-      <app-ad-card [ad]="ad"></app-ad-card>
-
-      <modal id="custom-modal-5">
-        <div class="my-modal">
-          <div class="my-modal-body">
-            <h1>Message Seller</h1>
-            <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.id, ad.title)">
-              <div class="form-group">
-                <label for="formGroupExampleInput">Message</label>
-                <textarea
-                  required
-                  style="height: 100px"
-                  name="message"
-                  type="text"
-                  ngModel
-                  class="form-control"
-                  id="formGroupExampleInput"
-                  placeholder="Message..">
-              </textarea>
-                <input [disabled]="f.invalid"  class="btn btn-success mt-5" type="submit" value="Send">
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="my-modal-background"></div>
-      </modal>
-
-    </div>
-  </div>
+  <app-ad-card [ads]="ads"></app-ad-card>
 
 </div>
