@@ -13,27 +13,11 @@
 
 <div class="container">
   <h4 class="text-danger" *ngIf="ads.length == 0">There are no ads in this category.</h4>
+
   <div class="row">
     <div *ngFor="let ad of ads" class="col-sm-4">
-      <div class="card mb-3">
-        <h3 class="card-header">{{ad.title}}</h3>
-        <img style="height: 200px; width: 100%; display: block;"
-             src={{ad.imageUrl}}
-             alt="Card image">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item blockquote">{{ad.price}}$</li>
-        </ul>
-        <div class="card-body">
-          <button *ngIf="authService.isAuthenticated() && ad.condition == 'New' && !ad.isCreator"
-                  (click)="addToCart(ad.title, ad.id, ad.price)"
-                  class="card-link btn btn-success">Add To Cart</button>
-          <button *ngIf="authService.isAuthenticated() && ad.condition == 'Used'  && !ad.isCreator"
-                  (click)="openModal('custom-modal-5')"
-                  class="card-link btn btn-success">Message</button>
-          <a *ngIf="ad.isCreator" routerLink="/ads/edit/{{ad.id}}" class="card-link btn btn-success">Edit</a>
-          <a routerLink="/ads/{{ad.id}}" class="card-link btn btn-info">Details</a>
-        </div>
-      </div>
+
+      <app-ad-card [ad]="ad"></app-ad-card>
 
       <modal id="custom-modal-5">
         <div class="my-modal">
@@ -55,7 +39,6 @@
                 <input [disabled]="f.invalid"  class="btn btn-success mt-5" type="submit" value="Send">
               </div>
             </form>
-            <button class="btn btn-danger" (click)="closeModal('custom-modal-5');">Close</button>
           </div>
         </div>
         <div class="my-modal-background"></div>

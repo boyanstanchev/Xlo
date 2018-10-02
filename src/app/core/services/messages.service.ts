@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as firebase from 'firebase';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 
 @Injectable({
@@ -10,14 +9,10 @@ import {Router} from '@angular/router';
 
 export class MessagesService {
 
-  constructor(private toastr: ToastrService,
-              private router: Router) {
-  }
-
+  constructor(private db: AngularFireDatabase) {}
 
   sendMessage(message: string, receiverId: string, adId: string, adTitle: string) {
-    const messagesRef = firebase.database().ref('messages')
-    let newStoreRef = messagesRef.push()
+    const messagesRef = this.db.list('messages')
     let messageObj = {
       receiverId,
       message,
@@ -25,33 +20,11 @@ export class MessagesService {
       adTitle,
       senderId: firebase.auth().currentUser.uid
     }
-    return newStoreRef.set(messageObj)
+    return messagesRef.push(messageObj)
   }
 
-  getSentMessagesByProfileId(profileId: string) {
-    let dbRef = firebase.database().ref();
-    let peep;
-    return dbRef.child('messages')
-      .orderByChild('senderId')
-      .equalTo(profileId)
-      .once('value')
-      .then((snapshot) => {
-        peep = snapshot;
-        return peep;
-      });
-  }
-
-  getRecievedMessagesByProfileId(profileId: string) {
-    let dbRef = firebase.database().ref();
-    let peep;
-    return dbRef.child('messages')
-      .orderByChild('receiverId')
-      .equalTo(profileId)
-      .once('value')
-      .then((snapshot) => {
-        peep = snapshot;
-        return peep;
-      });
+  getMessagesByProfileId(profileId: string, sent: boolean) {
+    return sent ? this.db.list('messages', ref => ref.orderByChild('senderId').equalTo(profileId)).snapshotChanges() : this.db.list('messages', ref => ref.orderByChild('receiverId').equalTo(profileId)).snapshotChanges()
   }
 
 }

@@ -15,17 +15,54 @@
       <div [hidden]="sent" class="tab-pane fade active show">
         <table class="table table-hover">
           <thead>
+            <tr>
+              <th scope="col">To</th>
+              <th scope="col">Ad</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col">Message</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="sentMessages.length == 0">
+          <tr class="table-secondary">
+            <th scope="row">You haven't sent any messages.</th>
+          </tr>
+          </tbody>
+
+          <tbody *ngFor="let message of sentMessages">
+            <tr class="table-secondary">
+              <th scope="row">{{message.receiverName}}</th>
+              <td><a routerLink="/ads/{{message.adId}}">{{message.adTitle}}</a></td>
+              <td></td>
+              <td></td>
+              <td>{{message.message}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div [hidden]="received" class="tab-pane fade active show">
+        <table class="table table-hover">
+          <thead>
           <tr>
-            <th scope="col">To</th>
+            <th scope="col">From</th>
             <th scope="col">Ad</th>
             <th scope="col"></th>
             <th scope="col"></th>
-            <th scope="col">Message</th>
+            <th scope="col">Reply</th>
           </tr>
           </thead>
-          <tbody *ngFor="let message of sentMessages">
+
+          <tbody *ngIf="receivedMessages.length == 0">
           <tr class="table-secondary">
-            <th scope="row">{{message.receiverName}}</th>
+            <th scope="row">You don't have any messages.</th>
+          </tr>
+          </tbody>
+
+          <tbody *ngFor="let message of receivedMessages">
+          <tr class="table-secondary">
+            <th scope="row">{{message.senderName}}</th>
             <td><a routerLink="/ads/{{message.adId}}">{{message.adTitle}}</a></td>
             <td></td>
             <td></td>
@@ -33,10 +70,6 @@
           </tr>
           </tbody>
         </table>
-      </div>
-
-      <div [hidden]="received" class="tab-pane fade active show">
-        <p>Received</p>
       </div>
     </div>
   </div>

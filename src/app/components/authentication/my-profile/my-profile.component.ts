@@ -31,17 +31,34 @@ export class MyProfileComponent implements OnInit {
         })
       })
 
-    this.messagesService.getSentMessagesByProfileId(firebase.auth().currentUser.uid)
-      .then((snapshot) => {
-        snapshot.forEach((message) => {
-          this.authService.getUserNameById(message.val().receiverId)
+    this.messagesService.getMessagesByProfileId(firebase.auth().currentUser.uid, true)
+      .subscribe((messages) => {
+        messages.forEach((message) => {
+          this.authService.getUserNameById(message.payload.val()['receiverId'])
             .then((name) => {
               name.forEach((child) => {
                 this.sentMessages.push({
                   receiverName: child.val().displayName,
-                  adTitle: message.val().adTitle,
-                  message: message.val().message,
-                  adId: message.val().adId
+                  adTitle: message.payload.val()['adTitle'],
+                  message: message.payload.val()['message'],
+                  adId: message.payload.val()['adId']
+                })
+              })
+            })
+        })
+      })
+
+    this.messagesService.getMessagesByProfileId(firebase.auth().currentUser.uid, false)
+      .subscribe((messages) => {
+        messages.forEach((message) => {
+          this.authService.getUserNameById(message.payload.val()['senderId'])
+            .then((name) => {
+              name.forEach((child) => {
+                this.receivedMessages.push({
+                  senderName: child.val().displayName,
+                  adTitle: message.payload.val()['adTitle'],
+                  message: message.payload.val()['message'],
+                  adId: message.payload.val()['adId']
                 })
               })
             })

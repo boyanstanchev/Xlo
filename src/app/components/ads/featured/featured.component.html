@@ -1,54 +1,9 @@
 <h3 class="text-center">Featured Ads</h3>
+
 <div class="row">
   <div *ngFor="let ad of featuredAds | paginate: { itemsPerPage: 6, currentPage: p }" class="col-sm-4">
-    <div class="card mb-4">
-      <h5 class="card-header">{{ad.title}}</h5>
-      <img style="height: 200px; width: 100%; display: block;"
-           src={{ad.imageUrl}}
-           alt="Card image">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item blockquote">
-          <span class="mr-5"><del>{{ad.price | currency:"USD"}}  </del></span>
-          <span><i>{{ad.price - (ad.price * 0.30) | currency:"USD"}}</i></span>
-        </li>
-      </ul>
-      <div class="card-body" style="padding: 0px">
-        <button *ngIf="authService.isAuthenticated() && ad.condition == 'New' && !ad.isCreator"
-                (click)="addToCart(ad.title, ad.id, ad.price)"
-                class="card-link btn btn-success">Add To Cart</button>
-        <button *ngIf="authService.isAuthenticated() && ad.condition == 'Used'  && !ad.isCreator"
-                (click)="openModal('custom-modal-4')"
-                class="card-link btn btn-success">Message Seller</button>
-        <a *ngIf="ad.isCreator" routerLink="/ads/edit/{{ad.id}}" class="card-link btn btn-success">Edit</a>
-        <a routerLink="/ads/{{ad.id}}" class="card-link btn btn-info">Details</a>
-      </div>
-    </div>
 
-    <modal id="custom-modal-4">
-      <div class="my-modal">
-        <div class="my-modal-body">
-          <h1>Message Seller</h1>
-          <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.id, ad.title)">
-            <div class="form-group">
-              <label for="formGroupExampleInput">Message</label>
-              <textarea
-                required
-                style="height: 100px"
-                name="message"
-                type="text"
-                ngModel
-                class="form-control"
-                id="formGroupExampleInput"
-                placeholder="Message..">
-              </textarea>
-              <input [disabled]="f.invalid"  class="btn btn-success mt-5" type="submit" value="Send">
-            </div>
-          </form>
-          <button class="btn btn-danger" (click)="closeModal('custom-modal-4');">Close</button>
-        </div>
-      </div>
-      <div class="my-modal-background"></div>
-    </modal>
+    <app-ad-card [ad]="ad"></app-ad-card>
 
   </div>
 </div>

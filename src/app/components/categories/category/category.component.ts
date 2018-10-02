@@ -6,7 +6,6 @@ import {AuthService} from '../../../core/services/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
-import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-category',
@@ -17,7 +16,7 @@ export class CategoryComponent implements OnInit {
   subCategories = []
   ads = []
   navigationSubscription
-  categoryName
+  categoryName: string
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService,
@@ -25,9 +24,8 @@ export class CategoryComponent implements OnInit {
               private router: Router,
               public authService: AuthService,
               private toastr: ToastrService,
-              private modalService: ModalService,
-              private messagesService: MessagesService,
-              private cartService: ShoppingCartService) {
+              public modalService: ModalService,
+              private messagesService: MessagesService) {
 
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
 
@@ -37,26 +35,13 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  addToCart(adTitle: string, adId: string, adPrice: string) {
-    this.cartService.add(adTitle, adId, adPrice)
-  }
-
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
-  }
-
   message(form, profileId, adId, adTitle) {
     let message = form.value.message
     this.messagesService.sendMessage(message, profileId, adId, adTitle)
       .then(() => {
         this.toastr.success('Message send.')
-        this.closeModal('custom-modal-5')
+        this.modalService.close('custom-modal-5')
       })
-      .catch(err => this.toastr.error(err.message))
   }
 
 
@@ -68,7 +53,7 @@ export class CategoryComponent implements OnInit {
     this.categoriesService.getCategoryNameById(this.route.snapshot.params['id'], false)
       .subscribe((cats) => {
         cats.forEach((cat) => {
-          this.categoryName= cat.payload.val()['name']
+          this.categoryName = cat.payload.val()['name']
         })
       })
   }

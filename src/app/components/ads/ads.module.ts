@@ -1,9 +1,6 @@
 import {NgModule} from '@angular/core';
 import {adsComponents} from './index';
-import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
 import {SharedModule} from '../shared/shared.module';
-import {NgxPaginationModule} from 'ngx-pagination';
 import {AdsRoutingModule} from './ads-routing.module';
 
 @NgModule({
@@ -11,11 +8,8 @@ import {AdsRoutingModule} from './ads-routing.module';
     ...adsComponents
   ],
   imports: [
-    FormsModule,
-    CommonModule,
     AdsRoutingModule,
-    SharedModule,
-    NgxPaginationModule
+    SharedModule
   ]
 })
 

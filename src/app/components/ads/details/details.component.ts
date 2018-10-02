@@ -7,6 +7,7 @@ import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
 import {ToastrService} from 'ngx-toastr';
 import * as firebase from 'firebase';
+import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-details',
@@ -21,17 +22,10 @@ export class DetailsComponent implements OnInit {
               private adsService: AdsService,
               public authService: AuthService,
               public categoriesService: CategoriesService,
-              private modalService: ModalService,
+              public modalService: ModalService,
               private messagesService: MessagesService,
-              private toastr: ToastrService) {
-  }
-
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
+              private toastr: ToastrService,
+              private cartService: ShoppingCartService) {
   }
 
   message(form, profileId, adTitle) {
@@ -39,9 +33,12 @@ export class DetailsComponent implements OnInit {
     this.messagesService.sendMessage(message, profileId, this.route.snapshot.params['id'], adTitle)
       .then(() => {
         this.toastr.success('Message send.');
-        this.closeModal('custom-modal-1');
+        this.modalService.close('custom-modal-1');
       })
-      .catch(err => this.toastr.error(err.message));
+  }
+
+  addToCart(adTitle: string, adId: string, adPrice: string) {
+    this.cartService.add(adTitle, adId, adPrice)
   }
 
   ngOnInit() {

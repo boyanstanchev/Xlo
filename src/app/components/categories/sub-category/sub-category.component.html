@@ -1,24 +1,12 @@
 <div *ngIf="catName" class="container">
   <h3 class="text-center mt-3">{{catName}}</h3>
+
   <div class="row mt-3">
     <h4 class="text-danger" *ngIf="ads.length == 0">Sorry, there are no ads in this category.</h4>
     <div *ngFor="let ad of ads" class="col-sm-4">
-      <div class="card mb-3">
-        <h3 class="card-header">{{ad.title}}</h3>
-        <img style="height: 200px; width: 100%; display: block;"
-             src={{ad.imageUrl}}
-             alt="Card image">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item blockquote">{{ad.price}}$</li>
-        </ul>
-        <div class="card-body">
-          <button
-            *ngIf="authService.isAuthenticated()"
-            class="card-link btn btn-success"
-            (click)="addToCart(ad.title, ad.id)">Add To Cart</button>
-          <a routerLink="/ads/{{ad.id}}" class="card-link btn btn-info">Details</a>
-        </div>
-      </div>
+
+      <app-ad-card [ad]="ad"></app-ad-card>
+
     </div>
   </div>
 

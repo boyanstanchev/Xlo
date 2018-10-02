@@ -18,27 +18,18 @@ export class ProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
               private adsService: AdsService,
-              private modalService: ModalService,
+              public modalService: ModalService,
               private messagesService: MessagesService,
               private toastr: ToastrService) {
   }
 
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
-  }
-
   message(form, profileId, adId, adTitle) {
     let message = form.value.message
-    this.messagesService.sendMessage(message, profileId, this.route.snapshot.params['id'], adTitle)
+    this.messagesService.sendMessage(message, this.route.snapshot.params['id'], adId, adTitle)
       .then(() => {
         this.toastr.success('Message send.')
-        this.closeModal('custom-modal-3')
+        this.modalService.close('custom-modal-3')
       })
-      .catch(err => this.toastr.error(err.message))
   }
 
   ngOnInit() {

@@ -14,7 +14,7 @@ import {ToastrModule} from 'ngx-toastr';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule, // SHOULD I IMPORT THIS? How can i use modal component from shared module?
+    SharedModule, // SHOULD I IMPORT THIS? How can I use modal component from shared module?,
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-right',

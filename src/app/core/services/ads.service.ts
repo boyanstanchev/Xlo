@@ -17,43 +17,27 @@ export class AdsService {
 
   getFeaturedAds() {
     return this.db.list('obiavi').snapshotChanges()
-    // let featuredAds: Array<any> = [];
-    // this.db.list('obiavi').snapshotChanges()
-    //   .subscribe((ads) => {
-    //     ads.forEach((ad) => {
-    //       if (ad.payload.val()['featured']) {
-    //         let isCreator = false;
-    //         if (firebase.auth().currentUser && firebase.auth().currentUser.uid == ad.payload.val()['creator']) {
-    //           isCreator = true;
-    //         }
-    //         featuredAds.push({
-    //           'id': ad.key,
-    //           'imageUrl': ad.payload.val()['imageUrl'],
-    //           'price': ad.payload.val()['price'],
-    //           'title': ad.payload.val()['title'],
-    //           'condition': ad.payload.val()['condition'],
-    //           'creator': ad.payload.val()['creator'],
-    //           isCreator
-    //         });
-    //       }
-    //     });
-    //   });
-    // return featuredAds;
   }
 
   createAd(ad: AdCreateInterface) {
     const adsRef = this.db.list('obiavi');
     const promise = adsRef.push(ad);
-    promise
-      .then(() => {
+    promise.then(() => {
         this.toastr.success('Your Ad is successfully added.');
         this.router.navigate(['/ads/featured']);
       });
   }
 
-  getAdsByCategoryId(categoryId: string) {
+  getAdsByCategoryId(categoryId: string, subCategory: boolean = false) {
     let categoryAds: Array<any> = [];
-    this.db.list('obiavi', ref => ref.orderByChild('category').equalTo(categoryId)).snapshotChanges()
+
+    let dbRef = this.db.list('obiavi', ref => ref.orderByChild('category').equalTo(categoryId))
+
+    if (subCategory) {
+      dbRef = this.db.list('obiavi', ref => ref.orderByChild('subCategory').equalTo(categoryId))
+    }
+
+    dbRef.snapshotChanges()
       .subscribe((ads) => {
         ads.forEach((ad) => {
           let isCreator = false;
@@ -73,30 +57,6 @@ export class AdsService {
         });
       });
     return categoryAds;
-  }
-
-  getAdsBySubCategoryId(subCategoryId: string) {
-    let subCategoryAds: Array<any> = [];
-    this.db.list('obiavi', ref => ref.orderByChild('subCategory').equalTo(subCategoryId)).snapshotChanges()
-      .subscribe((ads) => {
-        ads.forEach((ad) => {
-          let isCreator = false;
-          if (firebase.auth().currentUser && firebase.auth().currentUser.uid == ad.payload.val()['creator']) {
-            isCreator = true;
-          }
-
-          subCategoryAds.push({
-            'id': ad.key,
-            'imageUrl': ad.payload.val()['imageUrl'],
-            'price': ad.payload.val()['price'],
-            'title': ad.payload.val()['title'],
-            'condition': ad.payload.val()['condition'],
-            'creator': ad.payload.val()['creator'],
-            isCreator
-          });
-        });
-      });
-    return subCategoryAds;
   }
 
   getAdById(adId: string) {

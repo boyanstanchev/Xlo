@@ -28,8 +28,7 @@ const config = {
     AuthenticationModule,
     CategoriesModule,
     AdsModule,
-    CoreModule,
-
+    CoreModule
   ],
   bootstrap: [AppComponent]
 })

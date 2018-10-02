@@ -15,7 +15,7 @@ export class NavigationComponent implements OnInit {
   isAdmin: boolean
 
   constructor(public authService: AuthService,
-              private modalService: ModalService,
+              public modalService: ModalService,
               private cartService: ShoppingCartService,
               private router: Router) {
   }
@@ -40,12 +40,8 @@ export class NavigationComponent implements OnInit {
     this.cartService.remove(cartItemId)
   }
 
-  closeModal(id: string) {
-    this.modalService.close(id);
-  }
-
   checkout(modalId) {
-    this.closeModal(modalId)
+    this.modalService.close(modalId)
     this.router.navigate(['/checkout'])
   }
 

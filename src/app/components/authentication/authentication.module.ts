@@ -1,6 +1,4 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
 
 import {authenticationComponents} from './index';
 
@@ -12,8 +10,6 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
     ...authenticationComponents
   ],
   imports: [
-    FormsModule,
-    CommonModule,
     SharedModule,
     AuthenticationRoutingModule
   ]
