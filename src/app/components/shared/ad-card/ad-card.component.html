@@ -2,24 +2,19 @@
   <div *ngFor="let ad of ads | paginate: { itemsPerPage: 6, currentPage: p }" class="col-sm-4">
 
     <div class="card mb-4">
-      <h5 class="card-header">{{ad.title}}</h5>
-      <img style="height: 200px; width: 100%; display: block;"
-           src={{ad.imageUrl}}
-           alt="Card image">
+      <a routerLink="/ads/{{ad.id}}">
+        <h5 class="card-header">{{ad.title}}</h5>
+        <img style="height: 200px; width: 100%; display: block;"
+             src={{ad.imageUrl}}
+             alt="Card image">
+      </a>
+
       <ul class="list-group list-group-flush">
         <li class="list-group-item blockquote">
           <span class="mr-5"><del>{{ad.price | currency:"USD"}}  </del></span>
           <span><i>{{ad.price - (ad.price * 0.30) | currency:"USD"}}</i></span>
         </li>
       </ul>
-      <div class="card-body" style="padding: 0px">
-        <button *ngIf="authService.isAuthenticated() && ad.condition == 'New' && !ad.isCreator"
-                (click)="cartService.add(ad.title, ad.id, ad.price)"
-                class="card-link btn btn-success">Add To Cart
-        </button>
-        <a *ngIf="ad.isCreator" routerLink="/ads/edit/{{ad.id}}" class="card-link btn btn-success">Edit</a>
-        <a routerLink="/ads/{{ad.id}}" class="card-link btn btn-info">Details</a>
-      </div>
     </div>
 
   </div>

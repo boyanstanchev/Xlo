@@ -15,7 +15,6 @@ export class FeaturedComponent implements OnInit {
 
   constructor(private adsService: AdsService,
               public authService: AuthService,
-              public cartService: ShoppingCartService,
               public modalService: ModalService) {}
 
 

@@ -8,31 +8,3 @@ There is also a nav-bar with menus for adding an ad and your shopping cart.
 If the ad is in new condition you have the Add To Cart button, if not you have the Message Seller button.
 On the side you can find the sidebar with all the categories listed.
 On the category page you can view all the ads from the current category and also all the sub-categories.
-
-Project components: 
-
-	AppComponent,
-    NavigationComponent,
-    SidebarComponent,
-    LoginComponent,
-    RegisterComponent,
-    FeaturedComponent,
-    AddComponent,
-    CategoryComponent,
-    SubCategoryComponent,
-    DetailsComponent,
-    ProfileComponent,
-    MyProfileComponent,
-    ModalComponent,
-    EditComponent,
-    AdminPanelComponent
-	
-The main project category consists of two main folders - Components and Core.
-In the core folder you can find 4 folders:
-		
-		Guard,
-		Interceptors,
-		Models,
-		Services.
-
-

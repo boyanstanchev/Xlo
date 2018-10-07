@@ -12,23 +12,23 @@
         <a class="nav-link" routerLink="/ads/add">➕ New Ad</a>
       </li>
 
-      <modal id="custom-modal-2">
-        <div class="my-modal">
-          <div class="my-modal-body">
-            <h3>Shopping Cart</h3>
-            <p class="mt-3" *ngIf="cartItems.length == 0">Your shopping cart is empty.</p>
-            <ul *ngFor="let ad of cartItems" class="list-group">
-              <li id={{ad.cartItemId}} class="list-group-item d-flex justify-content-between align-items-center">
-                <a style="width: 200px" routerLink="/ads/{{ad.adId}}">{{ad.adTitle}}</a>
-                <span class="badge mr-1">{{ad.adPrice | currency:'USD'}}</span>
-                <span style="cursor: pointer" (click)="remove(ad.cartItemId)" class="badge badge-primary">❌ Remove</span>
-              </li>
-            </ul>
-            <button *ngIf="cartItems.length > 0" class="btn btn-info mt-3" (click)="checkout('custom-modal-2')">Checkout</button>
-          </div>
-        </div>
-        <div class="my-modal-background"></div>
-      </modal>
+      <!--<modal id="custom-modal-2">-->
+        <!--<div class="my-modal">-->
+          <!--<div class="my-modal-body">-->
+            <!--<h3>Shopping Cart</h3>-->
+            <!--<p class="mt-3" *ngIf="cartItems.length == 0">Your shopping cart is empty.</p>-->
+            <!--<ul *ngFor="let ad of cartItems" class="list-group">-->
+              <!--<li id={{ad.cartItemId}} class="list-group-item d-flex justify-content-between align-items-center">-->
+                <!--<a style="width: 200px" routerLink="/ads/{{ad.adId}}">{{ad.adTitle}}</a>-->
+                <!--<span class="badge mr-1">{{ad.adPrice | currency:'USD'}}</span>-->
+                <!--<span style="cursor: pointer" (click)="remove(ad.cartItemId)" class="badge badge-primary">❌ Remove</span>-->
+              <!--</li>-->
+            <!--</ul>-->
+            <!--<button *ngIf="cartItems.length > 0" class="btn btn-info mt-3" (click)="checkout('custom-modal-2')">Checkout</button>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="my-modal-background"></div>-->
+      <!--</modal>-->
 
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
         <a (click)="openModal('custom-modal-2')" class="nav-link ml-2 btn btn-secondary">🛒 Cart</a>

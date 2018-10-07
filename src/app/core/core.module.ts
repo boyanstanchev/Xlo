@@ -14,7 +14,7 @@ import {ToastrModule} from 'ngx-toastr';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule, // SHOULD I IMPORT THIS? How can I use modal component from shared module?,
+    //SharedModule, // TODO Check how can you use the modal component from shared module, without importing the shared module here! Refactor ad-card components so it doesn't have button for edit or details, it should only redirect to details.  The modal component is part of shared module. If I want to use in any other module's components I have to import shared module. So now I can use it in ads module or categories module but I can't use it in components from core module without importing shared module in it too, which is against the guide I read on the internet?! Food for thoughts
     ToastrModule.forRoot({
       timeOut: 2000,
       positionClass: 'toast-top-right',
