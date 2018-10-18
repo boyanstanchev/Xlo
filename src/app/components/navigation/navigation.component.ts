@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import {ModalService} from '../shared/modal/modal.service';
-import * as firebase from 'firebase';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
-import {Router} from '@angular/router';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-navigation',
@@ -12,56 +11,40 @@ import {Router} from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
   cartItems = []
-  isAdmin: boolean
+  user
+  isAdmin: boolean = false
 
   constructor(public authService: AuthService,
               public modalService: ModalService,
-              private cartService: ShoppingCartService,
-              private router: Router) {
+              public cartService: ShoppingCartService,
+              public auth: AngularFireAuth) {
   }
 
   openModal(id: string) {
-    this.cartService.getAllByUserId(this.authService.userId)
-      .then((snapshot) => {
+    this.cartService.getAllByUserId(this.auth.auth.currentUser.uid)
+      .subscribe((items) => {
         this.cartItems = []
-        snapshot.forEach((child) => {
+        items.forEach((item) => {
           this.cartItems.push({
-            adTitle: child.val().adTitle,
-            adId: child.val().adId,
-            adPrice: child.val().adPrice,
-            cartItemId: child.key
+            adTitle: item.payload.val()['adTitle'],
+            adId: item.payload.val()['adId'],
+            adPrice: item.payload.val()['adPrice'],
+            cartItemId: item.key
           })
         })
+        this.modalService.open(id);
       })
-    this.modalService.open(id);
-  }
-
-  remove(cartItemId: string) {
-    this.cartService.remove(cartItemId)
-  }
-
-  checkout(modalId) {
-    this.modalService.close(modalId)
-    this.router.navigate(['/checkout'])
-  }
-
-  logout() {
-    this.authService.logout();
   }
 
   ngOnInit() {
-    firebase.auth().onAuthStateChanged((user) => {
+    this.auth.user.subscribe((user) => {
+      this.user = user
       if (user) {
-        let userDataRef = firebase.database().ref()
-        userDataRef.child('userData').child(firebase.auth().currentUser.uid)
-          .once('value')
-          .then((snapshot) => {
-            snapshot.forEach((child) => {
-              this.isAdmin = child.val().isAdmin
-            })
+        this.authService.getUserData(user.uid)
+          .subscribe((user) => {
+            this.isAdmin = user[0].payload.val()['isAdmin']
           })
       }
-    });
+    })
   }
-
 }

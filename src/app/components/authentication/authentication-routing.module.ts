@@ -10,7 +10,7 @@ import {ProfileComponent} from './profile/profile.component';
 const authenticationRoutes: Routes = [
   {path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always'},
   {path: 'register', component: RegisterComponent},
-  {path: 'admin', component: AdminPanelComponent}, //, canActivate: [AdminGuard]
+  {path: 'admin', component: AdminPanelComponent}, //TODO: canActivate: [AdminGuard]
   {path: 'me', component: MyProfileComponent, canActivate: [AuthGuard]},
   {path: ':id', component: ProfileComponent},
 ]

@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {CategoriesModel} from '../../../core/models/categories.model';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {NgForm} from '@angular/forms';
 import {AdsService} from '../../../core/services/ads.service';
-import {AuthService} from '../../../core/services/auth.service';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-add',
@@ -17,7 +16,7 @@ export class AddComponent implements OnInit {
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService,
-              private authService: AuthService) {
+              private auth: AngularFireAuth) {
   }
 
   add(form: NgForm) {
@@ -30,7 +29,7 @@ export class AddComponent implements OnInit {
       model: form.value.model,
       price: form.value.price,
       imageUrl: form.value.imageUrl,
-      creator: this.authService.userId
+      creator: this.auth.auth.currentUser.uid
     });
   }
 

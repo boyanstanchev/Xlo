@@ -5,11 +5,10 @@ import {AuthenticationModule} from './components/authentication/authentication.m
 import {CategoriesModule} from './components/categories/categories.module';
 import {AdsModule} from './components/ads/ads.module';
 import {CoreModule} from './core/core.module';
+import {AngularFireModule} from 'angularfire2';
 
 // Components
 import {AppComponent} from './app.component';
-import {AngularFireModule} from 'angularfire2';
-import {AngularFireDatabaseModule} from 'angularfire2/database';
 
 const config = {
   apiKey: "AIzaSyBHn91ex8QQzNLvvjvqbHzbADMqh1fGbrM",
@@ -23,7 +22,6 @@ const config = {
   ],
   imports: [
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule,
     AppRoutingModule,
     AuthenticationModule,
     CategoriesModule,

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import * as firebase from 'firebase';
-import {AdCreateInterface} from '../models/ad.create.interface';
+import {AdInterface} from '../models/ad-interface';
 import {AngularFireDatabase} from 'angularfire2/database';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AdsService {
     return this.db.list('obiavi').snapshotChanges()
   }
 
-  createAd(ad: AdCreateInterface) {
+  createAd(ad: AdInterface) {
     const adsRef = this.db.list('obiavi');
     const promise = adsRef.push(ad);
     promise.then(() => {
@@ -60,7 +60,7 @@ export class AdsService {
   }
 
   getAdById(adId: string) {
-    return this.db.list('obiavi', ref => ref.orderByKey().equalTo(adId)).snapshotChanges()
+    return this.db.list('obiavi', ref => ref.orderByKey().equalTo(adId).limitToFirst(1)).snapshotChanges()
   }
 
   editAdById(adId: string, model) {

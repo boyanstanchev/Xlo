@@ -13,14 +13,13 @@ export class MessagesService {
 
   sendMessage(message: string, receiverId: string, adId: string, adTitle: string) {
     const messagesRef = this.db.list('messages')
-    let messageObj = {
+    return messagesRef.push({
       receiverId,
       message,
       adId,
       adTitle,
       senderId: firebase.auth().currentUser.uid
-    }
-    return messagesRef.push(messageObj)
+    })
   }
 
   getMessagesByProfileId(profileId: string, sent: boolean) {

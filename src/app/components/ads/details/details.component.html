@@ -9,8 +9,8 @@
         <div *ngIf="!authService.isAuthenticated()">
           <h5 class="text-danger">Please login to buy or message seller</h5>
         </div>
-        <button *ngIf="authService.isAuthenticated() && ad.condition == 'New' && !ad.isCreator"
-                (click)="addToCart(ad.title, ad.id, ad.price)"
+        <button *ngIf="authService.isAuthenticated() && ad.condition == 'New' && !isCreator"
+                (click)="cartService.add(ad.title, ad.id, ad.price)"
                 class="card-link btn btn-success">Add To Cart</button>
         <button *ngIf="!isCreator && authService.isAuthenticated()" (click)="modalService.open('custom-modal-1')" type="button" class="btn btn-secondary mb-5">💬 Message Seller</button>
         <a *ngIf="isCreator" class="btn btn-secondary mb-5" routerLink="/ads/edit/{{ad.id}}">✎ Edit</a>

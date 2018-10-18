@@ -5,7 +5,7 @@ import './components/shared/modal/modal.less'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: []
 })
 export class AppComponent {
   ngOnInit() {

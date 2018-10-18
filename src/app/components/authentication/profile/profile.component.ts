@@ -12,8 +12,8 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: []
 })
 export class ProfileComponent implements OnInit {
-  userName: string
-  userAds = []
+  userName: string;
+  userAds = [];
 
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
@@ -24,21 +24,19 @@ export class ProfileComponent implements OnInit {
   }
 
   message(form, profileId, adId, adTitle) {
-    let message = form.value.message
+    let message = form.value.message;
     this.messagesService.sendMessage(message, this.route.snapshot.params['id'], adId, adTitle)
       .then(() => {
-        this.toastr.success('Message send.')
-        this.modalService.close('custom-modal-3')
-      })
+        this.toastr.success('Message send.');
+        this.modalService.close('custom-modal-3');
+      });
   }
 
   ngOnInit() {
-    this.authService.getUserNameById(this.route.snapshot.params['id'])
-      .then((snapshot) => {
-        snapshot.forEach((child) => {
-          this.userName = child.val().displayName
-        });
-      })
+    this.authService.getUserData(this.route.snapshot.params['id'])
+      .subscribe((users) => {
+        this.userName = users[0].payload.val()['displayName'];
+      });
 
     this.adsService.getAdsByUserId(this.route.snapshot.params['id'])
       .subscribe((ads) => {
@@ -48,9 +46,9 @@ export class ProfileComponent implements OnInit {
             title: ad.payload.val()['title'],
             price: ad.payload.val()['price'],
             creator: ad.payload.val()['creator']
-          })
-        })
-      })
+          });
+        });
+      });
   }
 
 }

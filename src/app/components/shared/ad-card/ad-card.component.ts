@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../../core/services/auth.service';
-import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 
 @Component({
   selector: 'app-ad-card',
@@ -9,8 +8,7 @@ import {ShoppingCartService} from '../../../core/services/shopping-cart.service'
 })
 export class AdCardComponent implements OnInit {
 
-  constructor(public authService: AuthService,
-              public cartService: ShoppingCartService) { }
+  constructor(public authService: AuthService) { }
 
   @Input() ads
 

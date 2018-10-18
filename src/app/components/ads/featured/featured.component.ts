@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AdsService} from '../../../core/services/ads.service';
 import {AuthService} from '../../../core/services/auth.service';
-import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 import {ModalService} from '../../shared/modal/modal.service';
 import * as firebase from 'firebase';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'app-featured',
@@ -15,7 +15,8 @@ export class FeaturedComponent implements OnInit {
 
   constructor(private adsService: AdsService,
               public authService: AuthService,
-              public modalService: ModalService) {}
+              public modalService: ModalService,
+              public auth: AngularFireAuth) {}
 
 
   ngOnInit() {
@@ -36,10 +37,9 @@ export class FeaturedComponent implements OnInit {
               'condition': ad.payload.val()['condition'],
               'creator': ad.payload.val()['creator'],
               isCreator
-            });
+            })
           }
-        });
-      });
+        })
+      })
   }
-
 }

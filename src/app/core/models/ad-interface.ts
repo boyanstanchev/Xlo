@@ -1,4 +1,5 @@
-export interface AdCreateInterface {
+export interface AdInterface {
+  id? : string,
   title: string,
   condition: string,
   category: string,

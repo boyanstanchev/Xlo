@@ -6,9 +6,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
-    CommonModule,    //Not really sure if this is supposed to be here?
-    NgxPaginationModule,    //Not really sure if this is supposed to be here?
-    RouterModule    //Not really sure if this is supposed to be here?
+    CommonModule,
+    NgxPaginationModule,
+    RouterModule
   ],
   declarations: [
     ...sharedComponents

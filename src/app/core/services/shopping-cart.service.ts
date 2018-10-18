@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import * as firebase from 'firebase';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
+import {ModalService} from '../../components/shared/modal/modal.service';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 
 @Injectable({
@@ -11,46 +13,38 @@ import {Router} from '@angular/router';
 export class ShoppingCartService {
 
   constructor(private toastr: ToastrService,
-              private router: Router) {
+              private router: Router,
+              private modalService: ModalService,
+              private db: AngularFireDatabase) {
   }
 
   add(adTitle: string, adId: string, adPrice: string) {
-    const cartRef = firebase.database().ref('shopping-cart');
-    let newStoreRef = cartRef.push();
-    newStoreRef.set({
+    const cartRef = this.db.list('shopping-cart')
+    const promise = cartRef.push({
       adId,
       adTitle,
       adPrice,
       userId: firebase.auth().currentUser.uid
     })
-      .then(() => {
-        this.toastr.success('Product added to shopping cart.');
-      })
-      .catch((err) => {
-        this.toastr.error(err.message);
-      });
+    promise.then(() => {
+      this.toastr.success('Product added to shopping cart.')
+    })
   }
 
   remove(cartItemId: string) {
-    const cartRef = firebase.database().ref(`shopping-cart/${cartItemId}`);
-    cartRef.remove()
+    const cartRef = this.db.list(`shopping-cart`)
+    cartRef.remove(cartItemId)
       .then(() => {
-        document.getElementById(cartItemId).outerHTML = "";
         this.toastr.success('Product removed successfully.')
-      })
-      .catch((err) => {
-        this.toastr.error(err.message)
       })
   }
 
+  checkout(modalId: string) {
+    this.modalService.close(modalId)
+    this.router.navigate(['/checkout'])
+  }
+
   getAllByUserId(userId: string) {
-    const cartRef = firebase.database().ref('shopping-cart');
-    let peep
-    return cartRef.orderByChild('userId').equalTo(userId)
-      .once('value')
-      .then((snapshot) => {
-        peep = snapshot
-        return peep
-      })
+    return this.db.list('shopping-cart', ref => ref.orderByChild('userId').equalTo(userId)).snapshotChanges()
   }
 }

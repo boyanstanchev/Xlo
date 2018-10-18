@@ -15,15 +15,15 @@ export class CheckoutComponent implements OnInit {
 
   setUserItem(userId) {
     this.cartService.getAllByUserId(userId)
-      .then((snapshot) => {
+      .subscribe((items) => {
         this.cartItems = []
-        snapshot.forEach((child) => {
-          this.total += +child.val().adPrice
+        items.forEach((item) => {
+          this.total += +item.payload.val()['adPrice']
           this.cartItems.push({
-            adTitle: child.val().adTitle,
-            adId: child.val().adId,
-            adPrice: child.val().adPrice,
-            cartItemId: child.key
+            adTitle: item.payload.val()['adTitle'],
+            adId: item.payload.val()['adId'],
+            adPrice: item.payload.val()['adPrice'],
+            cartItemId: item.key
           })
         })
       })

@@ -33,7 +33,7 @@ export class CategoriesService {
   }
 
   getCategoryNameById(categoryId: string, subCategory: boolean) {
-    return subCategory ? this.db.list('subCategories', ref => ref.orderByKey().equalTo(categoryId)).snapshotChanges() : this.db.list('categories', ref => ref.orderByKey().equalTo(categoryId)).snapshotChanges()
+    return subCategory ? this.db.list('subCategories', ref => ref.orderByKey().equalTo(categoryId).limitToFirst(1)).snapshotChanges() : this.db.list('categories', ref => ref.orderByKey().equalTo(categoryId).limitToFirst(1)).snapshotChanges()
   }
 
   addCategory(categoryName: string) {
