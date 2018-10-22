@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoriesModel} from '../../../core/models/categories.model';
 import {CategoriesService} from '../../../core/services/categories.service';
 import {NgForm} from '@angular/forms';
 import {AdsService} from '../../../core/services/ads.service';
@@ -11,7 +10,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
   styleUrls: []
 })
 export class AddComponent implements OnInit {
-  categories: CategoriesModel[] = [];
+  categories: Array<any> = [];
   subCategories = [];
 
   constructor(private categoriesService: CategoriesService,
@@ -34,14 +33,15 @@ export class AddComponent implements OnInit {
   }
 
   loadSubCategories(event) {
-    this.subCategories = this.categoriesService.getSubCategories(event.target.value);
+    this.categoriesService.getSubCategories(event.target.value)
+      .subscribe((subCategories) => {
+        this.subCategories = subCategories
+      })
   }
 
   ngOnInit() {
     this.categoriesService.getAllCategories().subscribe((cats) => {
-      cats.forEach((cat) => {
-        this.categories.push(new CategoriesModel(cat.key, cat.payload.val()['name']))
-      });
+      this.categories = cats
     });
   }
 

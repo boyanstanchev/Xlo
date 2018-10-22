@@ -3,18 +3,31 @@ import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+
+interface UserData {
+  displayName: string,
+  isAdmin: boolean,
+  userId: string
+}
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  private _authtoken: string;
+  public user  //TODO: Make this shit like auth guard so it saves state when refreshed
+  public userData: UserData
 
   constructor(private toastr: ToastrService,
               private router: Router,
               private db: AngularFireDatabase,
               private auth: AngularFireAuth) {
+
+    this.auth.user.pipe(map((user) => {
+      this.user = user
+    })).subscribe()
   }
 
   register(email: string, password: string, displayName: string) {
@@ -28,7 +41,7 @@ export class AuthService {
               photoURL: ''
             })
               .then(() => {
-                this.saveUserDisplayName(displayName, user.user.uid)
+                this.saveUserData(displayName, user.user.uid)
                   .then(() => {
                     this.router.navigate(['/profile/login']);
                     this.toastr.success('You are now registered. Please login to continue.');
@@ -44,7 +57,7 @@ export class AuthService {
       });
   }
 
-  saveUserDisplayName(displayName: string, userId: string) {
+  saveUserData(displayName: string, userId: string) {
     const userDataRef = this.db.list('userData');
     return userDataRef.push({
       userId: userId,
@@ -56,22 +69,13 @@ export class AuthService {
   login(email: string, password: string) {
     this.auth.auth
       .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authtoken = user.user['qa'];
+      .then(() => {
         this.router.navigate(['/ads/featured']);
         this.toastr.success('You are now logged in.');
       })
       .catch((err) => {
         this.toastr.error(err.message);
       });
-  }
-
-  set authtoken(token) {
-    this._authtoken = token;
-  }
-
-  get authtoken() {
-    return this._authtoken;
   }
 
   logout() {
@@ -83,11 +87,19 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.auth.auth.currentUser
+    return !!this.user
   }
 
-  getUserData(userId: string) {
-    return this.db.list('userData', ref => ref.orderByChild('userId').equalTo(userId).limitToFirst(1)).snapshotChanges();
+  getUserDisplayName(userId: string): Observable<string> {
+    return this.db.list('userData', ref => ref.orderByChild('userId').equalTo(userId).limitToFirst(1)).valueChanges().pipe(map((userData) => {
+      return userData[0]['displayName']
+    }))
+  }
+
+  getUserIsAdmin(userId: string): Observable<boolean> {
+    return this.db.list('userData', ref => ref.orderByChild('userId').equalTo(userId).limitToFirst(1)).valueChanges().pipe(map((userData) => {
+      return userData[0]['isAdmin']
+    }))
   }
 
 }

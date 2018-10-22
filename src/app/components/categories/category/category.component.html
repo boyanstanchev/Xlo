@@ -4,7 +4,7 @@
     <li class="nav-item mb-5">
       <ul class="list-inline-mb-0">
         <li *ngFor="let cat of subCategories" class="list-inline-item">
-          <a class="btn btn-secondary" routerLink="/sub-category/{{cat.id}}">{{cat.name}}</a>
+          <a class="btn btn-secondary" routerLink="/sub-category/{{cat.key}}">{{cat.payload.val()['name']}}</a>
         </li>
       </ul>
     </li>

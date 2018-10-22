@@ -9,7 +9,9 @@ export class TokenInterceptor implements HttpInterceptor{
 
   intercept(req: HttpRequest<any>, next: HttpHandler)
   : Observable<HttpEvent<any>> {
-    const token = this.authService.authtoken
+
+    const token = this.authService.user['qa'] //TODO: take token other way
+    console.log(token);
     if (token) {
       req = req.clone({
         url: `${req.url}?auth=${token}`

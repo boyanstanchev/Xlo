@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import {ModalService} from '../shared/modal/modal.service';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
@@ -21,7 +21,7 @@ export class NavigationComponent implements OnInit {
   }
 
   openModal(id: string) {
-    this.cartService.getAllByUserId(this.auth.auth.currentUser.uid)
+    this.cartService.getAllByUserId(this.authService.user.uid)
       .subscribe((items) => {
         this.cartItems = []
         items.forEach((item) => {
@@ -40,9 +40,9 @@ export class NavigationComponent implements OnInit {
     this.auth.user.subscribe((user) => {
       this.user = user
       if (user) {
-        this.authService.getUserData(user.uid)
-          .subscribe((user) => {
-            this.isAdmin = user[0].payload.val()['isAdmin']
+        this.authService.getUserIsAdmin(user.uid)
+          .subscribe((isAdmin: boolean) => {
+            this.isAdmin = isAdmin
           })
       }
     })

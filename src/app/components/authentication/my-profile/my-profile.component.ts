@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MessagesService} from '../../../core/services/messages.service';
-import * as firebase from 'firebase';
 import {AuthService} from '../../../core/services/auth.service';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {Message} from '../../../core/models/message';
 
 @Component({
   selector: 'app-my-profile',
@@ -12,13 +11,12 @@ import {AngularFireAuth} from 'angularfire2/auth';
 export class MyProfileComponent implements OnInit {
   sent: boolean = false;
   received: boolean = true;
-  sentMessages = [];
-  receivedMessages = [];
+  sentMessages: Array<Message> = [];
+  receivedMessages: Array<Message> = [];
   displayName: string;
 
   constructor(private messagesService: MessagesService,
-              private authService: AuthService,
-              private auth: AngularFireAuth) {
+              private authService: AuthService) {
   }
 
   show() {
@@ -27,35 +25,14 @@ export class MyProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.messagesService.getMessagesByProfileId(firebase.auth().currentUser.uid, true)
+    this.messagesService.getMessagesByProfileId(this.authService.user.uid, true)
       .subscribe((messages) => {
-        messages.forEach((message) => {
-          this.authService.getUserData(message.payload.val()['receiverId'])
-            .subscribe((users) => {
-              this.sentMessages.push({
-                receiverName: users[0].payload.val()['displayName'],
-                adTitle: message.payload.val()['adTitle'],
-                message: message.payload.val()['message'],
-                adId: message.payload.val()['adId']
-              });
-            });
-        });
-      });
-
-    this.messagesService.getMessagesByProfileId(firebase.auth().currentUser.uid, false)
+        this.sentMessages = messages
+      })
+    this.messagesService.getMessagesByProfileId(this.authService.user.uid, false)
       .subscribe((messages) => {
-        messages.forEach((message) => {
-          this.authService.getUserData(message.payload.val()['senderId'])
-            .subscribe((users) => {
-              this.receivedMessages.push({
-                senderName: users[0].payload.val()['displayName'],
-                adTitle: message.payload.val()['adTitle'],
-                message: message.payload.val()['message'],
-                adId: message.payload.val()['adId']
-              });
-            });
-        });
-      });
+        this.receivedMessages = messages
+      })
   }
 
 }

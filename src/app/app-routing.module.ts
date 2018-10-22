@@ -5,13 +5,14 @@ import {SubCategoryComponent} from './components/categories/sub-category/sub-cat
 import {CheckoutComponent} from './components/checkout/checkout.component';
 import {AdsModule} from './components/ads/ads.module';
 import {AuthenticationModule} from './components/authentication/authentication.module';
+import {AuthGuard} from './core/guards/auth.guard';
 
 const routes: Route[] = [
   {path: '', redirectTo: '/ads/featured', pathMatch: 'full'},
 
   {path: 'category/:id', component: CategoryComponent},
   {path: 'sub-category/:id', component: SubCategoryComponent},
-  {path: 'checkout', component: CheckoutComponent},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
 
   {path: 'profile', loadChildren: () => AuthenticationModule},
   {path: 'ads', loadChildren: () => AdsModule}

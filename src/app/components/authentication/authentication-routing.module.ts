@@ -6,11 +6,12 @@ import {RegisterComponent} from './register/register.component';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {MyProfileComponent} from './my-profile/my-profile.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AdminGuard} from '../../core/guards/admin.guard';
 
 const authenticationRoutes: Routes = [
   {path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always'},
   {path: 'register', component: RegisterComponent},
-  {path: 'admin', component: AdminPanelComponent}, //TODO: canActivate: [AdminGuard]
+  {path: 'admin', component: AdminPanelComponent, canActivate: [AuthGuard, AdminGuard]}, //TODO: canActivate: [AdminGuard]
   {path: 'me', component: MyProfileComponent, canActivate: [AuthGuard]},
   {path: ':id', component: ProfileComponent},
 ]

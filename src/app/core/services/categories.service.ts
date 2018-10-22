@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +15,13 @@ export class CategoriesService {
   }
 
   getAllCategories() {
-    return this.db.list('categories').snapshotChanges();
+    return this.db.list('categories').snapshotChanges()
   }
 
-  getSubCategories(categoryId): Array<any> {
-    let subCategories = [];
-    this.db.list('subCategories').snapshotChanges()
-      .subscribe((subCats) => {
-        subCats.forEach((cat) => {
-          if (cat.payload.val()['category'] === categoryId) {
-            subCategories.push({
-              'id': cat.key,
-              'name': cat.payload.val()['name']
-            });
-          }
-        });
-      });
-    return subCategories;
+  getSubCategories(categoryId): Observable<any> {
+    return this.db.list('subCategories').snapshotChanges().pipe(map((subCategories) => {
+      return subCategories.filter(c => c.payload.val()['category'] === categoryId)
+    }))
   }
 
   getCategoryNameById(categoryId: string, subCategory: boolean) {

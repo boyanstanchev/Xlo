@@ -11,7 +11,7 @@ import {CategoriesService} from '../../../core/services/categories.service';
 })
 export class SubCategoryComponent implements OnInit {
   ads = [];
-  catName: string
+  catName: string;
 
   constructor(private adsService: AdsService,
               private route: ActivatedRoute,
@@ -20,12 +20,15 @@ export class SubCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ads = this.adsService.getAdsByCategoryId(this.route.snapshot.params['id'], true)
+    this.adsService.getAdsByCategoryId(this.route.snapshot.params['id'], true)
+      .subscribe((ads) => {
+        this.ads = ads;
+      });
+
+
     this.categoriesService.getCategoryNameById(this.route.snapshot.params['id'], true)
       .subscribe((cats) => {
-        cats.forEach((cat) => {
-          this.catName = cat.payload.val()['name'];
-        });
+        this.catName = cats[0].payload.val()['name'];
       });
   }
 

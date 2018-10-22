@@ -2,25 +2,27 @@
   <div *ngFor="let ad of ads | paginate: { itemsPerPage: 6, currentPage: p }" class="col-sm-4">
 
     <div class="card mb-4">
-      <a routerLink="/ads/{{ad.id}}">
-        <h5 class="card-header">{{ad.title}}</h5>
+      <a routerLink="/ads/{{ad.id || ad.key}}">
+        <h5 class="card-header">{{ad.title || ad.payload.val()['title']}}</h5>
         <img style="height: 200px; width: 100%; display: block;"
-             src={{ad.imageUrl}}
+             src="{{ad.imageUrl || ad.payload.val()['imageUrl']}}"
              alt="Card image">
       </a>
 
       <ul class="list-group list-group-flush">
         <li class="list-group-item blockquote">
-          <span class="mr-5"><del>{{ad.price | currency:"USD"}}  </del></span>
-          <span><i>{{ad.price - (ad.price * 0.30) | currency:"USD"}}</i></span>
+          <span class="mr-5"><del>{{ad.price || ad.payload.val()['price'] | currency:"USD"}}  </del></span>
+          <span><i>{{ad.price || ad.payload.val()['price'] - (ad.price || ad.payload.val()['price'] * 0.30) | currency:"USD"}}</i></span>
         </li>
       </ul>
     </div>
 
   </div>
+
 </div>
 
 <pagination-controls
+  *ngIf="ads.length !== 0"
   (pageChange)="p = $event">
   directionLinks="true"
   autoHide="true"
@@ -28,4 +30,6 @@
   previousLabel="Previous"
   nextLabel="Next"
 </pagination-controls>
+
+
 

@@ -33,9 +33,9 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getUserData(this.route.snapshot.params['id'])
-      .subscribe((users) => {
-        this.userName = users[0].payload.val()['displayName'];
+    this.authService.getUserDisplayName(this.route.snapshot.params['id'])
+      .subscribe((name) => {
+        this.userName = name;
       });
 
     this.adsService.getAdsByUserId(this.route.snapshot.params['id'])

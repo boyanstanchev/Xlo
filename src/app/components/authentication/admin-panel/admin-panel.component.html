@@ -46,8 +46,8 @@
         name="category"
         id="sub-category"
         ngModel>
-        <option *ngFor="let cat of categories" value={{cat.id}}>
-          {{cat.name}}
+        <option *ngFor="let cat of categories" value={{cat.key}}>
+          {{cat.payload.val()['name']}}
         </option>
       </select>
       <input class="btn btn-success mt-3" type="submit" value="Add">

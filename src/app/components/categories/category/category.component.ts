@@ -3,7 +3,6 @@ import {CategoriesService} from '../../../core/services/categories.service';
 import {AdsService} from '../../../core/services/ads.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
-import {ModalService} from '../../shared/modal/modal.service';
 
 @Component({
   selector: 'app-category',
@@ -11,10 +10,10 @@ import {ModalService} from '../../shared/modal/modal.service';
   styleUrls: []
 })
 export class CategoryComponent implements OnInit {
-  subCategories = []
-  ads = []
-  navigationSubscription
-  categoryName: string
+  subCategories = [];
+  ads = [];
+  navigationSubscription;
+  categoryName: string;
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService,
@@ -25,22 +24,26 @@ export class CategoryComponent implements OnInit {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
 
       if (e instanceof NavigationEnd) {
-        this.ngOnInit()
+        this.ngOnInit();
       }
     });
   }
 
   ngOnInit() {
-    this.subCategories = this.categoriesService.getSubCategories(this.route.snapshot.params['id'])
+    this.categoriesService.getSubCategories(this.route.snapshot.params['id'])
+      .subscribe((subCategories) => {
+        this.subCategories = subCategories;
+      });
 
-    this.ads = this.adsService.getAdsByCategoryId(this.route.snapshot.params['id'])
+    this.adsService.getAdsByCategoryId(this.route.snapshot.params['id'])
+      .subscribe((ads) => {
+        this.ads = ads;
+      });
 
     this.categoriesService.getCategoryNameById(this.route.snapshot.params['id'], false)
       .subscribe((cats) => {
-        cats.forEach((cat) => {
-          this.categoryName = cat.payload.val()['name']
-        })
-      })
+        this.categoryName = cats[0].payload.val()['name'];
+      });
   }
 
 }
