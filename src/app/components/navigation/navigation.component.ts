@@ -10,9 +10,9 @@ import {AngularFireAuth} from 'angularfire2/auth';
   styleUrls: []
 })
 export class NavigationComponent implements OnInit {
-  cartItems = []
-  user
-  isAdmin: boolean = false
+  cartItems = [];
+  user;
+  isAdmin: boolean = false;
 
   constructor(public authService: AuthService,
               public modalService: ModalService,
@@ -21,30 +21,23 @@ export class NavigationComponent implements OnInit {
   }
 
   openModal(id: string) {
-    this.cartService.getAllByUserId(this.authService.user.uid)
-      .subscribe((items) => {
-        this.cartItems = []
-        items.forEach((item) => {
-          this.cartItems.push({
-            adTitle: item.payload.val()['adTitle'],
-            adId: item.payload.val()['adId'],
-            adPrice: item.payload.val()['adPrice'],
-            cartItemId: item.key
-          })
-        })
-        this.modalService.open(id);
-      })
+
   }
 
   ngOnInit() {
     this.auth.user.subscribe((user) => {
-      this.user = user
+      this.user = user;
       if (user) {
         this.authService.getUserIsAdmin(user.uid)
           .subscribe((isAdmin: boolean) => {
-            this.isAdmin = isAdmin
-          })
+            this.isAdmin = isAdmin;
+          });
+
+        this.cartService.getUserAll()
+          .subscribe((items) => {
+            this.cartItems = items;
+          });
       }
-    })
+    });
   }
 }

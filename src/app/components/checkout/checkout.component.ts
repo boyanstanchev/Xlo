@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
-import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,13 +10,13 @@ export class CheckoutComponent implements OnInit {
   cartItems = [];
   total: number = 0;
 
-  constructor(public cartService: ShoppingCartService,
-              private authService: AuthService) {
+  constructor(public cartService: ShoppingCartService) {
   }
 
   ngOnInit() {
-    this.cartService.getAllByUserId(this.authService.user.uid)
+    this.cartService.getUserAll()
       .subscribe((items) => {
+        this.total = 0
         items.forEach(item => {
           this.total += item.payload.val()['adPrice'] * item.payload.val()['quantity'];
         })
