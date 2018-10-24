@@ -20,10 +20,6 @@ export class NavigationComponent implements OnInit {
               public auth: AngularFireAuth) {
   }
 
-  openModal(id: string) {
-
-  }
-
   ngOnInit() {
     this.auth.user.subscribe((user) => {
       this.user = user;

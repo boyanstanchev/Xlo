@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
-import * as firebase from 'firebase';
-import './components/shared/modal/modal.less'
+import './components/shared/modal/modal.less';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +8,6 @@ import './components/shared/modal/modal.less'
 })
 export class AppComponent {
   ngOnInit() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyBHn91ex8QQzNLvvjvqbHzbADMqh1fGbrM',
-      authDomain: 'https://xlo-exam.firebaseio.com/',
-      databaseURL: "https://xlo-exam.firebaseio.com",
-    });
+
   }
 }

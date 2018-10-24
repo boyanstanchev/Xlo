@@ -52,11 +52,11 @@ export class ShoppingCartService {
 
   setQuantity(quantity: string, itemId: string) {
     if (+quantity <= 20) {
-      const dbRef = this.db.list(`shopping-cart/${this.authService.user.uid}`)
+      const dbRef = this.db.list(`shopping-cart/${this.authService.user.uid}`);
       dbRef.update(itemId, {quantity: +quantity})
-        .then(() => this.toastr.success('Quantity updated.'))
+        .then(() => this.toastr.success('Quantity updated.'));
     } else {
-      this.toastr.error('Quantity must be under 20. For wholesale message the retailer.')
+      this.toastr.error('Quantity must be under 20. For wholesale message the retailer.');
     }
   }
 

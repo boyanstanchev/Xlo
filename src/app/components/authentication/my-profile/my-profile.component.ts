@@ -13,15 +13,9 @@ export class MyProfileComponent implements OnInit {
   received: boolean = true;
   sentMessages: Array<Message> = [];
   receivedMessages: Array<Message> = [];
-  displayName: string;
 
   constructor(private messagesService: MessagesService,
               private authService: AuthService) {
-  }
-
-  show() {
-    this.sent = !this.sent;
-    this.received = !this.received;
   }
 
   ngOnInit() {

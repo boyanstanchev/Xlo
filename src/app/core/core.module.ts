@@ -20,9 +20,9 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
+      timeOut: 1500,
       positionClass: 'toast-top-right',
-      preventDuplicates: true
+      preventDuplicates: false
     })
   ],
   declarations: [

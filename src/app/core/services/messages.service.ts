@@ -25,7 +25,9 @@ export class MessagesService {
       message,
       adId,
       adTitle,
-      senderId: this.auth.auth.currentUser.uid
+      senderId: this.auth.auth.currentUser.uid,
+      date: Date.now(),
+      read: false
     });
   }
 

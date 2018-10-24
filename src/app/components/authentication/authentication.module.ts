@@ -4,6 +4,7 @@ import {authenticationComponents} from './index';
 
 import {SharedModule} from '../shared/shared.module';
 import {AuthenticationRoutingModule} from './authentication-routing.module';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
   ],
   imports: [
     SharedModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    MatTabsModule
   ]
 })
 

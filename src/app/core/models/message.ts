@@ -5,5 +5,6 @@ export interface Message {
   receiverId?: string,
   senderId?: string,
   senderName?: string,
-  receiverName?: string
+  receiverName?: string,
+  date: Date
 }
