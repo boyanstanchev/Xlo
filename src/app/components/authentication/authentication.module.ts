@@ -4,16 +4,23 @@ import {authenticationComponents} from './index';
 
 import {SharedModule} from '../shared/shared.module';
 import {AuthenticationRoutingModule} from './authentication-routing.module';
+
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatDialogModule} from '@angular/material/dialog';
+
+import {MessagesDialog} from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
-    ...authenticationComponents
+    ...authenticationComponents,
+    MessagesDialog
   ],
   imports: [
     SharedModule,
     AuthenticationRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
+
   ]
 })
 

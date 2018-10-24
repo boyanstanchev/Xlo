@@ -4,7 +4,6 @@ import {AuthService} from '../../../core/services/auth.service';
 import {AdsService} from '../../../core/services/ads.service';
 import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
-import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -19,17 +18,7 @@ export class ProfileComponent implements OnInit {
               private authService: AuthService,
               private adsService: AdsService,
               public modalService: ModalService,
-              private messagesService: MessagesService,
-              private toastr: ToastrService) {
-  }
-
-  message(form, profileId, adId, adTitle) {
-    let message = form.value.message;
-    this.messagesService.sendMessage(message, this.route.snapshot.params['id'], adId, adTitle)
-      .then(() => {
-        this.toastr.success('Message send.');
-        this.modalService.close('custom-modal-3');
-      });
+              public messagesService: MessagesService) {
   }
 
   ngOnInit() {

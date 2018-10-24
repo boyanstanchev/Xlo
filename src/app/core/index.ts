@@ -9,6 +9,7 @@ import {TokenInterceptor} from './interceptors/token.interceptor';
 import {CheckoutComponent} from '../components/checkout/checkout.component';
 import {NavigationComponent} from '../components/navigation/navigation.component';
 import {SidebarComponent} from '../components/sidebar/sidebar.component';
+import {ConversationsService} from './services/conversations.service';
 
 export const coreServices = [
   AdsService,
@@ -17,6 +18,7 @@ export const coreServices = [
   MessagesService,
   ShoppingCartService,
   ModalService,
+  ConversationsService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

@@ -1,5 +1,6 @@
-<div class="jumbotron">
+<div class="jumbotron mt-5">
   <mat-tab-group>
+
     <mat-tab label="Ads">
       <div class="container mt-5">
         <h1>Ads</h1>
@@ -7,33 +8,40 @@
 
     </mat-tab>
     <mat-tab label="Messages">
-      <div class="container mt-5">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Ad</th>
-            </tr>
-          </thead>
 
-          <tbody *ngIf="receivedMessages.length == 0">
-            <tr class="table-secondary">
-              <th scope="row">You don't have any messages.</th>
-            </tr>
-          </tbody>
+      <ol>
+        <li>
+          <button mat-raised-button (click)="openDialog()">Pick one</button>
+        </li>
+      </ol>
 
-          <tbody *ngFor="let message of receivedMessages">
-            <tr class="table-secondary">
-              <th scope="row"><a routerLink="/profile/{{message.senderId}}">{{message.senderName}}</a></th>
-              <td><a routerLink="/ads/{{message.adId}}">{{message.adTitle}}</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <!--<div class="container mt-5">-->
+        <!---->
+        <!--<table class="table table-hover">-->
+          <!--<thead>-->
+            <!--<tr>-->
+              <!--<th scope="col">Name</th>-->
+              <!--<th scope="col">Ad</th>-->
+            <!--</tr>-->
+          <!--</thead>-->
 
+          <!--<tbody *ngIf="receivedMessages.length == 0">-->
+            <!--<tr class="table-secondary">-->
+              <!--<th scope="row">You don't have any messages.</th>-->
+            <!--</tr>-->
+          <!--</tbody>-->
 
-      </div>
+          <!--<tbody *ngFor="let message of receivedMessages">-->
+            <!--<tr class="table-secondary">-->
+              <!--<th scope="row"><a routerLink="/profile/{{message.senderId}}">{{message.senderName}}</a></th>-->
+              <!--<td><a routerLink="/ads/{{message.adId}}">{{message.adTitle}}</a></td>-->
+            <!--</tr>-->
+          <!--</tbody>-->
+        <!--</table>-->
+        <!---->
+      <!--</div>-->
     </mat-tab>
-    <mat-tab label="Third"> Content 3 </mat-tab>
+
   </mat-tab-group>
 
 

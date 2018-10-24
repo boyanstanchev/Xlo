@@ -24,19 +24,9 @@ export class DetailsComponent implements OnInit {
               public authService: AuthService,
               public categoriesService: CategoriesService,
               public modalService: ModalService,
-              private messagesService: MessagesService,
-              private toastr: ToastrService,
+              public messagesService: MessagesService,
               public cartService: ShoppingCartService,
               private auth: AngularFireAuth) {
-  }
-
-  message(form, profileId, adTitle) {
-    let message = form.value.message;
-    this.messagesService.sendMessage(message, profileId, this.route.snapshot.params['id'], adTitle)
-      .then(() => {
-        this.toastr.success('Message send.');
-        this.modalService.close('custom-modal-1');
-      });
   }
 
   ngOnInit() {

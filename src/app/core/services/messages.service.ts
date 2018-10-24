@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
-import {AngularFireAuth} from 'angularfire2/auth';
 import {Message} from '../models/message';
 import {AuthService} from './auth.service';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {ConversationsService} from './conversations.service';
+import {ToastrService} from 'ngx-toastr';
+import {ModalService} from '../../components/shared/modal/modal.service';
 
 
 @Injectable({
@@ -14,21 +16,38 @@ import {Observable} from 'rxjs';
 export class MessagesService {
 
   constructor(private db: AngularFireDatabase,
-              private auth: AngularFireAuth,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private conversationService: ConversationsService,
+              private toastr: ToastrService,
+              private modalService: ModalService) {
   }
 
-  sendMessage(message: string, receiverId: string, adId: string, adTitle: string) {
-    const messagesRef = this.db.list('messages');
-    return messagesRef.push({
-      receiverId,
-      message,
-      adId,
-      adTitle,
-      senderId: this.auth.auth.currentUser.uid,
-      date: Date.now(),
-      read: false
-    });
+  sendMessage(form, receiverId: string, adId: string, adTitle: string, modalId: number) {
+    this.conversationService.getConvsByAdIdAndReceiverIdOrSenderId(adId, receiverId).subscribe((convs) => {
+      if (convs.length === 0) {
+        const dbRef = this.db.list('conversations')
+        dbRef.push({
+          senderId: this.authService.user.uid,
+          receiverId,
+          adId,
+          adTitle
+        })
+      } else {
+        const messagesRef = this.db.list('messages');
+        const promise = messagesRef.push({
+          message: form.value.message,
+          adId,
+          adTitle,
+          date: Date.now(),
+          read: false,
+          conversationId: convs[0].key
+        });
+        promise.then(() => {
+          this.toastr.success('Message send.');
+          this.modalService.close(`custom-modal-${modalId}`);
+        });
+      }
+    })
   }
 
   getMessagesByProfileId(profileId: string, sent: boolean): Observable<Message[]> {
@@ -54,7 +73,7 @@ export class MessagesService {
           });
       });
 
-      return messages
+      return messages;
     }));
   }
 

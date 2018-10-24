@@ -21,7 +21,7 @@
       <div class="my-modal">
         <div class="my-modal-body">
           <h1>Message Seller</h1>
-          <form #f="ngForm" (ngSubmit)="message(f, ad.creator, ad.title)">
+          <form #f="ngForm" (ngSubmit)="messagesService.sendMessage(f, ad.creator, ad.id, ad.title, 1)">
             <div class="form-group">
               <label for="formGroupExampleInput">Message</label>
               <textarea
