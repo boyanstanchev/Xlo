@@ -9,37 +9,31 @@
     </mat-tab>
     <mat-tab label="Messages">
 
-      <ol>
-        <li>
-          <button mat-raised-button (click)="openDialog()">Pick one</button>
-        </li>
-      </ol>
+      <div class="container mt-5">
 
-      <!--<div class="container mt-5">-->
-        <!---->
-        <!--<table class="table table-hover">-->
-          <!--<thead>-->
-            <!--<tr>-->
-              <!--<th scope="col">Name</th>-->
-              <!--<th scope="col">Ad</th>-->
-            <!--</tr>-->
-          <!--</thead>-->
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Ad</th>
+            </tr>
+          </thead>
 
-          <!--<tbody *ngIf="receivedMessages.length == 0">-->
-            <!--<tr class="table-secondary">-->
-              <!--<th scope="row">You don't have any messages.</th>-->
-            <!--</tr>-->
-          <!--</tbody>-->
+          <tbody *ngIf="conversations.length == 0">
+            <tr class="table-secondary">
+              <th scope="row">You don't have any messages.</th>
+            </tr>
+          </tbody>
 
-          <!--<tbody *ngFor="let message of receivedMessages">-->
-            <!--<tr class="table-secondary">-->
-              <!--<th scope="row"><a routerLink="/profile/{{message.senderId}}">{{message.senderName}}</a></th>-->
-              <!--<td><a routerLink="/ads/{{message.adId}}">{{message.adTitle}}</a></td>-->
-            <!--</tr>-->
-          <!--</tbody>-->
-        <!--</table>-->
-        <!---->
-      <!--</div>-->
+          <tbody *ngFor="let conv of conversations">
+            <tr class="table-secondary" (click)="openDialog(conv.key)">
+              <th scope="row"><a routerLink="/profile/{{conv.payload.val()['senderId']}}">{{conv.payload.val()['senderName']}}</a></th>
+              <td><a routerLink="/ads/{{conv.payload.val()['adId']}}">{{conv.payload.val()['adTitle']}}</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
     </mat-tab>
 
   </mat-tab-group>

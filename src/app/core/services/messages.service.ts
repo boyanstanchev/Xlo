@@ -28,6 +28,7 @@ export class MessagesService {
         const dbRef = this.db.list('conversations')
         dbRef.push({
           senderId: this.authService.user.uid,
+          senderName: this.authService.user.displayName,
           receiverId,
           adId,
           adTitle
@@ -50,31 +51,8 @@ export class MessagesService {
     })
   }
 
-  getMessagesByProfileId(profileId: string, sent: boolean): Observable<Message[]> {
-    let dbRef = this.db.list('messages', ref => ref.orderByChild('receiverId').equalTo(profileId)).valueChanges();
-
-    if (sent) {
-      dbRef = this.db.list('messages', ref => ref.orderByChild('senderId').equalTo(profileId)).valueChanges();
-    }
-
-    return dbRef.pipe(map((messages: Array<Message>) => {
-      messages.forEach((message) => {
-
-        if (sent) {
-          this.authService.getUserDisplayName(message.receiverId)
-            .subscribe((displayName) => {
-              message.receiverName = displayName;
-            });
-        }
-
-        this.authService.getUserDisplayName(message.senderId)
-          .subscribe((displayName) => {
-            message.senderName = displayName;
-          });
-      });
-
-      return messages;
-    }));
+  getMessagesByConversationId(convId: string) {
+    return this.db.list('messages', ref => ref.orderByChild('conversationId').equalTo(convId)).snapshotChanges()
   }
 
 }

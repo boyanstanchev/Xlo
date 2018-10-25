@@ -1,3 +1,4 @@
+import { ConversationsService } from './../../../core/services/conversations.service';
 import {Component, Inject, OnInit} from '@angular/core';
 import {MessagesService} from '../../../core/services/messages.service';
 import {AuthService} from '../../../core/services/auth.service';
@@ -11,36 +12,32 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: []
 })
 export class MyProfileComponent implements OnInit {
-  sentMessages: Array<Message> = [];
-  receivedMessages: Array<Message> = [];
-  animal
+  conversations = []
 
   constructor(private messagesService: MessagesService,
+              private convService: ConversationsService,
               private authService: AuthService,
               public dialog: MatDialog) {
   }
 
-  openDialog(): void {
+  openDialog(conversationId): void {
+    console.log(conversationId)
     const dialogRef = this.dialog.open(MessagesDialog, {
-      width: '250px',
-      data: {name: 'Boyan', animal: 'Stanchev'}
+      width: '500px',
+      height: '400px', //This could be array of messages.lengh * 20px per message!
+      data: '<arrayOfMessages!>'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      console.log('Result: ', result)
     });
   }
 
   ngOnInit() {
-    this.messagesService.getMessagesByProfileId(this.authService.user.uid, true)
-      .subscribe((messages) => {
-        this.sentMessages = messages
-      })
-    this.messagesService.getMessagesByProfileId(this.authService.user.uid, false)
-      .subscribe((messages) => {
-        this.receivedMessages = messages
-      })
+    this.convService.getUserConversations().subscribe((convs) => {
+      console.log(convs)
+      this.conversations = convs
+    })
   }
 
 }

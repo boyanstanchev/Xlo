@@ -5,6 +5,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import { getMatIconFailedToSanitizeLiteralError } from '@angular/material';
 
 interface UserData {
   displayName: string,
@@ -98,7 +99,7 @@ export class AuthService {
 
   getUserIsAdmin(userId: string): Observable<boolean> {
     return this.db.list('userData', ref => ref.orderByChild('userId').equalTo(userId).limitToFirst(1)).valueChanges().pipe(map((userData) => {
-      return userData[0]['isAdmin']
+      return userData.length > 0 ? userData[0]['isAdmin'] : false
     }))
   }
 

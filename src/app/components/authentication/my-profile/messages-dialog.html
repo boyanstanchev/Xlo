@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>adTitle + link to ad!</h1>
+<h5>{{data}}</h5>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <input matInput [(ngModel)]="data.animal">
+  <input matInput #message>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-button [mat-dialog-close]="message.value" cdkFocusInitial>Send</button>
 </div>

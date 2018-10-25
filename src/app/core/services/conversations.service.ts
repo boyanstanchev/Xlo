@@ -14,7 +14,7 @@ export class ConversationsService {
 
   getConvsByAdIdAndReceiverIdOrSenderId(adId: string, receiverId: string, sender: boolean = false, receiver: boolean = false) {
     return this.db.list('conversations', ref => ref.orderByChild('adId').equalTo(adId)).snapshotChanges().pipe(map((cons) => {
-      return cons.map((con) => {
+      return cons.filter((con) => { // if .map is used it returns undefined https://stackoverflow.com/questions/16037049/why-does-javascript-map-function-return-undefined
         if (con.payload.val()['senderId'] === this.authService.user.uid && con.payload.val()['receiverId'] === receiverId) {
           return con
         } else if (receiver && con.payload.val()['receiverId'] === receiverId) {
@@ -26,5 +26,8 @@ export class ConversationsService {
     }))
   }
 
+  getUserConversations() {
+    return this.db.list('conversations', ref => ref.orderByChild('receiverId').equalTo(this.authService.user.uid)).snapshotChanges()
+  }
 
 }

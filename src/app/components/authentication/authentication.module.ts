@@ -15,12 +15,14 @@ import {MessagesDialog} from './my-profile/my-profile.component';
     ...authenticationComponents,
     MessagesDialog
   ],
+  entryComponents: [
+    MessagesDialog
+  ],
   imports: [
     SharedModule,
     AuthenticationRoutingModule,
     MatTabsModule,
     MatDialogModule,
-
   ]
 })
 
