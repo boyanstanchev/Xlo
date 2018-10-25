@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
-import {Message} from '../models/message';
 import {AuthService} from './auth.service';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
 import {ConversationsService} from './conversations.service';
 import {ToastrService} from 'ngx-toastr';
 import {ModalService} from '../../components/shared/modal/modal.service';
+import {Message} from '../models/message';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -37,11 +37,10 @@ export class MessagesService {
         const messagesRef = this.db.list('messages');
         const promise = messagesRef.push({
           message: form.value.message,
-          adId,
-          adTitle,
           date: Date.now(),
           read: false,
-          conversationId: convs[0].key
+          conversationId: convs[0].key,
+          senderName: this.authService.user.displayName,
         });
         promise.then(() => {
           this.toastr.success('Message send.');
@@ -51,8 +50,12 @@ export class MessagesService {
     })
   }
 
-  getMessagesByConversationId(convId: string) {
-    return this.db.list('messages', ref => ref.orderByChild('conversationId').equalTo(convId)).snapshotChanges()
+  getMessagesByConversationId(convId: string): Observable<Array<Message>> {
+    return this.db.list('messages', ref => ref.orderByChild('conversationId').equalTo(convId)).valueChanges().pipe(map((messages: Array<Message>) => {
+      return messages.sort((a, b) => {
+        return +new Date(a.date) - +new Date(b.date)
+      })
+    }))
   }
 
 }

@@ -9,6 +9,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 
 import {MessagesDialog} from './my-profile/my-profile.component';
+import {MatTooltipModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {MessagesDialog} from './my-profile/my-profile.component';
     AuthenticationRoutingModule,
     MatTabsModule,
     MatDialogModule,
+    MatTooltipModule
   ]
 })
 

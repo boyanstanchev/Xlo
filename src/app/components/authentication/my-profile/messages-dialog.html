@@ -1,9 +1,48 @@
-<h1 mat-dialog-title>adTitle + link to ad!</h1>
-<h5>{{data}}</h5>
-<div mat-dialog-content>
-  <input matInput #message>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button [mat-dialog-close]="message.value" cdkFocusInitial>Send</button>
+<div class="messaging">
+  <div class="inbox_msg">
+
+    <div class="mesgs">
+      <div class="msg_history">
+
+        <div *ngFor="let message of data" class="incoming_msg mb-2">
+          <div class="incoming_msg_img">
+            <!--<a routerLink="/profile/{{message.}}">-->
+            <img
+              src="https://ptetutorials.com/images/user-profile.png"
+              alt="Profile pic"
+              matTooltip="{{message.senderName}}">
+            <!--</a>-->
+          </div>
+          <div class="received_msg">
+            <div class="received_withd_msg">
+              <p style="width: fit-content"
+                 matTooltip="{{message.date | date: 'medium'}}">
+                {{message.message}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="outgoing_msg">
+          <div class="sent_msg">
+            <p style="width: fit-content">Test which is a new approach to have all
+              solutions</p>
+            <span class="time_date"> 11:01 AM    |    June 9</span></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="type_msg mt-3">
+    <div class="input_msg_write">
+      <div mat-dialog-content>
+        <input matInput #message type="text" class="write_msg" placeholder="Type a message"/>
+      </div>
+      <button mat-button [mat-dialog-close]="message.value" cdkFocusInitial class="msg_send_btn" type="button"><i
+        class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
 </div>

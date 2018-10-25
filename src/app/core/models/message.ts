@@ -1,10 +1,7 @@
 export interface Message {
-  adId: string,
-  adTitle: string,
+  conversationId: string,
   message: string,
-  receiverId?: string,
-  senderId?: string,
-  senderName?: string,
-  receiverName?: string,
-  date: Date
+  senderName: string,
+  date: Date | number, //TODO
+  read: boolean
 }

@@ -1,10 +1,9 @@
-import { ConversationsService } from './../../../core/services/conversations.service';
+import {ConversationsService} from '../../../core/services/conversations.service';
 import {Component, Inject, OnInit} from '@angular/core';
 import {MessagesService} from '../../../core/services/messages.service';
-import {AuthService} from '../../../core/services/auth.service';
-import {Message} from '../../../core/models/message';
 
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+import {Message} from '../../../core/models/message';
 
 @Component({
   selector: 'app-my-profile',
@@ -12,32 +11,33 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: []
 })
 export class MyProfileComponent implements OnInit {
-  conversations = []
+  conversations = [];
 
   constructor(private messagesService: MessagesService,
               private convService: ConversationsService,
-              private authService: AuthService,
               public dialog: MatDialog) {
   }
 
   openDialog(conversationId): void {
-    console.log(conversationId)
-    const dialogRef = this.dialog.open(MessagesDialog, {
-      width: '500px',
-      height: '400px', //This could be array of messages.lengh * 20px per message!
-      data: '<arrayOfMessages!>'
-    });
+    this.messagesService.getMessagesByConversationId(conversationId).subscribe((messages: Array<Message>) => {
+      const dialogRef = this.dialog.open(MessagesDialog, {
+        width: '700px',
+        height: `fit-content`, //This could be the length of messages array * 20px per message!
+        data: messages
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Result: ', result)
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.convService.answerConversation(conversationId, result) //TODO Make it so it doesn't close the modal! It will be very cool
+        }
+      });
+    })
   }
 
   ngOnInit() {
     this.convService.getUserConversations().subscribe((convs) => {
-      console.log(convs)
-      this.conversations = convs
-    })
+      this.conversations = convs;
+    });
   }
 
 }
@@ -45,15 +45,11 @@ export class MyProfileComponent implements OnInit {
 @Component({
   selector: 'messages-dialog',
   templateUrl: 'messages-dialog.html',
+  styleUrls: ['messages-dialog.css']
 })
 export class MessagesDialog {
 
   constructor(
-    public dialogRef: MatDialogRef<MessagesDialog>,
-    @Inject(MAT_DIALOG_DATA) public data) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+    @Inject(MAT_DIALOG_DATA) public data: Array<Message>) {
   }
-
 }
