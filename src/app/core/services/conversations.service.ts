@@ -15,7 +15,7 @@ export class ConversationsService {
               private toastr: ToastrService) {
   }
 
-  getConvsByAdIdAndReceiverIdOrSenderId(adId: string, receiverId: string) {
+  checkIfConversationExists(adId: string, receiverId: string) {
     return this.db.list('conversations', ref => ref.orderByChild('adId').equalTo(adId)).snapshotChanges().pipe(map((cons) => {
       return cons.filter((con) => {
         if (con.payload.val()['senderId'] === this.authService.user.uid && con.payload.val()['receiverId'] === receiverId) {
@@ -26,14 +26,18 @@ export class ConversationsService {
   }
 
   getUserConversations() {
-    return this.db.list('conversations', ref => ref.orderByChild('receiverId').equalTo(this.authService.user.uid)).snapshotChanges()
+    return this.db.list('conversations').snapshotChanges().pipe(map((convs) => {
+      return convs.filter((con) => {
+        if (con.payload.val()['senderId'] || con.payload.val()['receiverId'] === this.authService.user.uid) return con
+      })
+    }))
   }
 
   answerConversation(conversationId: string, messageText: string) {
     let messageObj: Message = {
       conversationId,
       message: messageText,
-      date: Date.now(), // number?
+      date: Date.now(),
       read: false,
       senderName: this.authService.user.displayName
     }

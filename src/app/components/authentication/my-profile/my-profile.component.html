@@ -27,8 +27,26 @@
 
           <tbody *ngFor="let conv of conversations">
             <tr class="table-secondary" (click)="openDialog(conv.key)">
-              <th scope="row"><a routerLink="/profile/{{conv.payload.val()['senderId']}}">{{conv.payload.val()['senderName']}}</a></th>
+
+              <th scope="row">Me,
+                <a *ngIf="conv.payload.val()['senderId'] !== authService.user.uid; else receiver"  routerLink="/profile/{{conv.payload.val()['senderId']}}">
+                  {{conv.payload.val()['senderName']}}
+                </a>
+              </th>
+
+              <!-- Make this shit works! -->
+
+              <ng-template #receiver>
+                  <a routerLink="/profile/{{conv.payload.val()['receiverId']}}">
+                    {{conv.payload.val()['receiverName']}}
+                  </a>
+              </ng-template>
+
+
+              <!-- Make this shit works! -->
+
               <td><a routerLink="/ads/{{conv.payload.val()['adId']}}">{{conv.payload.val()['adTitle']}}</a></td>
+
             </tr>
           </tbody>
         </table>

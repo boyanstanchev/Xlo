@@ -22,8 +22,8 @@ export class MessagesService {
               private modalService: ModalService) {
   }
 
-  sendMessage(form, receiverId: string, adId: string, adTitle: string, modalId: number) {
-    this.conversationService.getConvsByAdIdAndReceiverIdOrSenderId(adId, receiverId).subscribe((convs) => {
+  sendMessage(form, receiverId: string, adId: string, adTitle: string, modalId: number, receiverName: string) {
+    this.conversationService.checkIfConversationExists(adId, receiverId).subscribe((convs) => {
       if (convs.length === 0) {
         const dbRef = this.db.list('conversations')
         dbRef.push({
@@ -31,7 +31,8 @@ export class MessagesService {
           senderName: this.authService.user.displayName,
           receiverId,
           adId,
-          adTitle
+          adTitle,
+          receiverName
         })
       } else {
         const messagesRef = this.db.list('messages');
@@ -52,6 +53,10 @@ export class MessagesService {
 
   getMessagesByConversationId(convId: string): Observable<Array<Message>> {
     return this.db.list('messages', ref => ref.orderByChild('conversationId').equalTo(convId)).valueChanges().pipe(map((messages: Array<Message>) => {
+      messages.forEach((msg) => {
+        msg.isSender = msg.senderName === this.authService.user.displayName
+      })
+
       return messages.sort((a, b) => {
         return +new Date(a.date) - +new Date(b.date)
       })
