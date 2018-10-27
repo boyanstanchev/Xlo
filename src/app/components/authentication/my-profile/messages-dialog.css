@@ -187,8 +187,8 @@ img {
   font-size: 17px;
   height: 33px;
   position: absolute;
-  right: 0;
-  top: 11px;
+  right: 7px;
+  top: 7px;
   width: 33px;
 }
 
@@ -198,7 +198,11 @@ img {
 
 .msg_history {
   height: 516px;
-  overflow: auto
+  overflow-y: scroll;
+}
+
+.msg_history::-webkit-scrollbar {
+  display: none;
 }
 
 .fit {

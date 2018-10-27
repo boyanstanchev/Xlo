@@ -31,7 +31,7 @@ export class AuthService {
     })).subscribe()
   }
 
-  register(email: string, password: string, displayName: string) {
+  register(email: string, password: string, displayName: string, photoURL?: string) {
     this.auth.auth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
@@ -42,7 +42,7 @@ export class AuthService {
               photoURL: ''
             })
               .then(() => {
-                this.saveUserData(displayName, user.user.uid)
+                this.saveUserData(displayName, user.user.uid, photoURL)
                   .then(() => {
                     this.router.navigate(['/profile/login']);
                     this.toastr.success('You are now registered. Please login to continue.');
@@ -58,12 +58,13 @@ export class AuthService {
       });
   }
 
-  saveUserData(displayName: string, userId: string) {
+  saveUserData(displayName: string, userId: string, photoURL?: string) {
     const userDataRef = this.db.list('userData');
     return userDataRef.push({
       userId: userId,
       displayName: displayName,
-      isAdmin: false
+      isAdmin: false,
+      photoURL: photoURL || ''
     });
   }
 
@@ -94,6 +95,12 @@ export class AuthService {
   getUserDisplayName(userId: string): Observable<string> {
     return this.db.list('userData', ref => ref.orderByChild('userId').equalTo(userId).limitToFirst(1)).valueChanges().pipe(map((userData) => {
       return userData[0]['displayName']
+    }))
+  }
+
+  getUserImageUrl(userId: string) {
+    return this.db.list('userData', ref => ref.orderByChild('userId').equalTo(userId).limitToFirst(1)).valueChanges().pipe(map((userData) => {
+      return userData[0]['photoURL']
     }))
   }
 

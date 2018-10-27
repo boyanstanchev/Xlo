@@ -9,13 +9,13 @@
     </mat-tab>
     <mat-tab label="Messages">
 
-      <div class="container mt-5">
+      <div class="container mt-3">
 
         <table class="table table-hover">
           <thead>
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Ad</th>
+              <th style="border-top: 0" scope="col">Participants</th>
+              <th style="border-top: 0" scope="col">Ad</th>
             </tr>
           </thead>
 
@@ -34,16 +34,11 @@
                 </a>
               </th>
 
-              <!-- Make this shit works! -->
-
               <ng-template #receiver>
                   <a routerLink="/profile/{{conv.payload.val()['receiverId']}}">
                     {{conv.payload.val()['receiverName']}}
                   </a>
               </ng-template>
-
-
-              <!-- Make this shit works! -->
 
               <td><a routerLink="/ads/{{conv.payload.val()['adId']}}">{{conv.payload.val()['adTitle']}}</a></td>
 

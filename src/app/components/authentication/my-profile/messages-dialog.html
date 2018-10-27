@@ -2,9 +2,10 @@
   <div class="inbox_msg">
 
     <div class="mesgs">
-      <div class="msg_history">
 
-        <ng-container *ngFor="let message of data">
+      <div #content class="msg_history">  <!--#scrollMe [scrollTop]="conversationMessages.length === 0 ? 0 : scrollMe.scrollHeight"-->
+
+        <ng-container #messages *ngFor="let message of conversationMessages">
 
           <div *ngIf="message.isSender; else incoming" class="outgoing_msg">
             <div class="sent_msg">
@@ -23,9 +24,7 @@
 
                 <div class="received_msg">
                   <div class="received_withd_msg">
-                    <p style="width: fit-content" matTooltip="{{message.date | date: 'MMM d, y, HH:mm:ss'}}">
-                      {{message.message}}
-                    </p>
+                    <p style="width: fit-content" matTooltip="{{message.date | date: 'MMM d, y, HH:mm:ss'}}">{{message.message}}</p>
                   </div>
                 </div>
               </div>
@@ -34,16 +33,16 @@
         </ng-container>
 
       </div>
-
     </div>
+
   </div>
 
   <div class="type_msg mt-3">
     <div class="input_msg_write">
       <div mat-dialog-content>
-        <input matInput #message type="text" class="write_msg" placeholder="Enter a message..." cdkFocusInitial />
+        <input matInput [(ngModel)]="message" (keyup.enter)="answer(conversationMessages[0].conversationId)" type="text" class="write_msg" placeholder="Enter a message..." cdkFocusInitial />
       </div>
-      <button mat-button [mat-dialog-close]="message.value" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
+      <button mat-button (click)="answer(conversationMessages[0].conversationId)" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
           aria-hidden="true"></i></button>
     </div>
   </div>

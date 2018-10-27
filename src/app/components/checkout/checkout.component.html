@@ -25,7 +25,7 @@
     <td>x</td>
     <td data-th="Price">{{item.payload.val()['adPrice'] | currency:'USD'}}</td>
     <td class="actions" data-th="">
-      <button (click)="cartService.remove(item.key)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+      <button (click)="cartService.remove(item.key)" class="btn btn-danger btn-sm" style="float: right"><i class="fa fa-trash-o"></i></button>
     </td>
   </tr>
   </tbody>

@@ -55,6 +55,8 @@ export class MessagesService {
     return this.db.list('messages', ref => ref.orderByChild('conversationId').equalTo(convId)).valueChanges().pipe(map((messages: Array<Message>) => {
       messages.forEach((msg) => {
         msg.isSender = msg.senderName === this.authService.user.displayName
+
+        //if (msg.) //TODO set senderPhotoURL
       })
 
       return messages.sort((a, b) => {

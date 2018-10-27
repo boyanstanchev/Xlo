@@ -1,6 +1,6 @@
 import {AuthService} from '../../../core/services/auth.service';
 import {ConversationsService} from '../../../core/services/conversations.service';
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {MessagesService} from '../../../core/services/messages.service';
 
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
@@ -15,28 +15,16 @@ import {ToastrService} from 'ngx-toastr';
 export class MyProfileComponent implements OnInit {
   conversations = [];
 
-  constructor(private messagesService: MessagesService,
-              private convService: ConversationsService,
+  constructor(private convService: ConversationsService,
               public dialog: MatDialog,
-              private toastr: ToastrService,
               public authService: AuthService) {
   }
 
   openDialog(conversationId): void {
-    this.messagesService.getMessagesByConversationId(conversationId).subscribe((messages: Array<Message>) => {
-      const dialogRef = this.dialog.open(MessagesDialog, {
-        width: '700px',
-        height: `fit-content`,
-        data: messages
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        if (result && result.trim().length >= 2) {
-          this.convService.answerConversation(conversationId, result); //TODO Make it so it doesn't close the modal! It will be very cool
-        } else if (result && result.trim().length <= 0) {
-          this.toastr.error('Error message must not be empty.');
-        }
-      });
+    this.dialog.open(MessagesDialog, {
+      width: '700px',
+      height: `fit-content`,
+      data: conversationId
     });
   }
 
@@ -52,9 +40,43 @@ export class MyProfileComponent implements OnInit {
   styleUrls: ['messages-dialog.css']
 })
 
-export class MessagesDialog {
+export class MessagesDialog implements AfterViewInit {
+  conversationMessages: Array<Message> = []
+  message: string = ''
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Array<Message>) {
+  @ViewChildren('messages') messages: QueryList<any>;
+  @ViewChild('content') content: ElementRef;
+
+  constructor(@Inject(MAT_DIALOG_DATA)
+              public data: string,
+              private conversationService: ConversationsService,
+              private messagesService: MessagesService,
+              private toastr: ToastrService) {
+
+    this.messagesService.getMessagesByConversationId(data).subscribe((messages: Array<Message>) => {
+      this.conversationMessages = messages
+    });
   }
+
+  answer(conversationId: string) {
+    if (this.message.trim().length > 1) {
+      this.conversationService.answerConversation(conversationId, this.message)
+      this.message = ''
+    } else {
+      this.toastr.error('Message must be at least two characters long.')
+    }
+  }
+
+  ngAfterViewInit() {
+    this.messages.changes.subscribe(this.scrollToBottom);
+  }
+
+  scrollToBottom = () => {
+    try {
+      this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 }

@@ -22,7 +22,7 @@
 </div>
 
 <pagination-controls
-  *ngIf="ads.length !== 0"
+  *ngIf="ads.length > 6"
   (pageChange)="p = $event">
   directionLinks="true"
   autoHide="true"
