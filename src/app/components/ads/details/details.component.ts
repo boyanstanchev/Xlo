@@ -5,10 +5,8 @@ import {CategoriesService} from '../../../core/services/categories.service';
 import {AuthService} from '../../../core/services/auth.service';
 import {ModalService} from '../../shared/modal/modal.service';
 import {MessagesService} from '../../../core/services/messages.service';
-import {ToastrService} from 'ngx-toastr';
 import {ShoppingCartService} from '../../../core/services/shopping-cart.service';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-details',
@@ -30,7 +28,7 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.adsService.getAdById(this.route.snapshot.params['id'])
+    this.adsService.getAdById(this.route.snapshot.params['id']) //TODO .pipe(map()) & : Ad!
       .subscribe((ads) => {
         if (ads.length > 0) {
           this.ad = {
