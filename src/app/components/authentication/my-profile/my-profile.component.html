@@ -13,7 +13,7 @@
 
         <table class="table table-hover">
           <thead>
-            <tr>
+            <tr *ngIf="conversations.length !== 0" >
               <th style="border-top: 0" scope="col">Participants</th>
               <th style="border-top: 0" scope="col">Ad</th>
             </tr>
@@ -42,7 +42,13 @@
 
               <td><a routerLink="/ads/{{conv.payload.val()['adId']}}">{{conv.payload.val()['adTitle']}}</a></td>
 
+              <td class="actions">
+                  <button (click)="convService.deleteConversation(conv.key);$event.stopPropagation()" class="btn btn-danger btn-sm" style="float: right"><i class="fa fa-trash-o"></i></button>
+              </td>
+
             </tr>
+
+
           </tbody>
         </table>
 

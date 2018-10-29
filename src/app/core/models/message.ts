@@ -1,5 +1,4 @@
 export interface Message {
-  conversationId: string,
   message: string,
   senderName: string,
   isSender?: boolean

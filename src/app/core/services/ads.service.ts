@@ -1,3 +1,4 @@
+import { CategoriesService } from './categories.service';
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
@@ -15,8 +16,8 @@ export class AdsService {
   constructor(private toastr: ToastrService,
               private router: Router,
               private db: AngularFireDatabase,
-              private authService: AuthService) {
-  }
+              private authService: AuthService,
+              private categoriesService: CategoriesService) { }
 
   getFeaturedAds(): Observable<any> {
     let adsRef = this.db.list('obiavi', ref => ref.orderByChild('featured').equalTo(true)).snapshotChanges();
@@ -67,7 +68,27 @@ export class AdsService {
   }
 
   getAdById(adId: string) {
-    return this.db.list('obiavi', ref => ref.orderByKey().equalTo(adId).limitToFirst(1)).snapshotChanges();
+    return this.db.list('obiavi', ref => ref.orderByKey().equalTo(adId).limitToFirst(1)).valueChanges().pipe(map((ads: Array<Ad>) => {
+      if (ads.length > 0) {
+        this.categoriesService.getCategoryNameById(ads[0].category, false).subscribe((cats) => {
+          ads[0].categoryName = cats[0].payload.val()['name'];
+        });
+
+        this.categoriesService.getCategoryNameById(ads[0].subCategory, true).subscribe((cats) => {
+          ads[0].subCategoryName = cats[0].payload.val()['name'];
+        });
+
+        this.authService.getUserDisplayName(ads[0].creator).subscribe((name) => {
+          ads[0].creatorUserName = name;
+        });
+
+        if (this.authService.isAuthenticated()) {
+          ads[0].isCreator = this.authService.user.uid === ads[0].creator;
+        }
+
+        return ads[0]
+      }
+    }))
   }
 
   editAdById(adId: string, model) {

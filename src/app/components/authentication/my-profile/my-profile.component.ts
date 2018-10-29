@@ -15,7 +15,7 @@ import {ToastrService} from 'ngx-toastr';
 export class MyProfileComponent implements OnInit {
   conversations = [];
 
-  constructor(private convService: ConversationsService,
+  constructor(public convService: ConversationsService,
               public dialog: MatDialog,
               public authService: AuthService) {
   }
@@ -59,7 +59,7 @@ export class MessagesDialog implements AfterViewInit {
   }
 
   answer(conversationId: string) {
-    if (this.message.trim().length > 1) {
+    if (this.message.trim().length > 2) {
       this.conversationService.answerConversation(conversationId, this.message)
       this.message = ''
     } else {

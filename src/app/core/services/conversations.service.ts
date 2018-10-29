@@ -35,16 +35,29 @@ export class ConversationsService {
 
   answerConversation(conversationId: string, messageText: string) {
     let messageObj: Message = {
-      conversationId,
       message: messageText,
       date: Date.now(),
       read: false,
       senderName: this.authService.user.displayName
     }
 
-    const dbRef = this.db.list('messages')
+    const dbRef = this.db.list(`messages/${conversationId}`)
     const promise = dbRef.push(messageObj)
     promise.then(() => this.toastr.success('Message sent.'))
+  }
+
+  deleteConversation(conversationId: string) {
+    const dbRef = this.db.list(`conversations/${conversationId}`) //TODO: Make this work!
+    const promise = dbRef.remove()
+    promise.then(() => {
+      this.deleteMessagesByConvId(conversationId)
+        // .then(() => this.toastr.success('Conversation deleted.'))
+    })
+  }
+
+  deleteMessagesByConvId(conversationsId: string) {
+    const dbRef = this.db.list(`messages/${conversationsId}`)
+    return dbRef.remove()
   }
 
 }

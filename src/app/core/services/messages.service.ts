@@ -35,14 +35,15 @@ export class MessagesService {
           receiverName
         })
       } else {
-        const messagesRef = this.db.list('messages');
+        const messagesRef = this.db.list(`messages/${convs[0].key}`);
+
         const promise = messagesRef.push({
           message: form.value.message,
           date: Date.now(),
           read: false,
-          conversationId: convs[0].key,
           senderName: this.authService.user.displayName,
         });
+
         promise.then(() => {
           this.toastr.success('Message send.');
           this.modalService.close(`custom-modal-${modalId}`);
@@ -52,7 +53,7 @@ export class MessagesService {
   }
 
   getMessagesByConversationId(convId: string): Observable<Array<Message>> {
-    return this.db.list('messages', ref => ref.orderByChild('conversationId').equalTo(convId)).valueChanges().pipe(map((messages: Array<Message>) => {
+    return this.db.list(`messages/${convId}`).valueChanges().pipe(map((messages: Array<Message>) => {
       messages.forEach((msg) => {
         msg.isSender = msg.senderName === this.authService.user.displayName
 
