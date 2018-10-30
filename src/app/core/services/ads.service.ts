@@ -2,7 +2,7 @@ import { CategoriesService } from './categories.service';
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
-import {Ad} from '../models/ad';
+import { Ad } from '../models/ad';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {map} from 'rxjs/operators';
 import {AuthService} from './auth.service';
@@ -106,7 +106,7 @@ export class AdsService {
   }
 
   getAdsByUserId(userId: string) {
-    return this.db.list('obiavi', ref => ref.orderByChild('creator').equalTo(userId)).snapshotChanges();
+    return this.db.list('obiavi', ref => ref.orderByChild('creator').equalTo(userId)).snapshotChanges()
   }
 
   deleteAd(adId: string) {

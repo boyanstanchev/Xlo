@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
@@ -11,8 +12,8 @@ import {MessagesService} from '../../../core/services/messages.service';
   styleUrls: []
 })
 export class ProfileComponent implements OnInit {
-  userName: string;
-  userAds = [];
+  userName: Observable<any>;
+  userAds: Observable<any>
 
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
@@ -22,22 +23,8 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getUserDisplayName(this.route.snapshot.params['id'])
-      .subscribe((name) => {
-        this.userName = name;
-      });
-
-    this.adsService.getAdsByUserId(this.route.snapshot.params['id'])
-      .subscribe((ads) => {
-        ads.forEach((ad) => {
-          this.userAds.push({
-            id: ad.key,
-            title: ad.payload.val()['title'],
-            price: ad.payload.val()['price'],
-            creator: ad.payload.val()['creator']
-          });
-        });
-      });
+    this.userName = this.authService.getUserDisplayName(this.route.snapshot.params['id'])
+    this.userAds = this.adsService.getAdsByUserId(this.route.snapshot.params['id'])
   }
 
 }

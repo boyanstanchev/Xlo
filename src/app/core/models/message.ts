@@ -4,4 +4,5 @@ export interface Message {
   isSender?: boolean
   date: number
   read: boolean
+  conversationId?: string
 }

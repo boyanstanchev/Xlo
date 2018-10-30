@@ -23,7 +23,7 @@ export class MyProfileComponent implements OnInit {
   openDialog(conversationId): void {
     this.dialog.open(MessagesDialog, {
       width: '700px',
-      height: `fit-content`,
+      height: 'fit-content',
       data: conversationId
     });
   }
@@ -33,6 +33,9 @@ export class MyProfileComponent implements OnInit {
   }
 
 }
+
+
+
 
 @Component({
   selector: 'messages-dialog',
@@ -54,6 +57,7 @@ export class MessagesDialog implements AfterViewInit {
               private toastr: ToastrService) {
 
     this.messagesService.getMessagesByConversationId(data).subscribe((messages: Array<Message>) => {
+      messages[0].conversationId = data
       this.conversationMessages = messages
     });
   }
@@ -75,7 +79,7 @@ export class MessagesDialog implements AfterViewInit {
     try {
       this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
     } catch (err) {
-      console.log(err)
+      this.toastr.error(err)
     }
   }
 
