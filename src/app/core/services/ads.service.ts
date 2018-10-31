@@ -106,7 +106,18 @@ export class AdsService {
   }
 
   getAdsByUserId(userId: string) {
-    return this.db.list('obiavi', ref => ref.orderByChild('creator').equalTo(userId)).snapshotChanges()
+    return this.db.list('obiavi', ref => ref.orderByChild('creator').equalTo(userId)).snapshotChanges().pipe(map(ads => {
+      return ads.map(ad => {
+        return {
+          id: ad.key,
+          title: ad.payload.val()['title'],
+          condition: ad.payload.val()['condition'],
+          price: ad.payload.val()['price'],
+          creator: ad.payload.val()['creator'],
+          model: ad.payload.val()['model'].replace(/\n/g, '<br>')
+        }
+      })
+    }))
   }
 
   deleteAd(adId: string) {

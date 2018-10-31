@@ -6,18 +6,22 @@ import {MessagesService} from '../../../core/services/messages.service';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 import {Message} from '../../../core/models/message';
 import {ToastrService} from 'ngx-toastr';
+import {AdsService} from '../../../core/services/ads.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-my-profile',
   templateUrl: './my-profile.component.html',
-  styleUrls: []
+  styleUrls: ['./my-profile.component.css']
 })
 export class MyProfileComponent implements OnInit {
   conversations = [];
+  userAds
 
   constructor(public convService: ConversationsService,
               public dialog: MatDialog,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private adsService: AdsService) {
   }
 
   openDialog(conversationId): void {
@@ -28,10 +32,15 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.convService.getUserConversations().subscribe(convs => this.conversations = convs);
+  deleteAd(adId: string) {
+    this.adsService.deleteAd(adId)
   }
 
+  ngOnInit() {
+    this.convService.getUserConversations().subscribe(convs => this.conversations = convs);
+    this.adsService.getAdsByUserId(this.authService.user.uid).subscribe(ads => this.userAds = ads)
+
+  }
 }
 
 

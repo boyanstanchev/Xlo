@@ -1,16 +1,16 @@
 <div class="jumbotron">
-  <h2 class="text-center mb-5">{{userName}}</h2>
+  <h2 class="text-center mb-5">{{userName | async}}</h2>
   <ul class="list-group">
-    <li *ngFor="let ad of userAds | async" class="list-group-item d-flex justify-content-between align-items-center">
-      <a style="width: 200px" routerLink="/ads/{{ad.key}}">{{ad.payload.val()['title']}}</a>
-      <span class="badge">{{ad.payload.val()['price'] | currency:'USD'}}</span>
+    <li *ngFor="let ad of userAds" class="list-group-item d-flex justify-content-between align-items-center">
+      <a style="width: 200px" routerLink="/ads/{{ad.id}}">{{ad.title}}</a>
+      <span class="badge">{{ad.price | currency:'USD'}}</span>
       <button (click)="modalService.open('custom-modal-3')" type="button" class="btn btn-secondary">💬 Message Seller</button>
 
       <modal id="custom-modal-3">
         <div class="my-modal">
           <div class="my-modal-body">
             <h1>Message Seller</h1>
-            <form #f="ngForm" (ngSubmit)="messagesService.sendMessage(f, ad.payload.val()['creator'], ad.key, ad.payload.val()['title'], 3)">
+            <form #f="ngForm" (ngSubmit)="messagesService.sendMessage(f, ad.creator, ad.id, ad.title, 3)">
               <div class="form-group">
                 <label for="formGroupExampleInput">Message</label>
                 <textarea

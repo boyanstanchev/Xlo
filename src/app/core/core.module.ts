@@ -10,6 +10,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {ToastrModule} from 'ngx-toastr';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {MatBadgeModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
     SharedModule, // Must be imported here if I want to use modal component from shared module inside navigation component from core module
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    MatBadgeModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',

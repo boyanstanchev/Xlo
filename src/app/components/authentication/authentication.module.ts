@@ -8,8 +8,9 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MessagesDialog} from './my-profile/my-profile.component';
-import {MatTooltipModule} from '@angular/material';
+import {MatTooltipModule, MatListModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTabsModule,
     MatDialogModule,
     MatTooltipModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatListModule,
+    MatIconModule
   ]
 })
 

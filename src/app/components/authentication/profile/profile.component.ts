@@ -13,7 +13,7 @@ import {MessagesService} from '../../../core/services/messages.service';
 })
 export class ProfileComponent implements OnInit {
   userName: Observable<any>;
-  userAds: Observable<any>
+  userAds: Array<any>
 
   constructor(private route: ActivatedRoute,
               private authService: AuthService,
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userName = this.authService.getUserDisplayName(this.route.snapshot.params['id'])
-    this.userAds = this.adsService.getAdsByUserId(this.route.snapshot.params['id'])
+    this.adsService.getAdsByUserId(this.route.snapshot.params['id']).subscribe(ads => this.userAds = ads)
   }
 
 }
