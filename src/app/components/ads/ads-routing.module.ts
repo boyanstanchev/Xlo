@@ -9,7 +9,7 @@ import {NgModule} from '@angular/core';
 const adsRoutes: Routes = [
   {path: 'featured', component: FeaturedComponent},
   {path: 'add', component: AddComponent, canActivate: [AuthGuard]},
-  {path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]},
+  {path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard]}, //TODO: Make so only the owner can access it!
   {path: ':id', component: DetailsComponent}
 ]
 

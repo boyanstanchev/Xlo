@@ -8,6 +8,7 @@ import {Message} from '../../../core/models/message';
 import {ToastrService} from 'ngx-toastr';
 import {AdsService} from '../../../core/services/ads.service';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -21,7 +22,8 @@ export class MyProfileComponent implements OnInit {
   constructor(public convService: ConversationsService,
               public dialog: MatDialog,
               public authService: AuthService,
-              private adsService: AdsService) {
+              private adsService: AdsService,
+              private router: Router) {
   }
 
   openDialog(conversationId): void {
@@ -36,10 +38,13 @@ export class MyProfileComponent implements OnInit {
     this.adsService.deleteAd(adId)
   }
 
+  redirectToEdit(adId: string) {
+    this.router.navigate([`ads/edit/${adId}`])
+  }
+
   ngOnInit() {
     this.convService.getUserConversations().subscribe(convs => this.conversations = convs);
     this.adsService.getAdsByUserId(this.authService.user.uid).subscribe(ads => this.userAds = ads)
-
   }
 }
 

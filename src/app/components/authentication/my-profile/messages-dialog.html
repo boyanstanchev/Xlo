@@ -42,8 +42,9 @@
       <div mat-dialog-content>
         <input matInput [(ngModel)]="message" (keyup.enter)="answer(conversationMessages[0].conversationId)" type="text" class="write_msg" placeholder="Enter a message..." cdkFocusInitial />
       </div>
-      <button mat-button (click)="answer(conversationMessages[0].conversationId)" class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o"
-          aria-hidden="true"></i></button>
+      <button (click)="answer(conversationMessages[0].conversationId)" class="msg_send_btn" type="button">
+        <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 

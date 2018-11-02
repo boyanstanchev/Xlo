@@ -34,7 +34,7 @@
       </modal>
 
       <li *ngIf="authService.isAuthenticated()"  class="nav-item">
-        <a (click)="modalService.open('custom-modal-2')" [matBadge]="cartItems.length" matBadgePosition="after" matBadgeOverlap="false" matBadgeSize="medium" class="nav-link ml-2 btn btn-secondary">🛒 Cart</a>
+        <a (click)="modalService.open('custom-modal-2')" [matBadge]="cartItems.length" matBadgePosition="after" matBadgeOverlap="false" matBadgeSize="small" class="nav-link ml-2 btn btn-secondary">🛒 Cart</a>
       </li>
     </ul>
 

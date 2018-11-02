@@ -1,0 +1,7 @@
+.mat-badge-small.mat-badge-above .mat-badge-content {
+  top: auto;
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
+  font-size: 7px;
+}

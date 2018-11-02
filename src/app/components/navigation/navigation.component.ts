@@ -7,7 +7,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: []
+  styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
   cartItems = [];

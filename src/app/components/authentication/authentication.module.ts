@@ -8,7 +8,7 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MessagesDialog} from './my-profile/my-profile.component';
-import {MatTooltipModule, MatListModule} from '@angular/material';
+import {MatTooltipModule, MatListModule, MatMenuModule, MatButtonModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -28,7 +28,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatTooltipModule,
     MatExpansionModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule
   ]
 })
 
