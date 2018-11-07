@@ -10,6 +10,7 @@ import {CheckoutComponent} from '../components/checkout/checkout.component';
 import {NavigationComponent} from '../components/navigation/navigation.component';
 import {SidebarComponent} from '../components/sidebar/sidebar.component';
 import {ConversationsService} from './services/conversations.service';
+import {MatDrawer, MatDrawerContainer, MatDrawerContent} from '@angular/material';
 
 export const coreServices = [
   AdsService,
@@ -29,5 +30,8 @@ export const coreServices = [
 export const coreComponents = [
   CheckoutComponent,
   NavigationComponent,
-  SidebarComponent
+  SidebarComponent,
+  MatDrawer,
+  MatDrawerContainer,
+  MatDrawerContent
 ]

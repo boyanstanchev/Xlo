@@ -1,3 +1,4 @@
+import { MatExpansionModule } from '@angular/material/expansion';
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {
   coreServices,
@@ -10,7 +11,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {ToastrModule} from 'ngx-toastr';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
-import {MatBadgeModule} from '@angular/material';
+import {MatBadgeModule, MatButtonModule, MatListModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {MatBadgeModule} from '@angular/material';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     MatBadgeModule,
+    MatListModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',
@@ -36,7 +38,8 @@ import {MatBadgeModule} from '@angular/material';
   exports: [
     ...coreComponents,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
   ]
 })
 
