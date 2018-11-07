@@ -2,4 +2,12 @@
 @import url(https://bootswatch.com/4/lux/bootstrap.min.css);
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons)
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+html, body {
+  height: 100%;
+}
+
+.mat-drawer-container {
+  height: 89.7%;
+}

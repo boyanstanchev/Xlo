@@ -1,6 +1,6 @@
 <div *ngIf="catName" class="container">
-  <h3 class="text-center mt-3">{{catName}}</h3>
-  <h4 class="text-danger" *ngIf="ads.length == 0">Sorry, there are no ads in this category.</h4>
+  <h3 class="text-center mt-3 mb-5">{{catName}}</h3>
+  <h4 class="text-danger text-center mt-5" *ngIf="ads.length == 0">Sorry, there are no ads in this category.</h4>
 
   <app-ad-card [ads]="ads"></app-ad-card>
 

@@ -12,6 +12,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {MatBadgeModule, MatButtonModule, MatListModule} from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import {MatBadgeModule, MatButtonModule, MatListModule} from '@angular/material'
     ...coreComponents,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ]
 })
 

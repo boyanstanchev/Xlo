@@ -1,14 +1,20 @@
 <app-navigation></app-navigation>
 
 <mat-drawer-container autosize>
+
   <mat-drawer #drawer mode="push">
-    <app-sidebar></app-sidebar>
+    <app-sidebar (click)="drawer.close()"></app-sidebar>
   </mat-drawer>
-  <mat-drawer-content>
-    <!-- //Fix this so it's fixes height? -->
-    <button *ngIf="!drawer.opened"  mat-raised-button (click)="drawer.toggle()">Categories</button>
-    <div class="container mt-2" style="/* max-height: 768px */">
+
+  <mat-drawer-content >
+    <button *ngIf="!drawer.opened"  mat-raised-button (click)="drawer.toggle()">
+      <mat-icon class="mat-24">arrow_forward_ios</mat-icon>
+    </button>
+
+    <div class="container">
       <router-outlet></router-outlet>
     </div>
+
   </mat-drawer-content>
+
 </mat-drawer-container>
