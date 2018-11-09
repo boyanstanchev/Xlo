@@ -5,3 +5,19 @@
   line-height: 17px;
   font-size: 7px;
 }
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+.nav-item {
+  cursor: pointer;
+}
+
+.navbar {
+  padding: 0.8rem 1rem
+}
+
+.logo {
+  width: 100px;
+}

@@ -24,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
     AngularFireDatabaseModule,
     MatBadgeModule,
     MatListModule,
+    MatIconModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',

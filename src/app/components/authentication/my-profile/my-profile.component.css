@@ -11,3 +11,7 @@
 .mat-icon-button, .mat-menu-item {
   outline: none
 }
+
+tbody {
+  cursor: pointer;
+}
