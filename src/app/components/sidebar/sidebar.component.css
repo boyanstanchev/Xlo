@@ -93,6 +93,13 @@
   background: none;
 }
 
+.mat-nav-list a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
 @media(min-width:768px) {
   #wrapper {
     padding-left: 0;

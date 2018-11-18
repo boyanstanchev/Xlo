@@ -7,7 +7,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: []
+  styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
   categories: Array<any> = [];
@@ -25,7 +25,7 @@ export class AddComponent implements OnInit {
       category: form.value.category,
       subCategory: form.value.subCategory,
       featured: form.value.featured || false,
-      model: form.value.model,
+      description: form.value.description,
       price: form.value.price,
       imageUrl: form.value.imageUrl,
       creator: this.auth.auth.currentUser.uid
@@ -33,7 +33,7 @@ export class AddComponent implements OnInit {
   }
 
   loadSubCategories(event) {
-    this.categoriesService.getSubCategories(event.target.value)
+    this.categoriesService.getSubCategories(event.value)
       .subscribe((subCategories) => {
         this.subCategories = subCategories
       })

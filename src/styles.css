@@ -9,5 +9,5 @@ html, body {
 }
 
 .mat-drawer-container {
-  height: 92.25%;
+  height: calc(100% - 76px); /*container height - navbar height*/
 }

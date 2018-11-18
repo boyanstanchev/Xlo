@@ -1,5 +1,7 @@
 <mat-nav-list role="list">
-  <mat-list-item role="listitem" *ngFor="let cat of categories" >
-    <a routerLink="category/{{cat.key}}">{{cat.payload.val()['name']}}</a>
+  <mat-list-item role="listitem" *ngFor="let cat of categories">
+    <a routerLink="category/{{cat.key}}">
+      {{cat.payload.val()['name']}}
+    </a>
   </mat-list-item>
 </mat-nav-list>

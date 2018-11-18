@@ -1,4 +1,4 @@
-<div class="row ml-5 mt-5">
+<div class="row ml-5 mt-2">
   <form #f="ngForm" (ngSubmit)="register(f)">
 
     <div class="form-group">
@@ -7,7 +7,7 @@
         required
         type="email"
         ngModel
-        matInput
+        matInput="email"
         placeholder="Email"
         name="email">
       </mat-form-field>

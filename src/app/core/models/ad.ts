@@ -7,7 +7,7 @@ export interface Ad {
   subCategory?: string,
   subCategoryName?: string,
   featured?: boolean,
-  model?: string,
+  description?: string,
   price: number,
   imageUrl: string,
   creator: string,

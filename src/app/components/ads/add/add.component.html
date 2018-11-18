@@ -1,94 +1,108 @@
 <div class="col ml-5">
   <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
     <form #f="ngForm" (ngSubmit)="add(f)">
+
       <div class="form-group">
-        <label for="title">Title</label>
-        <input
-          required
-          type="text"
-          id="title"
-          name="title"
-          ngModel
-          class="form-control">
+        <mat-form-field>
+          <input
+            matInput="text"
+            placeholder="Title"
+            required
+            type="text"
+            id="title"
+            name="title"
+            ngModel
+            class="form-control">
+        </mat-form-field>
       </div>
+
       <div class="form-group">
-        <label for="condition">Condition</label>
-        <select
-          required
-          id="condition"
-          name="condition"
-          ngModel
-          class="form-control">
-          <option value="New">New</option>
-          <option value="Used">Used</option>
-        </select>
+        <mat-form-field>
+          <mat-select
+            placeholder="Condition"
+            name="condition"
+            ngModel
+            required>
+            <mat-option value="Used">Used</mat-option>
+            <mat-option value="New">New</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
+
       <div class="form-group">
-        <label for="category">Category</label>
-        <select
-          required
-          id="category"
-          name="category"
-          ngModel
-          (change)="loadSubCategories($event)"
-          class="form-control">
-          <option *ngFor="let cat of categories" value={{cat.key}}>
-            {{cat.payload.val()['name']}}
-          </option>
-        </select>
+        <mat-form-field>
+          <mat-select
+            placeholder="Category"
+            required
+            name="category"
+            ngModel
+            (selectionChange)="loadSubCategories($event)">
+            <mat-option *ngFor="let cat of categories" value={{cat.key}}>
+              {{cat.payload.val()['name']}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
+
       <div class="form-group">
-        <label for="subCategory">Sub-Category</label>
-        <select
-          required
-          id="subCategory"
-          name="subCategory"
-          ngModel
-          class="form-control">
-          <option *ngFor="let cat of subCategories" value={{cat.key}}>
-            {{cat.payload.val()['name']}}
-          </option>
-        </select>
+        <mat-form-field>
+          <mat-select
+            placeholder="Sub-Category"
+            required
+            name="subCategory"
+            ngModel>
+            <mat-option *ngFor="let cat of subCategories" value={{cat.key}}>
+              {{cat.payload.val()['name']}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <div class="custom-control custom-checkbox">
-        <label class="custom-control-label" for="featured">Featured</label>
-        <input
-          id="featured"
+
+      <div class="form-group">
+        <mat-slide-toggle
+          required
           name="featured"
           ngModel
-          type="checkbox"
-          checked>
+          matTooltip="Your ad will be featured on the main page and on top of searches. Cost 2$ per ad.">
+          Featured
+        </mat-slide-toggle>
       </div>
+
       <div class="form-group">
-        <label for="model">Description</label>
-        <textarea
-          required
-          id="model"
-          name="model"
-          ngModel
-          class="form-control"
-          style="height: 130px"></textarea>
+        <mat-form-field id="description">
+          <textarea
+            required
+            matInput
+            placeholder="Description"
+            name="description"
+            ngModel></textarea>
+        </mat-form-field>
       </div>
+
       <div class="form-group">
-        <label for="price">Price</label>
-        <input
-          type="number"
-          required
-          id="price"
-          name="price"
-          ngModel
-          class="form-control">
+        <mat-form-field>
+          <input
+            placeholder="Price"
+            matInput="number"
+            type="number"
+            required
+            name="price"
+            ngModel>
+        </mat-form-field>
       </div>
+
       <div class="form-group">
-        <label for="imageUrl">Image</label>
-        <input
-          required
-          id="imageUrl"
-          name="imageUrl"
-          ngModel
-          class="form-control">
+        <mat-form-field>
+          <input
+            placeholder="Image Url"
+            matInput="url"
+            required
+            name="imageUrl"
+            ngModel>
+        </mat-form-field>
       </div>
-      <button [disabled]="f.invalid" class="btn btn-primary" type="submit">Add</button>
+
+      <button [disabled]="f.invalid" type="submit" mat-raised-button color="primary">Add</button>
     </form>
   </div>
 </div>

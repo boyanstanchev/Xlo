@@ -1,4 +1,3 @@
-import { MatExpansionModule } from '@angular/material/expansion';
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {
   coreServices,
