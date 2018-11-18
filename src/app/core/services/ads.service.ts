@@ -95,7 +95,7 @@ export class AdsService {
     const adsRef = this.db.list('obiavi');
     adsRef.update(adId, {
       title: model.title,
-      model: model.model,
+      description: model.description,
       price: model.price,
       imageUrl: model.imageUrl
     })
@@ -114,7 +114,7 @@ export class AdsService {
           condition: ad.payload.val()['condition'],
           price: ad.payload.val()['price'],
           creator: ad.payload.val()['creator'],
-          model: ad.payload.val()['model'].replace(/\n/g, '<br>')
+          description: ad.payload.val()['description'].replace(/\n/g, '<br>')
         }
       })
     }))
