@@ -8,7 +8,14 @@ import {AuthenticationRoutingModule} from './authentication-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MessagesDialog} from './my-profile/my-profile.component';
-import {MatTooltipModule, MatListModule, MatMenuModule, MatButtonModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatInputModule} from '@angular/material';
+import {MatTooltipModule,
+        MatListModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatInputModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 

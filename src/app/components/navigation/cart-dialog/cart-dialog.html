@@ -1,0 +1,16 @@
+<div class="my-modal">
+    <div class="my-modal-body">
+      <h3>Shopping Cart</h3>
+      <ul  class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <a style="width: 200px" routerLink="/ads/test">Ad-title</a>
+          <span class="badge mr-1 ml-5">Qty. 123</span>
+          <span class="badge mr-1 ml-5">123 | currency:'USD'</span>
+          <span style="cursor: pointer"class="badge badge-primary">❌ Remove</span>
+        </li>
+      </ul>
+
+      <button class="btn btn-info mt-3" (click)="cartService.checkout('custom-modal-2')">View my cart</button>
+
+    </div>
+  </div>

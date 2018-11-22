@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {ModalService} from '../../components/shared/modal/modal.service';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AuthService} from './auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +67,17 @@ export class ShoppingCartService {
   }
 
   getUserAll() {
-    return this.db.list(`shopping-cart/${this.authService.user.uid}`).snapshotChanges();
+    return this.db.list(`shopping-cart/${this.authService.user.uid}`).snapshotChanges().pipe(map((items) => {
+      return items.map(i => {
+        return {
+          id: i.key,
+          adId: i.payload.val()['adId'],
+          adPrice: i.payload.val()['adPrice'],
+          adTitle: i.payload.val()['adTitle'],
+          quantity: i.payload.val()['quantity']
+        }
+      })
+    }))
   }
 
   getItemsByAdId(adId: string) {

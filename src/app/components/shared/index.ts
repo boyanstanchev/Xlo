@@ -6,7 +6,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 export const sharedComponents = [
   ModalComponent,
-  AdCardComponent
+  AdCardComponent,
 ]
 
 export const sharedModules = [

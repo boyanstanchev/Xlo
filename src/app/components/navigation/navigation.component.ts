@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
-import {ModalService} from '../shared/modal/modal.service';
 import {ShoppingCartService} from '../../core/services/shopping-cart.service';
 import {AngularFireAuth} from 'angularfire2/auth';
+
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -10,14 +12,22 @@ import {AngularFireAuth} from 'angularfire2/auth';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  cartItems = [];
-  user;
-  isAdmin: boolean = false;
+  cartItems = []
+  user
+  isAdmin = false
 
   constructor(public authService: AuthService,
-              public modalService: ModalService,
               public cartService: ShoppingCartService,
-              public auth: AngularFireAuth) {
+              public auth: AngularFireAuth,
+              public dialog: MatDialog) {
+  }
+
+  openDialog(): void {
+    this.dialog.open(MatDialog, {
+      width: '700px',
+      height: 'fit-content',
+      data: this.cartItems
+    })
   }
 
   ngOnInit() {
@@ -36,4 +46,19 @@ export class NavigationComponent implements OnInit {
       }
     });
   }
+}
+
+
+@Component({
+  selector: 'app-cart-dialog',
+  templateUrl: './cart-dialog/cart-dialog.html',
+  styleUrls: ['./cart-dialog/cart-dialog.css']
+})
+
+export class CartDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<CartDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: Observable<any>) {}
+
+  
 }

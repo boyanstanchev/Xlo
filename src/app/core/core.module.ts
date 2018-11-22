@@ -5,33 +5,38 @@ import {
 } from './index';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SharedModule} from '../components/shared/shared.module';
 import {AppRoutingModule} from '../app-routing.module';
 import {ToastrModule} from 'ngx-toastr';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {MatBadgeModule, MatButtonModule, MatListModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
+import {CartDialogComponent} from '../components/navigation/navigation.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   imports: [
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule, // Must be imported here if I want to use modal component from shared module inside navigation component from core module
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     MatBadgeModule,
     MatListModule,
     MatIconModule,
+ // MatDialogModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',
       preventDuplicates: false
     })
   ],
+  entryComponents: [
+    CartDialogComponent
+  ],
   declarations: [
-    ...coreComponents
+    ...coreComponents,
+    CartDialogComponent
   ],
   providers: [
     ...coreServices,

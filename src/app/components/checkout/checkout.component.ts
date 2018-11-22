@@ -18,7 +18,7 @@ export class CheckoutComponent implements OnInit {
       .subscribe((items) => {
         this.total = 0
         items.forEach(item => {
-          this.total += item.payload.val()['adPrice'] * item.payload.val()['quantity'];
+          this.total += item.adPrice * item.quantity
         })
 
         this.cartItems = items;

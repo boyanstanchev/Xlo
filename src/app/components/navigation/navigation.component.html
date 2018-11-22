@@ -15,17 +15,17 @@
         </a>
       </li>
 
-      <modal id="custom-modal-2">
+      <!-- <modal id="custom-modal-2"> 
         <div class="my-modal">
           <div class="my-modal-body">
             <h3>Shopping Cart</h3>
             <p class="mt-3" *ngIf="cartItems.length === 0">Your shopping cart is empty.</p>
-            <ul *ngFor="let ad of cartItems" class="list-group">
+            <ul *ngFor="let item of cartItems" class="list-group">
               <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a style="width: 200px" routerLink="/ads/{{ad.key}}">{{ad.payload.val()['adTitle']}}</a>
-                <span class="badge mr-1 ml-5">Qty. {{ad.payload.val()['quantity']}}</span>
-                <span class="badge mr-1 ml-5">{{ad.payload.val()['adPrice'] | currency:'USD'}}</span>
-                <span style="cursor: pointer" (click)="cartService.remove(ad.key)" class="badge badge-primary">❌ Remove</span>
+                <a style="width: 200px" routerLink="/ads/{{item.payload.val()['adId']}}">{{item.payload.val()['adTitle']}}</a>
+                <span class="badge mr-1 ml-5">Qty. {{item.payload.val()['quantity']}}</span>
+                <span class="badge mr-1 ml-5">{{item.payload.val()['adPrice'] | currency:'USD'}}</span>
+                <span style="cursor: pointer" (click)="cartService.remove(item.key)" class="badge badge-primary">❌ Remove</span>
               </li>
             </ul>
 
@@ -34,10 +34,10 @@
           </div>
         </div>
         <div class="my-modal-background"></div>
-      </modal>
+      </modal> -->
 
       <li *ngIf="authService.isAuthenticated()"  class="nav-item">
-        <a (click)="modalService.open('custom-modal-2')"
+        <a (click)="openDialog()"
            [matBadge]="cartItems.length"
            matBadgePosition="after"
            matBadgeOverlap="false"
