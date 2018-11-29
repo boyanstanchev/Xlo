@@ -23,10 +23,16 @@ export class NavigationComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialog.open(MatDialog, {
+    this.dialog.open(CartDialogComponent, {
       width: '700px',
       height: 'fit-content',
-      data: this.cartItems
+      data: this.cartItems,
+      closeOnNavigation: true,
+      position: {
+        top: '6%',
+        left: '4%'
+      },
+      panelClass: 'cart-dialog'
     })
   }
 
@@ -56,9 +62,17 @@ export class NavigationComponent implements OnInit {
 })
 
 export class CartDialogComponent {
+  displayedColumns: string[] = ['item', 'quantity', 'cost']
 
   constructor(public dialogRef: MatDialogRef<CartDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Observable<any>) {}
+              @Inject(MAT_DIALOG_DATA) public data: Array<any>) {}
 
-  
+  getTotalCost() {
+    let total = 0
+    this.data.forEach(i => {
+      total += i.adPrice * i.quantity
+    })
+
+    return total
+  }
 }

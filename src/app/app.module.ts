@@ -11,9 +11,9 @@ import {AngularFireModule} from 'angularfire2';
 import {AppComponent} from './app.component';
 
 const config = {
-  apiKey: "AIzaSyBHn91ex8QQzNLvvjvqbHzbADMqh1fGbrM",
-  authDomain: "https://xlo-exam.firebaseio.com/",
-  databaseURL: "https://xlo-exam.firebaseio.com/"
+  apiKey: 'AIzaSyBHn91ex8QQzNLvvjvqbHzbADMqh1fGbrM',
+  authDomain: 'https://xlo-exam.firebaseio.com/',
+  databaseURL: 'https://xlo-exam.firebaseio.com/'
 };
 
 @NgModule({

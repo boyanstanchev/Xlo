@@ -8,7 +8,7 @@ import {ShoppingCartService} from '../../core/services/shopping-cart.service';
 })
 export class CheckoutComponent implements OnInit {
   cartItems = [];
-  total: number = 0;
+  total = 0;
 
   constructor(public cartService: ShoppingCartService) {
   }

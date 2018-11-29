@@ -11,3 +11,8 @@ html, body {
 .mat-drawer-container {
   height: calc(100% - 76px); /*container height - navbar height*/
 }
+
+.cart-dialog > .mat-dialog-container {
+  padding: 0;
+  border-radius: 4px
+}

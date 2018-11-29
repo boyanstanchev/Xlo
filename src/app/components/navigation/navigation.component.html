@@ -15,27 +15,6 @@
         </a>
       </li>
 
-      <!-- <modal id="custom-modal-2"> 
-        <div class="my-modal">
-          <div class="my-modal-body">
-            <h3>Shopping Cart</h3>
-            <p class="mt-3" *ngIf="cartItems.length === 0">Your shopping cart is empty.</p>
-            <ul *ngFor="let item of cartItems" class="list-group">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a style="width: 200px" routerLink="/ads/{{item.payload.val()['adId']}}">{{item.payload.val()['adTitle']}}</a>
-                <span class="badge mr-1 ml-5">Qty. {{item.payload.val()['quantity']}}</span>
-                <span class="badge mr-1 ml-5">{{item.payload.val()['adPrice'] | currency:'USD'}}</span>
-                <span style="cursor: pointer" (click)="cartService.remove(item.key)" class="badge badge-primary">❌ Remove</span>
-              </li>
-            </ul>
-
-            <button *ngIf="cartItems.length > 0" class="btn btn-info mt-3" (click)="cartService.checkout('custom-modal-2')">View my cart</button>
-
-          </div>
-        </div>
-        <div class="my-modal-background"></div>
-      </modal> -->
-
       <li *ngIf="authService.isAuthenticated()"  class="nav-item">
         <a (click)="openDialog()"
            [matBadge]="cartItems.length"

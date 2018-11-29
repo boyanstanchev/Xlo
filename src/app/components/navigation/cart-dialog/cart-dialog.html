@@ -1,16 +1,28 @@
-<div class="my-modal">
-    <div class="my-modal-body">
-      <h3>Shopping Cart</h3>
-      <ul  class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          <a style="width: 200px" routerLink="/ads/test">Ad-title</a>
-          <span class="badge mr-1 ml-5">Qty. 123</span>
-          <span class="badge mr-1 ml-5">123 | currency:'USD'</span>
-          <span style="cursor: pointer"class="badge badge-primary">❌ Remove</span>
-        </li>
-      </ul>
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+  <!-- Item Column -->
+  <ng-container matColumnDef="item">
+    <th mat-header-cell *matHeaderCellDef> Item </th>
+    <td mat-cell *matCellDef="let ad">{{ad.adTitle}}</td>
+    <td mat-footer-cell *matFooterCellDef> Total </td>
+  </ng-container>
 
-      <button class="btn btn-info mt-3" (click)="cartService.checkout('custom-modal-2')">View my cart</button>
+  <!-- Quantity Column -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef> Quantity </th>
+    <td mat-cell *matCellDef="let ad"> {{ad.quantity}} </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>
 
-    </div>
-  </div>
+  <!-- Cost Column -->
+  <ng-container matColumnDef="cost">
+    <th mat-header-cell *matHeaderCellDef> Cost </th>
+    <td mat-cell *matCellDef="let ad"> {{ad.adPrice | currency:"USD"}} </td>
+    <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>
+
+<button id="checkout" (click)="dialogRef.close()" routerLink="/checkout" mat-raised-button color="primary">Checkout</button>

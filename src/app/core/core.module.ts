@@ -12,7 +12,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {MatBadgeModule, MatButtonModule, MatListModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {CartDialogComponent} from '../components/navigation/navigation.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -24,7 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatBadgeModule,
     MatListModule,
     MatIconModule,
- // MatDialogModule,
+    MatTableModule,
+    MatButtonModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       positionClass: 'toast-top-right',
