@@ -33,10 +33,6 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  redirectToEdit(adId: string) {
-    this.router.navigate([`ads/edit/${adId}`])
-  }
-
   ngOnInit() {
     this.convService.getUserConversations().subscribe(convs => this.conversations = convs);
     this.adsService.getAdsByUserId(this.authService.user.uid).subscribe(ads => this.userAds = ads)

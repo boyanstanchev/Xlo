@@ -23,7 +23,7 @@
 
                   <mat-menu #menu="matMenu">
 
-                    <button (click)="redirectToEdit(ad.id)" mat-menu-item>
+                    <button routerLink="/ads/edit/{{ad.id}}" mat-menu-item>
                       <mat-icon>edit</mat-icon>
                       <span>Edit</span>
                     </button>

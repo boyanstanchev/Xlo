@@ -9,4 +9,19 @@ tr.mat-footer-row {
 #checkout {
   float: right;
   right: 15%;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+
+.action-button {
+  outline: none;
+  float: right;
+}
+
+.mat-cell {
+  line-height: 40px;
 }

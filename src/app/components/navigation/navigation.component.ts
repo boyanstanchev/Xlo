@@ -4,7 +4,6 @@ import {ShoppingCartService} from '../../core/services/shopping-cart.service';
 import {AngularFireAuth} from 'angularfire2/auth';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
@@ -12,7 +11,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  cartItems = []
+  count = 0
   user
   isAdmin = false
 
@@ -26,7 +25,7 @@ export class NavigationComponent implements OnInit {
     this.dialog.open(CartDialogComponent, {
       width: '700px',
       height: 'fit-content',
-      data: this.cartItems,
+      // data: '',
       closeOnNavigation: true,
       position: {
         top: '6%',
@@ -38,22 +37,30 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.auth.user.subscribe((user) => {
-      this.user = user;
+      this.user = user
       if (user) {
         this.authService.getUserIsAdmin(user.uid)
           .subscribe((isAdmin: boolean) => {
             this.isAdmin = isAdmin;
-          });
+          })
 
-        this.cartService.getUserAll()
-          .subscribe((items) => {
-            this.cartItems = items;
-          });
+        this.cartService.getItemsCount()
+          .subscribe((count) => {
+            this.count = count
+          })
       }
-    });
+    })
   }
 }
 
+
+interface Items {
+  id: string,
+  adTitle: string,
+  adId: string,
+  adPrice: number,
+  quantity: number
+}
 
 @Component({
   selector: 'app-cart-dialog',
@@ -63,12 +70,16 @@ export class NavigationComponent implements OnInit {
 
 export class CartDialogComponent {
   displayedColumns: string[] = ['item', 'quantity', 'cost']
+  data: Array<Items> = []
 
   constructor(public dialogRef: MatDialogRef<CartDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Array<any>) {}
+              public cartService: ShoppingCartService) {
+    this.cartService.getUserAll().subscribe(items => this.data = items)
+  }
 
   getTotalCost() {
     let total = 0
+
     this.data.forEach(i => {
       total += i.adPrice * i.quantity
     })

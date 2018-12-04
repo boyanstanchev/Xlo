@@ -80,6 +80,12 @@ export class ShoppingCartService {
     }))
   }
 
+  getItemsCount() {
+    return this.db.list(`shopping-cart/${this.authService.user.uid}`).snapshotChanges().pipe(map((items) => {
+      return items.length
+    }))
+  }
+
   getItemsByAdId(adId: string) {
     return this.db.object(`shopping-cart/${this.authService.user.uid}`).query.orderByChild('adId').equalTo(adId).once('value');
   }
