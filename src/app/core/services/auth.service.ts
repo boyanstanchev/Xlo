@@ -1,11 +1,10 @@
-import {Injectable} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {Router} from '@angular/router';
-import {AngularFireDatabase} from 'angularfire2/database';
-import {AngularFireAuth} from 'angularfire2/auth';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import { getMatIconFailedToSanitizeLiteralError } from '@angular/material';
+import {Injectable} from '@angular/core'
+import {ToastrService} from 'ngx-toastr'
+import {Router} from '@angular/router'
+import {AngularFireDatabase} from 'angularfire2/database'
+import {AngularFireAuth} from 'angularfire2/auth'
+import {map} from 'rxjs/operators'
+import {Observable} from 'rxjs'
 
 interface UserData {
   displayName: string,
@@ -44,48 +43,48 @@ export class AuthService {
               .then(() => {
                 this.saveUserData(displayName, user.user.uid, photoURL)
                   .then(() => {
-                    this.router.navigate(['/profile/login']);
-                    this.toastr.success('You are now registered. Please login to continue.');
-                  });
+                    this.router.navigate(['/profile/login'])
+                    this.toastr.success('You are now registered. Please login to continue.')
+                  })
               })
               .catch((err) => {
-                this.toastr.error(err.message);
-              });
-          });
+                this.toastr.error(err.message)
+              })
+          })
       })
       .catch((err) => {
-        this.toastr.error(err.message);
-      });
+        this.toastr.error(err.message)
+      })
   }
 
   saveUserData(displayName: string, userId: string, photoURL?: string) {
-    const userDataRef = this.db.list('userData');
+    const userDataRef = this.db.list('userData')
     return userDataRef.push({
       userId: userId,
       displayName: displayName,
       isAdmin: false,
       photoURL: photoURL || ''
-    });
+    })
   }
 
   login(email: string, password: string) {
     this.auth.auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.router.navigate(['/ads/featured']);
-        this.toastr.success('You are now logged in.');
+        this.router.navigate(['/ads/featured'])
+        this.toastr.success('You are now logged in.')
       })
       .catch((err) => {
-        this.toastr.error(err.message);
-      });
+        this.toastr.error(err.message)
+      })
   }
 
   logout() {
     this.auth.auth.signOut()
       .then(() => {
-        this.router.navigate(['/profile/login']);
-        this.toastr.success('You are now singed out.');
-      });
+        this.router.navigate(['/profile/login'])
+        this.toastr.success('You are now singed out.')
+      })
   }
 
   isAuthenticated(): boolean {

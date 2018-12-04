@@ -1,9 +1,9 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {AuthService} from '../../core/services/auth.service';
-import {ShoppingCartService} from '../../core/services/shopping-cart.service';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {Component, OnInit} from '@angular/core'
+import {AuthService} from '../../core/services/auth.service'
+import {ShoppingCartService} from '../../core/services/shopping-cart.service'
+import {AngularFireAuth} from 'angularfire2/auth'
 
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material'
 
 @Component({
   selector: 'app-navigation',
@@ -25,7 +25,6 @@ export class NavigationComponent implements OnInit {
     this.dialog.open(CartDialogComponent, {
       width: '700px',
       height: 'fit-content',
-      // data: '',
       closeOnNavigation: true,
       position: {
         top: '6%',
@@ -41,7 +40,7 @@ export class NavigationComponent implements OnInit {
       if (user) {
         this.authService.getUserIsAdmin(user.uid)
           .subscribe((isAdmin: boolean) => {
-            this.isAdmin = isAdmin;
+            this.isAdmin = isAdmin
           })
 
         this.cartService.getItemsCount()

@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     this.categoriesService.getAllCategories()
       .subscribe((cats: Array<any>) => {
         this.categories = cats
-      });
+      })
   }
 
 }

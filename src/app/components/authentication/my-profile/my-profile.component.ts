@@ -21,8 +21,7 @@ export class MyProfileComponent implements OnInit {
   constructor(public convService: ConversationsService,
               public dialog: MatDialog,
               public authService: AuthService,
-              public adsService: AdsService,
-              private router: Router) {
+              public adsService: AdsService) {
   }
 
   openDialog(conversationId): void {

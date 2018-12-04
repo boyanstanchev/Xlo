@@ -14,7 +14,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: []
 })
 export class DetailsComponent implements OnInit {
-  ad: Ad;
+  ad: Ad
 
   constructor(private route: ActivatedRoute,
               private adsService: AdsService,

@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {CategoriesService} from '../../../core/services/categories.service';
-import {AdsService} from '../../../core/services/ads.service';
+import {Component, OnInit} from '@angular/core'
+import {CategoriesService} from '../../../core/services/categories.service'
+import {AdsService} from '../../../core/services/ads.service'
 
 @Component({
   selector: 'app-admin-panel',

@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from '@angular/core'
 import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router
-} from '@angular/router';
-import {Observable} from 'rxjs';
-import {ToastrService} from 'ngx-toastr';
-import {AuthService} from '../services/auth.service';
-import {AngularFireAuth} from 'angularfire2/auth';
-import {map} from 'rxjs/operators';
+} from '@angular/router'
+import {Observable} from 'rxjs'
+import {ToastrService} from 'ngx-toastr'
+import {AuthService} from '../services/auth.service'
+import {AngularFireAuth} from 'angularfire2/auth'
+import {map} from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'

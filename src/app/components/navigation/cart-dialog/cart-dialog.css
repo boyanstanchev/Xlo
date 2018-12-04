@@ -8,7 +8,7 @@ tr.mat-footer-row {
 
 #checkout {
   float: right;
-  right: 15%;
+  right: 23%;
   margin-top: 6px;
   margin-bottom: 6px;
 }
@@ -24,4 +24,10 @@ tr.mat-footer-row {
 
 .mat-cell {
   line-height: 40px;
+}
+
+#errorMsg {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-style: italic;
 }

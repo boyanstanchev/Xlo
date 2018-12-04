@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: []
 })
 export class EditComponent implements OnInit {
-  adModel: any;
+  adModel: any
 
   constructor(private adsService: AdsService,
               private route: ActivatedRoute) {
@@ -21,7 +21,7 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this.adsService.getAdById(this.route.snapshot.params['id']).subscribe((ad) => {
         this.adModel = ad
-      });
+      })
   }
 
 }

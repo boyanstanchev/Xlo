@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core'
-import {NgForm} from '@angular/forms';
-import {AuthService} from '../../../core/services/auth.service';
+import {Component} from '@angular/core'
+import {NgForm} from '@angular/forms'
+import {AuthService} from '../../../core/services/auth.service'
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: []
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
   register(form: NgForm) {
@@ -17,8 +17,4 @@ export class RegisterComponent implements OnInit {
     const photoURL = form.value.photoURL
     this.authService.register(email, password, displayName, photoURL)
   }
-
-  ngOnInit() {
-  }
-
 }

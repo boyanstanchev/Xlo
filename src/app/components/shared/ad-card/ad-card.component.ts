@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AuthService} from '../../../core/services/auth.service';
+import {Component, Input, OnInit} from '@angular/core'
+import {AuthService} from '../../../core/services/auth.service'
 
 @Component({
   selector: 'app-ad-card',

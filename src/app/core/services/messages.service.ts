@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database';
-import {AuthService} from './auth.service';
-import {map} from 'rxjs/operators';
-import {ConversationsService} from './conversations.service';
-import {ToastrService} from 'ngx-toastr';
-import {ModalService} from '../../components/shared/modal/modal.service';
-import {Message} from '../models/message';
-import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core'
+import {AngularFireDatabase} from 'angularfire2/database'
+import {AuthService} from './auth.service'
+import {map} from 'rxjs/operators'
+import {ConversationsService} from './conversations.service'
+import {ToastrService} from 'ngx-toastr'
+import {ModalService} from '../../components/shared/modal/modal.service'
+import {Message} from '../models/message'
+import {Observable} from 'rxjs'
 
 
 @Injectable({
@@ -35,19 +35,19 @@ export class MessagesService {
           receiverName
         })
       } else {
-        const messagesRef = this.db.list(`messages/${convs[0].key}`);
+        const messagesRef = this.db.list(`messages/${convs[0].key}`)
 
         const promise = messagesRef.push({
           message: form.value.message,
           date: Date.now(),
           read: false,
           senderName: this.authService.user.displayName,
-        });
+        })
 
         promise.then(() => {
-          this.toastr.success('Message send.');
-          this.modalService.close(`custom-modal-${modalId}`);
-        });
+          this.toastr.success('Message send.')
+          this.modalService.close(`custom-modal-${modalId}`)
+        })
       }
     })
   }

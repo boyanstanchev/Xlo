@@ -1,34 +1,40 @@
-<table mat-table [dataSource]="data" class="mat-elevation-z8">
-  <!-- Item Column -->
-  <ng-container matColumnDef="item">
-    <th mat-header-cell *matHeaderCellDef> Item </th>
-    <td mat-cell *matCellDef="let ad"> {{ad.adTitle}} </td>
-    <td mat-footer-cell *matFooterCellDef> Total </td>
-  </ng-container>
+<div *ngIf="data.length > 0; else empty">
+  <table mat-table [dataSource]="data" class="mat-elevation-z8">
+    <!-- Item Column -->
+    <ng-container matColumnDef="item">
+      <th mat-header-cell *matHeaderCellDef> Item </th>
+      <td mat-cell *matCellDef="let ad"> {{ad.adTitle}} </td>
+      <td mat-footer-cell *matFooterCellDef> Total </td>
+    </ng-container>
 
-  <!-- Quantity Column -->
-  <ng-container matColumnDef="quantity">
-    <th mat-header-cell *matHeaderCellDef> Quantity </th>
-    <td mat-cell *matCellDef="let ad"> {{ad.quantity}} </td>
-    <td mat-footer-cell *matFooterCellDef></td>
-  </ng-container>
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let ad"> {{ad.quantity}} </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
 
-  <!-- Cost Column -->
-  <ng-container matColumnDef="cost">
-    <th mat-header-cell *matHeaderCellDef> Cost </th>
-    <td mat-cell *matCellDef="let ad">
-       {{ad.adPrice | currency:"USD"}} 
-       <button (click)="cartService.remove(ad.id)" class="action-button" mat-icon-button>
+    <!-- Cost Column -->
+    <ng-container matColumnDef="cost">
+      <th mat-header-cell *matHeaderCellDef> Cost </th>
+      <td mat-cell *matCellDef="let ad">
+        {{ad.adPrice | currency:"USD"}}
+        <button (click)="cartService.remove(ad.id)" class="action-button" mat-icon-button>
           <mat-icon>delete_outline</mat-icon>
-       </button>
+        </button>
       </td>
-    <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
-  </ng-container>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
 
-<button cdkFocusInitial id="checkout" (click)="dialogRef.close()" routerLink="/checkout" mat-raised-button color="primary">Checkout</button>
+  <button cdkFocusInitial id="checkout" (click)="dialogRef.close()" routerLink="/checkout" mat-raised-button color="primary">Checkout</button>
+</div>
+
+<ng-template #empty>
+  <h4 id="errorMsg" class="text-center">Your shopping cart is empty</h4>
+</ng-template>
 

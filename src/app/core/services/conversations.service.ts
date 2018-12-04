@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database';
-import {AuthService} from './auth.service';
-import {map} from 'rxjs/operators';
-import {Message} from '../models/message';
-import {ToastrService} from 'ngx-toastr';
+import {Injectable} from '@angular/core'
+import {AngularFireDatabase} from 'angularfire2/database'
+import {AuthService} from './auth.service'
+import {map} from 'rxjs/operators'
+import {Message} from '../models/message'
+import {ToastrService} from 'ngx-toastr'
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {adsComponents} from './index';
-import {SharedModule} from '../shared/shared.module';
-import {AdsRoutingModule} from './ads-routing.module';
+import {NgModule} from '@angular/core'
+import {adsComponents} from './index'
+import {SharedModule} from '../shared/shared.module'
+import {AdsRoutingModule} from './ads-routing.module'
 import {
   MatButtonModule,
   MatFormFieldModule,
@@ -9,7 +9,7 @@ import {
   MatSelectModule,
   MatSlideToggleModule,
   MatTooltipModule
-} from '@angular/material';
+} from '@angular/material'
 
 @NgModule({
   declarations: [

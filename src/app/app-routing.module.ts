@@ -1,11 +1,11 @@
-import {Route, RouterModule} from '@angular/router';
-import {NgModule} from '@angular/core';
-import {CategoryComponent} from './components/categories/category/category.component';
-import {SubCategoryComponent} from './components/categories/sub-category/sub-category.component';
-import {CheckoutComponent} from './components/checkout/checkout.component';
-import {AdsModule} from './components/ads/ads.module';
-import {AuthenticationModule} from './components/authentication/authentication.module';
-import {AuthGuard} from './core/guards/auth.guard';
+import {Route, RouterModule} from '@angular/router'
+import {NgModule} from '@angular/core'
+import {CategoryComponent} from './components/categories/category/category.component'
+import {SubCategoryComponent} from './components/categories/sub-category/sub-category.component'
+import {CheckoutComponent} from './components/checkout/checkout.component'
+import {AdsModule} from './components/ads/ads.module'
+import {AuthenticationModule} from './components/authentication/authentication.module'
+import {AuthGuard} from './core/guards/auth.guard'
 
 const routes: Route[] = [
   {path: '', redirectTo: '/ads/featured', pathMatch: 'full'},

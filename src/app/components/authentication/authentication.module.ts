@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
+import {NgModule} from '@angular/core'
 
-import {authenticationComponents} from './index';
+import {authenticationComponents} from './index'
 
-import {SharedModule} from '../shared/shared.module';
-import {AuthenticationRoutingModule} from './authentication-routing.module';
+import {SharedModule} from '../shared/shared.module'
+import {AuthenticationRoutingModule} from './authentication-routing.module'
 
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MessagesDialog} from './my-profile/my-profile.component';
+import {MatTabsModule} from '@angular/material/tabs'
+import {MatDialogModule} from '@angular/material/dialog'
+import {MessagesDialog} from './my-profile/my-profile.component'
 import {MatTooltipModule,
         MatListModule,
         MatMenuModule,
@@ -15,9 +15,9 @@ import {MatTooltipModule,
         MatFormFieldModule,
         MatOptionModule,
         MatSelectModule,
-        MatInputModule} from '@angular/material';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
+        MatInputModule} from '@angular/material'
+import {MatExpansionModule} from '@angular/material/expansion'
+import {MatIconModule} from '@angular/material/icon'
 
 @NgModule({
   declarations: [

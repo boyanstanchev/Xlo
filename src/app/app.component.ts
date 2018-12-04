@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import './components/shared/modal/modal.less';
+import {Component} from '@angular/core'
+import './components/shared/modal/modal.less'
 
 @Component({
   selector: 'app-root',

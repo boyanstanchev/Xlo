@@ -1,10 +1,10 @@
-import { Observable } from 'rxjs';
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {AuthService} from '../../../core/services/auth.service';
-import {AdsService} from '../../../core/services/ads.service';
-import {ModalService} from '../../shared/modal/modal.service';
-import {MessagesService} from '../../../core/services/messages.service';
+import {Observable} from 'rxjs'
+import {Component, OnInit} from '@angular/core'
+import {ActivatedRoute} from '@angular/router'
+import {AuthService} from '../../../core/services/auth.service'
+import {AdsService} from '../../../core/services/ads.service'
+import {ModalService} from '../../shared/modal/modal.service'
+import {MessagesService} from '../../../core/services/messages.service'
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +12,7 @@ import {MessagesService} from '../../../core/services/messages.service';
   styleUrls: []
 })
 export class ProfileComponent implements OnInit {
-  userName: Observable<any>;
+  userName: Observable<any>
   userAds: Array<any>
 
   constructor(private route: ActivatedRoute,

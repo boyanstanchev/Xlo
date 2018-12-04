@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {CategoriesService} from '../../../core/services/categories.service';
-import {NgForm} from '@angular/forms';
-import {AdsService} from '../../../core/services/ads.service';
-import {AngularFireAuth} from 'angularfire2/auth';
+import {Component, OnInit} from '@angular/core'
+import {CategoriesService} from '../../../core/services/categories.service'
+import {NgForm} from '@angular/forms'
+import {AdsService} from '../../../core/services/ads.service'
+import {AngularFireAuth} from 'angularfire2/auth'
 
 @Component({
   selector: 'app-add',
@@ -10,8 +10,8 @@ import {AngularFireAuth} from 'angularfire2/auth';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  categories: Array<any> = [];
-  subCategories = [];
+  categories: Array<any> = []
+  subCategories = []
 
   constructor(private categoriesService: CategoriesService,
               private adsService: AdsService,
@@ -29,7 +29,7 @@ export class AddComponent implements OnInit {
       price: form.value.price,
       imageUrl: form.value.imageUrl,
       creator: this.auth.auth.currentUser.uid
-    });
+    })
   }
 
   loadSubCategories(event) {
@@ -42,7 +42,7 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.categoriesService.getAllCategories().subscribe((cats) => {
       this.categories = cats
-    });
+    })
   }
 
 }

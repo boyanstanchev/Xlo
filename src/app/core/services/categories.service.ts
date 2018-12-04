@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {AngularFireDatabase} from 'angularfire2/database';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core'
+import {ToastrService} from 'ngx-toastr'
+import {AngularFireDatabase} from 'angularfire2/database'
+import {map} from 'rxjs/operators'
+import {Observable} from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
@@ -29,24 +29,24 @@ export class CategoriesService {
   }
 
   addCategory(categoryName: string) {
-    const catsRef = this.db.list('categories');
-    const promise = catsRef.push({name: categoryName});
+    const catsRef = this.db.list('categories')
+    const promise = catsRef.push({name: categoryName})
     promise
       .then(() => {
-        this.toastr.success('Category added successfully.');
-      });
+        this.toastr.success('Category added successfully.')
+      })
   }
 
   addSubCategory(subCategoryName: string, categoryId: string) {
-    const catsRef = this.db.list('subCategories');
+    const catsRef = this.db.list('subCategories')
     const promise = catsRef.push({
       name: subCategoryName,
       category: categoryId
-    });
+    })
     promise
       .then(() => {
-        this.toastr.success('Sub-Category added successfully.');
-      });
+        this.toastr.success('Sub-Category added successfully.')
+      })
   }
 
 }

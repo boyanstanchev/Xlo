@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ShoppingCartService} from '../../core/services/shopping-cart.service';
+import {Component, OnInit} from '@angular/core'
+import {ShoppingCartService} from '../../core/services/shopping-cart.service'
 
 @Component({
   selector: 'app-checkout',
@@ -7,8 +7,8 @@ import {ShoppingCartService} from '../../core/services/shopping-cart.service';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-  cartItems = [];
-  total = 0;
+  cartItems = []
+  total = 0
 
   constructor(public cartService: ShoppingCartService) {
   }
@@ -21,8 +21,8 @@ export class CheckoutComponent implements OnInit {
           this.total += item.adPrice * item.quantity
         })
 
-        this.cartItems = items;
-      });
+        this.cartItems = items
+      })
   }
 
 }

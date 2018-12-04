@@ -1,12 +1,12 @@
-import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '../../core/guards/auth.guard';
-import {NgModule} from '@angular/core';
-import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './register/register.component';
-import {AdminPanelComponent} from './admin-panel/admin-panel.component';
-import {MyProfileComponent} from './my-profile/my-profile.component';
-import {ProfileComponent} from './profile/profile.component';
-import {AdminGuard} from '../../core/guards/admin.guard';
+import {RouterModule, Routes} from '@angular/router'
+import {AuthGuard} from '../../core/guards/auth.guard'
+import {NgModule} from '@angular/core'
+import {LoginComponent} from './login/login.component'
+import {RegisterComponent} from './register/register.component'
+import {AdminPanelComponent} from './admin-panel/admin-panel.component'
+import {MyProfileComponent} from './my-profile/my-profile.component'
+import {ProfileComponent} from './profile/profile.component'
+import {AdminGuard} from '../../core/guards/admin.guard'
 
 const authenticationRoutes: Routes = [
   {path: 'login', component: LoginComponent, runGuardsAndResolvers: 'always'},

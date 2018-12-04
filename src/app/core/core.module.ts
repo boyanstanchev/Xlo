@@ -1,18 +1,18 @@
-import {NgModule, Optional, SkipSelf} from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core'
 import {
   coreServices,
   coreComponents
-} from './index';
-import {HttpClientModule} from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AppRoutingModule} from '../app-routing.module';
-import {ToastrModule} from 'ngx-toastr';
-import {AngularFireAuthModule} from 'angularfire2/auth';
-import {AngularFireDatabaseModule} from 'angularfire2/database';
-import {MatBadgeModule, MatButtonModule, MatListModule} from '@angular/material';
-import {MatIconModule} from '@angular/material/icon';
-import {CartDialogComponent} from '../components/navigation/navigation.component';
-import {MatTableModule} from '@angular/material/table';
+} from './index'
+import {HttpClientModule} from '@angular/common/http'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {AppRoutingModule} from '../app-routing.module'
+import {ToastrModule} from 'ngx-toastr'
+import {AngularFireAuthModule} from 'angularfire2/auth'
+import {AngularFireDatabaseModule} from 'angularfire2/database'
+import {MatBadgeModule, MatButtonModule, MatListModule} from '@angular/material'
+import {MatIconModule} from '@angular/material/icon'
+import {CartDialogComponent} from '../components/navigation/navigation.component'
+import {MatTableModule} from '@angular/material/table'
 
 @NgModule({
   imports: [
