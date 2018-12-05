@@ -3,12 +3,14 @@ import {sharedComponents, sharedModules} from './index'
 import {CommonModule} from '@angular/common'
 import {RouterModule} from '@angular/router'
 import {NgxPaginationModule} from 'ngx-pagination'
+import {MatCardModule} from '@angular/material/card'
 
 @NgModule({
   imports: [
     CommonModule,
     NgxPaginationModule,
-    RouterModule
+    RouterModule,
+    MatCardModule
   ],
   declarations: [
     ...sharedComponents

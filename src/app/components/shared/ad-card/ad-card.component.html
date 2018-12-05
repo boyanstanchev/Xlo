@@ -1,21 +1,36 @@
 <div class="row">
-  <div *ngFor="let ad of ads | paginate: { itemsPerPage: 6, currentPage: p }" class="col-sm-4">
+  <div *ngFor="let ad of ads | paginate: { itemsPerPage: 6, currentPage: p }" class="col card-wrapper">
 
-    <div class="card mb-4">
-      <a routerLink="/ads/{{ad.id || ad.key}}">
-        <h5 class="card-header">{{ad.title || ad.payload.val()['title']}}</h5>
-        <img style="height: 200px; width: 100%; display: block;"
-             src="{{ad.imageUrl || ad.payload.val()['imageUrl']}}"
-             alt="Card image">
-      </a>
-
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item blockquote">
-          <span class="mr-5"><del>{{ad.price || ad.payload.val()['price'] | currency:"USD"}}  </del></span>
+      <mat-card>
+        <a routerLink="/ads/{{ad.id || ad.key}}">
+          <mat-card-header>
+            <mat-card-title>{{ad.title || ad.payload.val()['title']}}</mat-card-title>
+          </mat-card-header>
+          <div class="image-wrapper">
+            <img class="card-image" src="{{ad.imageUrl || ad.payload.val()['imageUrl']}}" alt="Ad Image">
+          </div>
+        </a>
+        <mat-card-content>
+          <span><del>{{ad.price || ad.payload.val()['price'] | currency:"USD"}}</del></span>
           <span><i>{{ad.price || ad.payload.val()['price'] - (ad.price || ad.payload.val()['price'] * 0.30) | currency:"USD"}}</i></span>
-        </li>
-      </ul>
-    </div>
+        </mat-card-content>
+      </mat-card>
+
+    <!-- <div class="card mb-4"> -->
+      <!-- <a routerLink="/ads/{{ad.id || ad.key}}"> -->
+        <!-- <h5 class="card-header">{{ad.title || ad.payload.val()['title']}}</h5> -->
+        <!-- <img style="height: 200px; width: 100%; display: block;" -->
+             <!-- src="{{ad.imageUrl || ad.payload.val()['imageUrl']}}" -->
+             <!-- alt="Card image"> -->
+      <!-- </a> -->
+
+      <!-- <ul class="list-group list-group-flush"> -->
+        <!-- <li class="list-group-item blockquote"> -->
+          <!-- <span class="mr-5"><del>{{ad.price || ad.payload.val()['price'] | currency:"USD"}}  </del></span> -->
+          <!-- <span><i>{{ad.price || ad.payload.val()['price'] - (ad.price || ad.payload.val()['price'] * 0.30) | currency:"USD"}}</i></span> -->
+        <!-- </li> -->
+      <!-- </ul> -->
+    <!-- </div> -->
 
   </div>
 

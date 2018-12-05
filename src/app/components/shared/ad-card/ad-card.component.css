@@ -1,0 +1,24 @@
+.card-wrapper {
+  width: 170px;
+  height: 184px;
+  padding: 0;
+  margin: 0 0 30px 10px;
+}
+
+.image-wrapper {
+  height: 132px;
+  line-height: 132px;
+  width: 170px;
+  text-align: center;
+}
+
+.card-image {
+  vertical-align: middle;
+  max-width: 170px;
+  max-height: 132px;
+  /* float: none; */
+}
+
+.mat-card-header .mat-card-title {
+  font-size: 15px;
+}

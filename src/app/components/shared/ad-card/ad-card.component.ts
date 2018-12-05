@@ -1,18 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core'
+import {Component, Input} from '@angular/core'
 import {AuthService} from '../../../core/services/auth.service'
 
 @Component({
   selector: 'app-ad-card',
   templateUrl: './ad-card.component.html',
-  styleUrls: []
+  styleUrls: ['./ad-card.component.css']
 })
-export class AdCardComponent implements OnInit {
+export class AdCardComponent {
 
   constructor(public authService: AuthService) { }
 
   @Input() ads
-
-  ngOnInit() {
-  }
 
 }
